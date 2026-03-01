@@ -30,6 +30,7 @@ dev_dependencies:
   # Генераторы кода
   build_runner: ^2.4.8          # Инструмент для генерации кода
   mobx_codegen: ^2.6.0+1        # Генератор кода для MobX
-  auto_route_generator: ^7.3.2  # Генератор кода для AutoRouter
+  auto_route_generator: ^7.3.2 # Генератор кода для AutoRouter
+  analyzer: ^6.4.0
 
   flutter_lints: ^3.0.0
