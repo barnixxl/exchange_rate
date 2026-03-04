@@ -542,16 +542,16 @@ auto_route_generator: ^7.3.2 # Генератор для AutoRouter
 2. Создается **CurrencyStore** с **CurrencyService** внутри
 3. Вызывается `_currencyStore.loadCurrencies()`
 4. **CurrencyStore.loadCurrencies()** (action):
-    - Устанавливает `isLoading = true`
-    - Вызывает `_currencyService.fetchRates(baseCurrency)`
+   - Устанавливает `isLoading = true`
+   - Вызывает `_currencyService.fetchRates(baseCurrency)`
 5. **CurrencyService.fetchRates()**:
-    - Делает HTTP GET запрос к API
-    - Парсит JSON ответ
-    - Создает список **CurrencyModel**
-    - Возвращает результат
+   - Делает HTTP GET запрос к API
+   - Парсит JSON ответ
+   - Создает список **CurrencyModel**
+   - Возвращает результат
 6. **CurrencyStore.loadCurrencies()** продолжает:
-    - Обновляет `currencies` списком
-    - Устанавливает `isLoading = false`
+   - Обновляет `currencies` списком
+   - Устанавливает `isLoading = false`
 7. **HomeScreen** автоматически перерисовывается благодаря **Observer** (MobX)
 
 ---
