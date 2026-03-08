@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:auto_route/auto_route.dart';
-import '../app_router.dart'; // Для аргументов
+import '../app_router.dart';
 
-// @RoutePage() - помечаем как страницу
-@RoutePage()
 class DetailScreen extends StatelessWidget {
   // Получаем аргументы через конструктор
   // Это типобезопасно! Компилятор проверит, что передается правильный тип

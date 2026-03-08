@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:auto_route/auto_route.dart';
 import 'app_router.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
-
-  final _appRouter = AppRouter();
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
+    return MaterialApp(
       title: 'Currency Converter',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -22,9 +19,8 @@ class MyApp extends StatelessWidget {
           elevation: 0,
         ),
       ),
-      // Используем AutoRouter для навигации
-      routerDelegate: AutoRouterDelegate(_appRouter),
-      routeInformationParser: _appRouter.defaultRouteParser(),
+      onGenerateRoute: AppRouter.generateRoute,
+      initialRoute: '/',
       debugShowCheckedModeBanner: false,
     );
   }

@@ -1,9 +1,6 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
 import 'screens/detail_screen.dart';
-
-part 'app_router.gr.dart';
 
 class CurrencyArgument {
   final String code;
@@ -19,11 +16,22 @@ class CurrencyArgument {
   });
 }
 
-@AutoRouterConfig(replaceInRouteName: 'Screen,Route')
-class AppRouter extends _$AppRouter {
-  @override
-  List<AutoRoute> get routes => [
-        AutoRoute(page: HomeRoute.page, initial: true),
-        AutoRoute(page: DetailRoute.page),
-      ];
+class AppRouter {
+  static Route<dynamic> generateRoute(RouteSettings settings) {
+    switch (settings.name) {
+      case '/':
+        return MaterialPageRoute(
+          builder: (_) => const HomeScreen(),
+        );
+      case '/detail':
+        final currency = settings.arguments as CurrencyArgument;
+        return MaterialPageRoute(
+          builder: (_) => DetailScreen(currency: currency),
+        );
+      default:
+        return MaterialPageRoute(
+          builder: (_) => const HomeScreen(),
+        );
+    }
+  }
 }

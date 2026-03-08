@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:auto_route/auto_route.dart';
 import '../stores/currency_store.dart';
 import '../services/currency_service.dart';
-import 'detail_screen.dart'; // Импортируем для аргументов
-import '../app_router.dart'; // Для навигации
+import '../app_router.dart';
 
-// @RoutePage() - аннотация AutoRouter, помечает этот виджет как страницу
-@RoutePage()
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -50,20 +46,23 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.all(8),
             color: Colors.blue.shade700,
             child: Observer(
-              builder: (_) => Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(Icons.update, size: 16, color: Colors.white70),
-                  const SizedBox(width: 4),
-                  Text(
-                    'Обновлено: ${_currencyStore.lastUpdateDate}',
-                    style: const TextStyle(
-                      color: Colors.white70,
-                      fontSize: 12,
+              builder: (_) {
+                _currencyStore.currencies.length;
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.update, size: 16, color: Colors.white70),
+                    const SizedBox(width: 4),
+                    Text(
+                      'Обновлено: ${_currencyStore.lastUpdateDate.value}',
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 12,
+                      ),
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                );
+              },
             ),
           ),
         ),
@@ -71,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           Observer(
             builder: (_) => IconButton(
-              icon: _currencyStore.isLoading
+              icon: _currencyStore.isLoading.value
                   ? const SizedBox(
                       width: 20,
                       height: 20,
@@ -81,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     )
                   : const Icon(Icons.refresh),
-              onPressed: _currencyStore.isLoading ? null : _loadData,
+              onPressed: _currencyStore.isLoading.value ? null : _loadData,
             ),
           ),
         ],
@@ -92,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Observer(
           builder: (_) {
             // Показываем ошибку, если она есть
-            if (_currencyStore.errorMessage != null) {
+            if (_currencyStore.errorMessage.value != null) {
               return Center(
                 child: Padding(
                   padding: const EdgeInsets.all(16),
@@ -106,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       const SizedBox(height: 16),
                       Text(
-                        _currencyStore.errorMessage!,
+                        _currencyStore.errorMessage.value!,
                         textAlign: TextAlign.center,
                         style: const TextStyle(fontSize: 16),
                       ),
@@ -122,7 +121,8 @@ class _HomeScreenState extends State<HomeScreen> {
             }
 
             // Показываем загрузку
-            if (_currencyStore.isLoading && _currencyStore.currencies.isEmpty) {
+            if (_currencyStore.isLoading.value &&
+                _currencyStore.currencies.isEmpty) {
               return const Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -164,22 +164,20 @@ class _HomeScreenState extends State<HomeScreen> {
                       title: Text(currency.name),
                       // Курс с двумя знаками после запятой
                       subtitle: Text(
-                        '1 ${_currencyStore.baseCurrency} = ${currency.rate.toStringAsFixed(2)} ${currency.code}',
+                        '100 ${_currencyStore.baseCurrency.value} = ${currency.rate * 100} ${currency.code}',
                       ),
                       // Стрелочка справа
                       trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                       // По клику переходим на экран деталей
                       onTap: () {
-                        // Используем AutoRouter для навигации
-                        // Передаем аргументы через DetailRoute (сгенерировано)
-                        context.pushRoute(
-                          DetailRoute(
-                            currency: CurrencyArgument(
-                              code: currency.code,
-                              name: currency.name,
-                              rate: currency.rate,
-                              date: currency.date,
-                            ),
+                        Navigator.pushNamed(
+                          context,
+                          '/detail',
+                          arguments: CurrencyArgument(
+                            code: currency.code,
+                            name: currency.name,
+                            rate: currency.rate,
+                            date: currency.date,
                           ),
                         );
                       },

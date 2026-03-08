@@ -14,9 +14,6 @@ dependencies:
   mobx: ^2.3.0+1              # Основная библиотека MobX
   flutter_mobx: ^2.2.0+1       # Интеграция с Flutter (Observer виджет)
 
-  # AutoRouter для навигации
-  auto_route: ^7.8.4           # Основная библиотека AutoRouter
-
   # Для HTTP запросов
   dio: ^5.4.0                  # Продвинутый HTTP клиент
 
@@ -30,7 +27,6 @@ dev_dependencies:
   # Генераторы кода
   build_runner: ^2.4.8          # Инструмент для генерации кода
   mobx_codegen: ^2.6.0+1        # Генератор кода для MobX
-  auto_route_generator: ^7.3.2 # Генератор кода для AutoRouter
   analyzer: ^6.4.0
 
   flutter_lints: ^3.0.0
