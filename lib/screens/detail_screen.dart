@@ -1,21 +1,40 @@
 import 'package:flutter/material.dart';
 import '../app_router.dart';
+import '../controllers/detail_controller.dart';
+import '../models/currency_model.dart';
 
-class DetailScreen extends StatelessWidget {
-  // Получаем аргументы через конструктор
-  // Это типобезопасно! Компилятор проверит, что передается правильный тип
+class DetailScreen extends StatefulWidget {
   final CurrencyArgument currency;
 
   const DetailScreen({
     super.key,
-    required this.currency, // required - обязательный параметр
+    required this.currency,
   });
+
+  @override
+  State<DetailScreen> createState() => _DetailScreenState();
+}
+
+class _DetailScreenState extends State<DetailScreen> {
+  late final DetailController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    final currencyModel = CurrencyModel(
+      code: widget.currency.code,
+      name: widget.currency.name,
+      rate: widget.currency.rate,
+      date: widget.currency.date,
+    );
+    controller = DetailController(currencyModel);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(currency.code), // Код валюты в заголовке
+        title: Text(controller.code), // Код валюты в заголовке
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
       ),
@@ -33,7 +52,7 @@ class DetailScreen extends StatelessWidget {
                   children: [
                     // Крупный код валюты
                     Text(
-                      currency.code,
+                      controller.code,
                       style: const TextStyle(
                         fontSize: 48,
                         fontWeight: FontWeight.bold,
@@ -43,7 +62,7 @@ class DetailScreen extends StatelessWidget {
                     const SizedBox(height: 8),
                     // Название
                     Text(
-                      currency.name,
+                      controller.name,
                       style: const TextStyle(
                         fontSize: 20,
                         color: Colors.grey,
@@ -54,7 +73,7 @@ class DetailScreen extends StatelessWidget {
                     // Информация о курсе
                     _buildInfoRow(
                       'Курс',
-                      '${currency.rate.toStringAsFixed(4)} ${currency.code}',
+                      '${controller.rate.toStringAsFixed(4)} ${controller.code}',
                     ),
                     const SizedBox(height: 16),
 
@@ -66,7 +85,7 @@ class DetailScreen extends StatelessWidget {
 
                     _buildInfoRow(
                       'Дата обновления',
-                      '${currency.date.day} ${_getMonthName(currency.date.month)} ${currency.date.year}, ${currency.date.hour}:${currency.date.minute.toString().padLeft(2, '0')}',
+                      '${controller.date.day} ${_getMonthName(controller.date.month)} ${controller.date.year}, ${controller.date.hour}:${controller.date.minute.toString().padLeft(2, '0')}',
                     ),
                   ],
                 ),
@@ -84,7 +103,7 @@ class DetailScreen extends StatelessWidget {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(
-                        '100 RUB = ${(100 * currency.rate).toStringAsFixed(2)} ${currency.code}',
+                        '100 RUB = ${(100 * controller.rate).toStringAsFixed(2)} ${controller.code}',
                       ),
                       duration: const Duration(seconds: 2),
                     ),
