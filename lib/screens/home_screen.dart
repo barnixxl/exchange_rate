@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import '../stores/currency_store.dart';
-import '../services/currency_service.dart';
+import '../controllers/home_controller.dart';
+import '../services/currency_repository.dart';
+import '../services/network.dart';
 import '../app_router.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -12,23 +13,19 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // Создаем Store с зависимостью от CurrencyService
-  late final CurrencyStore _currencyStore;
+  late final HomeController _homeController;
 
   @override
   void initState() {
     super.initState();
 
-    // Инициализируем Store
-    _currencyStore = CurrencyStore(CurrencyService());
+    _homeController = HomeController(CurrencyRepository(Network()));
 
-    // Загружаем данные при старте
     _loadData();
   }
 
-  // Метод для загрузки данных
   Future<void> _loadData() async {
-    await _currencyStore.loadCurrencies();
+    await _homeController.loadCurrencies();
   }
 
   @override
@@ -47,14 +44,14 @@ class _HomeScreenState extends State<HomeScreen> {
             color: Colors.blue.shade700,
             child: Observer(
               builder: (_) {
-                _currencyStore.currencies.length;
+                _homeController.currencies.length;
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Icon(Icons.update, size: 16, color: Colors.white70),
                     const SizedBox(width: 4),
                     Text(
-                      'Обновлено: ${_currencyStore.lastUpdateDate.value}',
+                      'Обновлено: ${_homeController.lastUpdateDate.value}',
                       style: const TextStyle(
                         color: Colors.white70,
                         fontSize: 12,
@@ -70,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           Observer(
             builder: (_) => IconButton(
-              icon: _currencyStore.isLoading.value
+              icon: _homeController.isLoading.value
                   ? const SizedBox(
                       width: 20,
                       height: 20,
@@ -80,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     )
                   : const Icon(Icons.refresh),
-              onPressed: _currencyStore.isLoading.value ? null : _loadData,
+              onPressed: _homeController.isLoading.value ? null : _loadData,
             ),
           ),
         ],
@@ -91,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Observer(
           builder: (_) {
             // Показываем ошибку, если она есть
-            if (_currencyStore.errorMessage.value != null) {
+            if (_homeController.errorMessage.value != null) {
               return Center(
                 child: Padding(
                   padding: const EdgeInsets.all(16),
@@ -105,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       const SizedBox(height: 16),
                       Text(
-                        _currencyStore.errorMessage.value!,
+                        _homeController.errorMessage.value!,
                         textAlign: TextAlign.center,
                         style: const TextStyle(fontSize: 16),
                       ),
@@ -121,8 +118,8 @@ class _HomeScreenState extends State<HomeScreen> {
             }
 
             // Показываем загрузку
-            if (_currencyStore.isLoading.value &&
-                _currencyStore.currencies.isEmpty) {
+            if (_homeController.isLoading.value &&
+                _homeController.currencies.isEmpty) {
               return const Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -136,12 +133,12 @@ class _HomeScreenState extends State<HomeScreen> {
             }
 
             // Показываем список валют
-            if (_currencyStore.currencies.isNotEmpty) {
+            if (_homeController.currencies.isNotEmpty) {
               return ListView.builder(
                 padding: const EdgeInsets.all(8),
-                itemCount: _currencyStore.currencies.length,
+                itemCount: _homeController.currencies.length,
                 itemBuilder: (context, index) {
-                  final currency = _currencyStore.currencies[index];
+                  final currency = _homeController.currencies[index];
 
                   return Card(
                     margin: const EdgeInsets.symmetric(
@@ -164,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       title: Text(currency.name),
                       // Курс с двумя знаками после запятой
                       subtitle: Text(
-                        '100 ${_currencyStore.baseCurrency.value} = ${currency.rate * 100} ${currency.code}',
+                        '100 ${_homeController.baseCurrency.value} = ${currency.rate * 100} ${currency.code}',
                       ),
                       // Стрелочка справа
                       trailing: const Icon(Icons.arrow_forward_ios, size: 16),
