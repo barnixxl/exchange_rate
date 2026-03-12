@@ -1,5 +1,5 @@
 import '../models/currency_model.dart';
-import '../net/currency/api.dart';
+import '../network/currency/currency_api.dart';
 
 class CurrencyRepository {
   final CurrencyApi _api;

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'home_controller.dart';
 import '../../services/currency_repository.dart';
-import '../../net/network.dart';
-import '../../net/currency/api.dart';
+import '../../network/exchange_rate_network.dart';
+import '../../network/currency/currency_api.dart';
 import '../../app_router.dart';
 
 class HomeScreen extends StatefulWidget {
