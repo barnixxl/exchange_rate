@@ -1,31 +1,22 @@
 import '../models/currency_model.dart';
-import '../../request/currency_request.dart';
-import '../../response/currency_response.dart';
-import '../../network/network.dart';
+import '../api/api.dart';
 
 class CurrencyRepository {
-  final Network _network;
+  final CurrencyApi _api;
 
-  CurrencyRepository(this._network);
+  CurrencyRepository(this._api);
 
   Future<List<CurrencyModel>> fetchRates(String baseCurrency) async {
-    final request = FetchRatesRequest(baseCurrency: baseCurrency);
-    final response = await _network.get(request.url);
+    final apiResponse = await _api.fetchRates(baseCurrency);
 
-    if (response.statusCode == 200) {
-      final apiResponse = CurrencyApiResponse.fromJson(response.data);
+    final currencies = <CurrencyModel>[];
 
-      final currencies = <CurrencyModel>[];
-
-      for (final code in CurrencyModel.supportedCurrencies) {
-        currencies.add(CurrencyModel.fromResponse(apiResponse, code));
-      }
-
-      currencies.sort((a, b) => a.code.compareTo(b.code));
-
-      return currencies;
-    } else {
-      throw Exception('Error loading rates: ${response.statusCode}');
+    for (final code in CurrencyModel.supportedCurrencies) {
+      currencies.add(CurrencyModel.fromResponse(apiResponse, code));
     }
+
+    currencies.sort((a, b) => a.code.compareTo(b.code));
+
+    return currencies;
   }
 }
