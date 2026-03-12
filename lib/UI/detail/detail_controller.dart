@@ -1,5 +1,5 @@
 import 'package:mobx/mobx.dart';
-import '../../DATA/models/currency_model.dart';
+import '../../models/currency_model.dart';
 
 class DetailController {
   DetailController(this._currency);

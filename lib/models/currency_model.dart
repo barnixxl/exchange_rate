@@ -1,4 +1,4 @@
-import '../response/currency_response.dart';
+import '../net/currency/response/currency_response.dart';
 
 class CurrencyModel {
   final String code;

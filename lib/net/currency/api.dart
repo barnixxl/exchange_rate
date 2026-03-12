@@ -1,5 +1,5 @@
-import '../network/network.dart';
-import '../response/currency_response.dart';
+import '../network.dart';
+import 'response/currency_response.dart';
 
 class CurrencyApi {
   final Network _network;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../app_router.dart';
 import 'detail_controller.dart';
-import '../../DATA/models/currency_model.dart';
+import '../../models/currency_model.dart';
 
 class DetailScreen extends StatefulWidget {
   final CurrencyArgument currency;
