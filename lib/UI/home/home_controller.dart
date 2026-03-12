@@ -1,6 +1,6 @@
 import 'package:mobx/mobx.dart';
-import '../models/currency_model.dart';
-import '../services/currency_repository.dart';
+import '../../DATA/models/currency_model.dart';
+import '../../DATA/services/currency_repository.dart';
 
 class HomeController {
   HomeController(this._repository);

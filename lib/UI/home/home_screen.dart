@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import '../controllers/home_controller.dart';
-import '../services/currency_repository.dart';
-import '../services/network.dart';
-import '../app_router.dart';
+import 'home_controller.dart';
+import '../../DATA/services/currency_repository.dart';
+import '../../DATA/services/network.dart';
+import '../../app_router.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -31,12 +31,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // AppBar с заголовком и кнопкой обновления
       appBar: AppBar(
         title: const Text('Курсы валют'),
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
-        // Нижняя часть AppBar с информацией о дате
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(40),
           child: Container(
@@ -63,7 +61,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-        // Кнопка обновления
         actions: [
           Observer(
             builder: (_) => IconButton(
@@ -83,11 +80,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       body: RefreshIndicator(
-        // Pull-to-refresh
         onRefresh: _loadData,
         child: Observer(
           builder: (_) {
-            // Показываем ошибку, если она есть
             if (_homeController.errorMessage.value != null) {
               return Center(
                 child: Padding(
@@ -117,7 +112,6 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             }
 
-            // Показываем загрузку
             if (_homeController.isLoading.value &&
                 _homeController.currencies.isEmpty) {
               return const Center(
@@ -132,7 +126,6 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             }
 
-            // Показываем список валют
             if (_homeController.currencies.isNotEmpty) {
               return ListView.builder(
                 padding: const EdgeInsets.all(8),
@@ -146,7 +139,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       vertical: 4,
                     ),
                     child: ListTile(
-                      // Левая часть - код валюты
                       leading: CircleAvatar(
                         backgroundColor: Colors.blue.shade100,
                         child: Text(
@@ -157,15 +149,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                       ),
-                      // Название валюты
                       title: Text(currency.name),
-                      // Курс с двумя знаками после запятой
                       subtitle: Text(
                         '100 ${_homeController.baseCurrency.value} = ${currency.rate * 100} ${currency.code}',
                       ),
-                      // Стрелочка справа
                       trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-                      // По клику переходим на экран деталей
                       onTap: () {
                         Navigator.pushNamed(
                           context,
@@ -184,7 +172,6 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             }
 
-            // Пустой экран (на всякий случай)
             return const Center(
               child: Text('Нет данных'),
             );

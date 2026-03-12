@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'screens/home_screen.dart';
-import 'screens/detail_screen.dart';
+import 'UI/home/home_screen.dart';
+import 'UI/detail/detail_screen.dart';
 
 class CurrencyArgument {
   final String code;

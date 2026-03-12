@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../app_router.dart';
-import '../controllers/detail_controller.dart';
-import '../models/currency_model.dart';
+import '../../app_router.dart';
+import 'detail_controller.dart';
+import '../../DATA/models/currency_model.dart';
 
 class DetailScreen extends StatefulWidget {
   final CurrencyArgument currency;
@@ -34,7 +34,7 @@ class _DetailScreenState extends State<DetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(controller.code), // Код валюты в заголовке
+        title: Text(controller.code),
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
       ),
@@ -43,14 +43,12 @@ class _DetailScreenState extends State<DetailScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Карточка с основной информацией
             Card(
               elevation: 4,
               child: Padding(
                 padding: const EdgeInsets.all(24),
                 child: Column(
                   children: [
-                    // Крупный код валюты
                     Text(
                       controller.code,
                       style: const TextStyle(
@@ -60,7 +58,6 @@ class _DetailScreenState extends State<DetailScreen> {
                       ),
                     ),
                     const SizedBox(height: 8),
-                    // Название
                     Text(
                       controller.name,
                       style: const TextStyle(
@@ -69,20 +66,16 @@ class _DetailScreenState extends State<DetailScreen> {
                       ),
                     ),
                     const Divider(height: 32),
-
-                    // Информация о курсе
                     _buildInfoRow(
                       'Курс',
                       '${controller.rate.toStringAsFixed(4)} ${controller.code}',
                     ),
                     const SizedBox(height: 16),
-
                     _buildInfoRow(
                       'Базовая валюта',
                       'Российский рубль (RUB)',
                     ),
                     const SizedBox(height: 16),
-
                     _buildInfoRow(
                       'Дата обновления',
                       '${controller.date.day} ${_getMonthName(controller.date.month)} ${controller.date.year}, ${controller.date.hour}:${controller.date.minute.toString().padLeft(2, '0')}',
@@ -91,15 +84,11 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
               ),
             ),
-
             const Spacer(),
-
-            // Кнопка "Рассчитать"
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  // Показываем SnackBar с примером расчета
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(
@@ -121,7 +110,6 @@ class _DetailScreenState extends State<DetailScreen> {
     );
   }
 
-  // Вспомогательный виджет для отображения строки информации
   Widget _buildInfoRow(String label, String value) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
