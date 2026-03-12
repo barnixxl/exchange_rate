@@ -1,7 +1,7 @@
 import '../models/currency_model.dart';
-import 'currency_request.dart';
-import 'currency_response.dart';
-import 'network.dart';
+import '../../request/currency_request.dart';
+import '../../response/currency_response.dart';
+import '../../network/network.dart';
 
 class CurrencyRepository {
   final Network _network;

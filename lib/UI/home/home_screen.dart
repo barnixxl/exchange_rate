@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'home_controller.dart';
 import '../../DATA/services/currency_repository.dart';
-import '../../DATA/services/network.dart';
+import '../../network/network.dart';
 import '../../app_router.dart';
 
 class HomeScreen extends StatefulWidget {
