@@ -51,6 +51,24 @@ class CurrencyModel {
     );
   }
 
+  static CurrencyModel withRecalculatedRate(
+      CurrencyModel model,
+      String newBaseCurrency,
+      Map<String, double> rates,
+      ) {
+    final baseRate = rates[newBaseCurrency] ?? 1.0;
+    final newRate = model.code == newBaseCurrency
+        ? 1.0
+        : model.rate / baseRate;
+
+    return CurrencyModel(
+      code: model.code,
+      name: model.name,
+      rate: newRate,
+      date: model.date,
+    );
+  }
+
   @override
   String toString() {
     return 'CurrencyModel(code: $code, name: $name, rate: $rate)';
