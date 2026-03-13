@@ -1,4 +1,4 @@
-import '../network/currency/response/resp_currency_from_network.dart';
+import '../network/currency/resp/resp_currency_from_network.dart';
 
 class CurrencyModel {
   final String code;
@@ -12,6 +12,7 @@ class CurrencyModel {
     'GBP',
     'CNY',
     'JPY',
+    'BYN',
   ];
 
   static const Map<String, String> _currencyNames = {
@@ -20,6 +21,7 @@ class CurrencyModel {
     'GBP': 'Фунт стерлингов',
     'JPY': 'Японская иена',
     'CNY': 'Китайский юань',
+    'BYN': 'Белорусский рубль',
   };
 
   CurrencyModel({
