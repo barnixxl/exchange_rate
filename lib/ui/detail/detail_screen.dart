@@ -92,7 +92,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(
-                        '100 RUB = ${(100 * controller.rate).toStringAsFixed(2)} ${controller.code}',
+                        '100 RUB = ${(1 * controller.rate).toStringAsFixed(2)} ${controller.code}',
                       ),
                       duration: const Duration(seconds: 2),
                     ),
