@@ -63,10 +63,17 @@ class HomeController {
 
   Future<void> changeBaseCurrency(String newCurrency) async {
     if (baseCurrency.value == newCurrency) return;
-    runInAction(() {
-      baseCurrency.value = newCurrency;
-    });
-    await loadCurrencies();
+
+    if (_repository.hasCachedRates()) {
+      final recalculated = _repository.recalculateToBaseCurrency(newCurrency);
+      runInAction(() {
+        baseCurrency.value = newCurrency;
+        currencies.clear();
+        currencies.addAll(recalculated);
+      });
+    } else {
+      await loadCurrencies();
+    }
   }
 
   CurrencyModel? getCurrencyByCode(String code) {
