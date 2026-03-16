@@ -6,8 +6,8 @@ class CurrencyApi {
 
   CurrencyApi(this._network);
 
-  Future<CurrencyApiResponse> fetchRates(String baseCurrency) async {
-    final url = '/$baseCurrency';
+  Future<CurrencyApiResponse> fetchRates() async {
+    final url = '/rates?periodicity=0';
     final response = await _network.get(url);
 
     if (response.statusCode == 200) {

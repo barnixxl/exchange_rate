@@ -9,7 +9,6 @@ class HomeController {
 
   late final ObservableList<CurrencyModel> currencies =
       ObservableList<CurrencyModel>();
-  late final Observable<String> baseCurrency = Observable('RUB');
   late final Observable<bool> isLoading = Observable(false);
   late final Observable<String?> errorMessage = Observable<String?>(null);
 
@@ -44,7 +43,7 @@ class HomeController {
     });
 
     try {
-      final loadedCurrencies = await _repository.fetchRates(baseCurrency.value);
+      final loadedCurrencies = await _repository.fetchRates();
       runInAction(() {
         currencies.clear();
         currencies.addAll(loadedCurrencies);
@@ -59,34 +58,6 @@ class HomeController {
         isLoading.value = false;
       });
     }
-  }
-
-  Future<void> changeBaseCurrency(String newCurrency) async {
-    if (baseCurrency.value == newCurrency) return;
-
-    if (_repository.hasCachedRates()) {
-      final recalculated = _repository.recalculateToBaseCurrency(newCurrency);
-      runInAction(() {
-        baseCurrency.value = newCurrency;
-        currencies.clear();
-        currencies.addAll(recalculated);
-      });
-    } else {
-      await loadCurrencies();
-    }
-  }
-
-  String getBaseCurrencyName() {
-    const names = {
-      'RUB': 'Российский рубль (RUB)',
-      'USD': 'Доллар США (USD)',
-      'EUR': 'Евро (EUR)',
-      'GBP': 'Фунт стерлингов (GBP)',
-      'JPY': 'Японская иена (JPY)',
-      'CNY': 'Китайский юань (CNY)',
-      'BYN': 'Белорусский рубль (BYN)',
-    };
-    return names[baseCurrency.value] ?? baseCurrency.value;
   }
 
   CurrencyModel? getCurrencyByCode(String code) {

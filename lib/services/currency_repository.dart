@@ -3,13 +3,12 @@ import '../network/currency/currency_api.dart';
 
 class CurrencyRepository {
   final CurrencyApi _api;
-  String? _cachedBaseCurrency;
   List<CurrencyModel>? _cachedRates;
 
   CurrencyRepository(this._api);
 
-  Future<List<CurrencyModel>> fetchRates(String baseCurrency) async {
-    final apiResponse = await _api.fetchRates(baseCurrency);
+  Future<List<CurrencyModel>> fetchRates() async {
+    final apiResponse = await _api.fetchRates();
 
     final currencies = <CurrencyModel>[];
 
@@ -19,7 +18,6 @@ class CurrencyRepository {
 
     currencies.sort((a, b) => a.code.compareTo(b.code));
 
-    _cachedBaseCurrency = baseCurrency;
     _cachedRates = currencies;
 
     return currencies;

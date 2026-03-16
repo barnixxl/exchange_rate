@@ -30,57 +30,11 @@ class _HomeScreenState extends State<HomeScreen> {
     await _homeController.loadCurrencies();
   }
 
-  void _showCurrencyPicker(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Выберите базовую валюту'),
-        content: SizedBox(
-          width: double.maxFinite,
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: _homeController.currencies.length,
-            itemBuilder: (context, index) {
-              final currency = _homeController.currencies[index];
-              final isSelected =
-                  currency.code == _homeController.baseCurrency.value;
-              return ListTile(
-                leading: CircleAvatar(
-                  backgroundColor:
-                      isSelected ? Colors.blue : Colors.blue.shade100,
-                  child: Text(
-                    currency.code,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: isSelected ? Colors.white : Colors.blue,
-                    ),
-                  ),
-                ),
-                title: Text(currency.name),
-                selected: isSelected,
-                onTap: () {
-                  _homeController.changeBaseCurrency(currency.code);
-                  Navigator.pop(context);
-                },
-              );
-            },
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Отмена'),
-          ),
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Курсы валют'),
+        title: const Text('Курсы валют НБРБ'),
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
         bottom: PreferredSize(
@@ -110,13 +64,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         actions: [
-          Observer(
-            builder: (_) => IconButton(
-              icon: const Icon(Icons.attach_money),
-              tooltip: 'Сменить базовую валюту',
-              onPressed: () => _showCurrencyPicker(context),
-            ),
-          ),
           Observer(
             builder: (_) => IconButton(
               icon: _homeController.isLoading.value
@@ -182,14 +129,11 @@ class _HomeScreenState extends State<HomeScreen> {
             }
 
             if (_homeController.currencies.isNotEmpty) {
-              final filteredCurrencies = _homeController.currencies
-                  .where((c) => c.code != _homeController.baseCurrency.value)
-                  .toList();
               return ListView.builder(
                 padding: const EdgeInsets.all(8),
-                itemCount: filteredCurrencies.length,
+                itemCount: _homeController.currencies.length,
                 itemBuilder: (context, index) {
-                  final currency = filteredCurrencies[index];
+                  final currency = _homeController.currencies[index];
 
                   return Card(
                     margin: const EdgeInsets.symmetric(
@@ -209,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       title: Text(currency.name),
                       subtitle: Text(
-                        '1 ${_homeController.baseCurrency.value} = ${currency.rate} ${currency.code}',
+                        '1 ${currency.code} = ${currency.rate.toStringAsFixed(4)} BYN',
                       ),
                       trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                       onTap: () {
@@ -221,10 +165,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             name: currency.name,
                             rate: currency.rate,
                             date: currency.date,
-                            baseCurrencyCode:
-                                _homeController.baseCurrency.value,
-                            baseCurrencyName:
-                                _homeController.getBaseCurrencyName(),
+                            baseCurrencyCode: 'BYN',
+                            baseCurrencyName: 'Белорусский рубль (BYN)',
                           ),
                         );
                       },

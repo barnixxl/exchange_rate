@@ -5,7 +5,7 @@ class Network {
 
   Network() {
     _dio = Dio(BaseOptions(
-      baseUrl: 'https://api.exchangerate-api.com/v4/latest/',
+      baseUrl: 'https://api.nbrb.by/exrates/',
       connectTimeout: Duration(seconds: 10),
       receiveTimeout: Duration(seconds: 10),
       headers: {

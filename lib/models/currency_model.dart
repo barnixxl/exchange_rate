@@ -13,18 +13,7 @@ class CurrencyModel {
     'GBP',
     'CNY',
     'JPY',
-    'BYN',
   ];
-
-  static const Map<String, String> _currencyNames = {
-    'RUB': 'Российский рубль',
-    'USD': 'Доллар США',
-    'EUR': 'Евро',
-    'GBP': 'Фунт стерлингов',
-    'JPY': 'Японская иена',
-    'CNY': 'Китайский юань',
-    'BYN': 'Белорусский рубль',
-  };
 
   CurrencyModel({
     required this.code,
@@ -35,10 +24,16 @@ class CurrencyModel {
 
   factory CurrencyModel.fromResponse(
       CurrencyApiResponse response, String code) {
-    final rate = response.rates[code]?.toDouble() ?? 0.0;
+    final rateData = response.rates.firstWhere(
+      (r) => r.cur_Abbreviation == code,
+      orElse: () => throw Exception('Currency $code not found'),
+    );
+
+    final rate = rateData.cur_OfficialRate / rateData.cur_Scale;
+
     return CurrencyModel(
       code: code,
-      name: _currencyNames[code] ?? code,
+      name: rateData.cur_Name,
       rate: rate,
       date: DateTime.parse(response.date),
     );

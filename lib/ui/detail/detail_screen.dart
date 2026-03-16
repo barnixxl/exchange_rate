@@ -19,6 +19,7 @@ class _DetailScreenState extends State<DetailScreen> {
   late final DetailController controller;
   String _inputAmount = '';
   String _convertedAmount = '0';
+  String _convertedAmountRevert = '0';
 
   @override
   void initState() {
@@ -70,7 +71,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     const Divider(height: 32),
                     _buildInfoRow(
                       'Курс',
-                      '${controller.rate.toStringAsFixed(4)} ${controller.code}',
+                      '1 ${controller.code} = ${controller.rate.toStringAsFixed(4)} BYN',
                     ),
                     const SizedBox(height: 16),
                     _buildInfoRow(
@@ -90,7 +91,7 @@ class _DetailScreenState extends State<DetailScreen> {
             TextField(
               keyboardType: TextInputType.numberWithOptions(decimal: true),
               decoration: InputDecoration(
-                labelText: 'Сумма в ${widget.currency.code}',
+                labelText: 'Сумма в ${widget.currency.baseCurrencyCode}',
                 border: OutlineInputBorder(),
               ),
               onChanged: (value) {
@@ -105,7 +106,37 @@ class _DetailScreenState extends State<DetailScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),
                 child: Text(
-                  '$_convertedAmount ${widget.currency.baseCurrencyName}',
+                  '$_convertedAmount ${widget.currency.name} (${widget.currency.code})', //{widget.currency.code}
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            const Spacer(),
+//---------------------------------------------------//
+            const SizedBox(height: 24),
+            TextField(
+              keyboardType: TextInputType.numberWithOptions(decimal: true),
+              decoration: InputDecoration(
+                labelText: 'Сумма в ${widget.currency.code}',
+                border: OutlineInputBorder(),
+              ),
+              onChanged: (value) {
+                setState(() {
+                  _inputAmount = value;
+                  final amount = double.tryParse(value) ?? 0.0;
+                  _convertedAmountRevert =
+                      (amount * controller.rate).toStringAsFixed(2);
+                });
+              },
+            ),
+
+            if (_inputAmount.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Text(
+                  '$_convertedAmountRevert ${widget.currency.baseCurrencyName}',
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
