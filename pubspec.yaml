@@ -19,6 +19,7 @@ dependencies:
 
   # Для работы с датами
   intl: ^0.18.1                # Форматирование дат
+  json_annotation: ^4.9.0     # Для JSON сериализации
 
 dev_dependencies:
   flutter_test:
@@ -27,6 +28,7 @@ dev_dependencies:
   # Генераторы кода
   build_runner: ^2.4.8          # Инструмент для генерации кода
   mobx_codegen: ^2.6.0+1        # Генератор кода для MobX
+  json_serializable: ^6.8.0     # Генератор для JSON сериализации
   analyzer: ^6.4.0
 
   flutter_lints: ^3.0.0
