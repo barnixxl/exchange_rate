@@ -7,12 +7,16 @@ class CurrencyArgument {
   final String name;
   final double rate;
   final DateTime date;
+  final String baseCurrencyCode;
+  final String baseCurrencyName;
 
   CurrencyArgument({
     required this.code,
     required this.name,
     required this.rate,
     required this.date,
+    required this.baseCurrencyCode,
+    required this.baseCurrencyName,
   });
 }
 

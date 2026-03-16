@@ -15,8 +15,8 @@ class DetailController {
     return '${date.day} ${_getMonthName(date.month)} ${date.year}, ${date.hour}:${date.minute.toString().padLeft(2, '0')}';
   }
 
-  String calculate(int amount) {
-    return (amount * _currency.rate).toStringAsFixed(2);
+  String calculate(double amount) {
+    return (amount / _currency.rate).toStringAsFixed(2);
   }
 
   String _getMonthName(int month) {

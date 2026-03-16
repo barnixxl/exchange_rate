@@ -17,6 +17,8 @@ class DetailScreen extends StatefulWidget {
 
 class _DetailScreenState extends State<DetailScreen> {
   late final DetailController controller;
+  String _inputAmount = '';
+  String _convertedAmount = '0';
 
   @override
   void initState() {
@@ -73,7 +75,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     const SizedBox(height: 16),
                     _buildInfoRow(
                       'Базовая валюта',
-                      'Российский рубль (RUB)',
+                      widget.currency.baseCurrencyName,
                     ),
                     const SizedBox(height: 16),
                     _buildInfoRow(
@@ -84,26 +86,33 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
               ),
             ),
-            const Spacer(),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        '100 RUB = ${(1 * controller.rate).toStringAsFixed(2)} ${controller.code}',
-                      ),
-                      duration: const Duration(seconds: 2),
-                    ),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                ),
-                child: const Text('Рассчитать 100 RUB'),
+            const SizedBox(height: 24),
+            TextField(
+              keyboardType: TextInputType.numberWithOptions(decimal: true),
+              decoration: InputDecoration(
+                labelText: 'Сумма в ${widget.currency.code}',
+                border: OutlineInputBorder(),
               ),
+              onChanged: (value) {
+                setState(() {
+                  _inputAmount = value;
+                  final amount = double.tryParse(value) ?? 0.0;
+                  _convertedAmount = controller.calculate(amount);
+                });
+              },
             ),
+            if (_inputAmount.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Text(
+                  '$_convertedAmount ${widget.currency.baseCurrencyName}',
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            const Spacer(),
           ],
         ),
       ),

@@ -7,6 +7,7 @@ class CurrencyModel {
   final DateTime date;
 
   static const List<String> supportedCurrencies = [
+    'RUB',
     'USD',
     'EUR',
     'GBP',
@@ -16,6 +17,7 @@ class CurrencyModel {
   ];
 
   static const Map<String, String> _currencyNames = {
+    'RUB': 'Российский рубль',
     'USD': 'Доллар США',
     'EUR': 'Евро',
     'GBP': 'Фунт стерлингов',
@@ -52,19 +54,17 @@ class CurrencyModel {
   }
 
   static CurrencyModel withRecalculatedRate(
-      CurrencyModel model,
-      String newBaseCurrency,
-      Map<String, double> rates,
-      ) {
+    CurrencyModel model,
+    String newBaseCurrency,
+    Map<String, double> rates,
+  ) {
     final baseRate = rates[newBaseCurrency] ?? 1.0;
-    final newRate = model.code == newBaseCurrency
-        ? 1.0
-        : model.rate / baseRate;
+    final newRate = model.code == newBaseCurrency ? 1.0 : model.rate / baseRate;
 
     return CurrencyModel(
       code: model.code,
       name: model.name,
-      rate: newRate,
+      rate: double.parse(newRate.toStringAsFixed(6)),
       date: model.date,
     );
   }

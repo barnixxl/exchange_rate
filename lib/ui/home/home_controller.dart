@@ -76,6 +76,19 @@ class HomeController {
     }
   }
 
+  String getBaseCurrencyName() {
+    const names = {
+      'RUB': 'Российский рубль (RUB)',
+      'USD': 'Доллар США (USD)',
+      'EUR': 'Евро (EUR)',
+      'GBP': 'Фунт стерлингов (GBP)',
+      'JPY': 'Японская иена (JPY)',
+      'CNY': 'Китайский юань (CNY)',
+      'BYN': 'Белорусский рубль (BYN)',
+    };
+    return names[baseCurrency.value] ?? baseCurrency.value;
+  }
+
   CurrencyModel? getCurrencyByCode(String code) {
     try {
       return currencies.firstWhere((c) => c.code == code);

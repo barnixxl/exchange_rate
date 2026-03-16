@@ -206,7 +206,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       title: Text(currency.name),
                       subtitle: Text(
-                        '100 ${_homeController.baseCurrency.value} = ${currency.rate * 100} ${currency.code}',
+                        '1 ${_homeController.baseCurrency.value} = ${currency.rate} ${currency.code}',
                       ),
                       trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                       onTap: () {
@@ -218,6 +218,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             name: currency.name,
                             rate: currency.rate,
                             date: currency.date,
+                            baseCurrencyCode:
+                                _homeController.baseCurrency.value,
+                            baseCurrencyName:
+                                _homeController.getBaseCurrencyName(),
                           ),
                         );
                       },
