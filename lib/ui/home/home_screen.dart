@@ -182,11 +182,14 @@ class _HomeScreenState extends State<HomeScreen> {
             }
 
             if (_homeController.currencies.isNotEmpty) {
+              final filteredCurrencies = _homeController.currencies
+                  .where((c) => c.code != _homeController.baseCurrency.value)
+                  .toList();
               return ListView.builder(
                 padding: const EdgeInsets.all(8),
-                itemCount: _homeController.currencies.length,
+                itemCount: filteredCurrencies.length,
                 itemBuilder: (context, index) {
-                  final currency = _homeController.currencies[index];
+                  final currency = filteredCurrencies[index];
 
                   return Card(
                     margin: const EdgeInsets.symmetric(
