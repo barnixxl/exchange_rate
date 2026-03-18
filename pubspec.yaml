@@ -9,26 +9,27 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+    uses-material-design: true
 
-  # MobX для управления состоянием (MVVM)
-  mobx: ^2.3.0+1              # Основная библиотека MobX
-  flutter_mobx: ^2.2.0+1       # Интеграция с Flutter (Observer виджет)
 
-  # Для HTTP запросов
-  dio: ^5.4.0                  # Продвинутый HTTP клиент
+  mobx: ^2.3.0+1
+  flutter_mobx: ^2.2.0+1
 
-  # Для работы с датами
-  intl: ^0.18.1                # Форматирование дат
-  json_annotation: ^4.9.0     # Для JSON сериализации
+
+  dio: ^5.4.0
+
+
+  intl: ^0.18.1
+  json_annotation: ^4.9.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  # Генераторы кода
-  build_runner: ^2.4.8          # Инструмент для генерации кода
-  mobx_codegen: ^2.6.0+1        # Генератор кода для MobX
-  json_serializable: ^6.8.0     # Генератор для JSON сериализации
+
+  build_runner: ^2.4.8
+  mobx_codegen: ^2.6.0+1
+  json_serializable: ^6.8.0
   analyzer: ^6.4.0
 
   flutter_lints: ^3.0.0
