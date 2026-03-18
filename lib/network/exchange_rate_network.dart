@@ -16,8 +16,8 @@ class Network {
   Network() {
     _dio = Dio(BaseOptions(
       baseUrl: 'https://api.nbrb.by/exrates/', //https://api.nbrb.by/exrates/
-      connectTimeout: Duration(seconds: 10),
-      receiveTimeout: Duration(seconds: 10),
+      connectTimeout: Duration(seconds: 20),
+      receiveTimeout: Duration(seconds: 20),
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
