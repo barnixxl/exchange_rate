@@ -2,7 +2,7 @@ import '../exchange_rate_network.dart';
 import 'resp/resp_currency_from_network.dart';
 
 class CurrencyApi {
-  final Network _network;
+  final ExchangeRateNetwork _network;
 
   CurrencyApi(this._network);
 

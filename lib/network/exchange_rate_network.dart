@@ -1,29 +1,33 @@
 import 'package:dio/dio.dart';
 
-class Network {
+class ExchangeRateNetwork {
   static const String _baseUrl = 'https://api.nbrb.by/exrates/';
   late final Dio _dio;
 
-  Network() {
-    _dio = Dio(BaseOptions(
-      baseUrl: _baseUrl,
-      connectTimeout: const Duration(
-        seconds: 20,
+  ExchangeRateNetwork() {
+    _dio = Dio(
+      BaseOptions(
+        baseUrl: _baseUrl,
+        connectTimeout: const Duration(
+          seconds: 20,
+        ),
+        receiveTimeout: const Duration(
+          seconds: 20,
+        ),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
       ),
-      receiveTimeout: const Duration(
-        seconds: 20,
+    );
+    _dio.interceptors.add(
+      LogInterceptor(
+        request: true,
+        requestBody: true,
+        responseBody: true,
+        error: true,
       ),
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-    ));
-    _dio.interceptors.add(LogInterceptor(
-      request: true,
-      requestBody: true,
-      responseBody: true,
-      error: true,
-    ));
+    );
   }
 
   Dio get dio => _dio;

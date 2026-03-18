@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
 
     _homeController =
-        HomeController(CurrencyRepository(CurrencyApi(Network())));
+        HomeController(CurrencyRepository(CurrencyApi(ExchangeRateNetwork())));
 
     _loadData();
   }
