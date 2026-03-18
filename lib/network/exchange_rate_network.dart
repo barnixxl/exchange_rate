@@ -5,7 +5,7 @@ class Network {
 
   Network() {
     _dio = Dio(BaseOptions(
-      baseUrl: 'https://api.nbrb.by/exrates/', //https://api.nbrb.by/exrates/
+      baseUrl: 'https://api.nbrb.by/exrates/',                                                                                //https://api.nbrb.by/exrates/
       connectTimeout: Duration(seconds: 20),
       receiveTimeout: Duration(seconds: 20),
       headers: {
@@ -13,7 +13,6 @@ class Network {
         'Accept': 'application/json',
       },
     ));
-
     _dio.interceptors.add(LogInterceptor(
       request: true,
       requestBody: true,
@@ -26,47 +25,65 @@ class Network {
 
   Future<Response<T>> get<T>(
       String path, {
-        Map<String, dynamic>? queryParameters,
+        Map<String, dynamic>?
+        queryParameters,
       }) async {
     try {
-      return await _dio.get<T>(path, queryParameters: queryParameters);
+      return await _dio.get<T>(
+        path,
+        queryParameters:
+        queryParameters,
+      );
     } on DioException catch (e) {
-      _handleDioError(e);
-      rethrow;
+      throw _mapDioErrorToException(e);
     } catch (e) {
-      throw Exception('Неизвестная ошибка: $e');
+      throw Exception(
+          'Неизвестная ошибка: $e'
+      );
     }
   }
-
-  void _handleDioError(DioException e) {
-    switch (e.type) { // в каждом кейсе прописываем вид ошибки/ошибок после которых выбрасываем сообщение
+  Exception _mapDioErrorToException(DioException e) {
+    switch (e.type) {
       case DioExceptionType.connectionTimeout:
       case DioExceptionType.sendTimeout:
       case DioExceptionType.receiveTimeout:
-        throw Exception('Время соединения вышло');
+        throw Exception(
+            'Время соединения вышло'
+        );
 
       case DioExceptionType.badCertificate:
-        throw Exception('Ошибка подключения API');
+        throw Exception(
+            'Ошибка подключения API'
+        );
 
       case DioExceptionType.badResponse:
         final statusCode = e.response?.statusCode;
         final message = _getErrorMessageByStatusCode(statusCode);
-        throw Exception('Ошибка подключения API (неверная ссылка), код ошибки:  $statusCode');
+        throw Exception(
+            'Ошибка подключения API (неверная ссылка), код ошибки:  $statusCode'
+        );
 
       case DioExceptionType.cancel:
-        throw Exception('Запрос не был отправлен');
+        throw Exception(
+            'Запрос не был отправлен'
+        );
 
       case DioExceptionType.connectionError:
-        throw Exception('Проверьте соединение с интернетом');
+        throw Exception(
+            'Проверьте соединение с интернетом'
+        );
 
       case DioExceptionType.unknown:
         if (e.error is FormatException) {
-          throw Exception('Ошибка формата данных');
+          throw Exception(
+              'Ошибка формата данных'
+          );
         }
-        throw Exception( 'Неизвестная ошибка сети');
+        throw Exception(
+            'Неизвестная ошибка сети'
+        );
     }
   }
-
   String _getErrorMessageByStatusCode(int? statusCode) {
     switch (statusCode) {
       case 400:
