@@ -59,7 +59,7 @@ class Network {
         final statusCode = e.response?.statusCode;
         final message = _getErrorMessageByStatusCode(statusCode);
         return Exception(
-          'Ошибка подключения API (неверная ссылка), код ошибки:  $statusCode',
+          'Ошибка подключения API (неверная ссылка), текст ошибки:  $message',
         );
       case DioExceptionType.cancel:
         return Exception(
