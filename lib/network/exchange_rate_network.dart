@@ -1,15 +1,5 @@
 import 'package:dio/dio.dart';
 
-class NetworkException implements Exception {
-  final String message;
-  final int? statusCode;
-
-  NetworkException({required this.message, this.statusCode});
-
-  @override
-  String toString() => 'NetworkException: $message${statusCode != null ? ' (Status: $statusCode)' : ''}';
-}
-
 class Network {
   late final Dio _dio;
 
@@ -44,7 +34,7 @@ class Network {
       _handleDioError(e);
       rethrow;
     } catch (e) {
-      throw NetworkException(message: ': неизвестная ошибка: $e');
+      throw Exception('Неизвестная ошибка: $e');
     }
   }
 
@@ -53,27 +43,27 @@ class Network {
       case DioExceptionType.connectionTimeout:
       case DioExceptionType.sendTimeout:
       case DioExceptionType.receiveTimeout:
-        throw NetworkException(message: ': время соединения вышло');
+        throw Exception('Время соединения вышло');
 
       case DioExceptionType.badCertificate:
-        throw NetworkException(message: ': ошибка подключения API');
+        throw Exception('Ошибка подключения API');
 
       case DioExceptionType.badResponse:
         final statusCode = e.response?.statusCode;
         final message = _getErrorMessageByStatusCode(statusCode);
-        throw NetworkException(message: ': ошибка подключения API (неверная ссылка), код ошибки:  $statusCode');
+        throw Exception('Ошибка подключения API (неверная ссылка), код ошибки:  $statusCode');
 
       case DioExceptionType.cancel:
-        throw NetworkException(message: ': запрос не был отправлен');
+        throw Exception('Запрос не был отправлен');
 
       case DioExceptionType.connectionError:
-        throw NetworkException(message: ': проверьте соединение с интернетом');
+        throw Exception('Проверьте соединение с интернетом');
 
       case DioExceptionType.unknown:
         if (e.error is FormatException) {
-          throw NetworkException(message: ': ошибка формата данных');
+          throw Exception('Ошибка формата данных');
         }
-        throw NetworkException(message: ': неизвестная ошибка сети');
+        throw Exception( 'Неизвестная ошибка сети');
     }
   }
 
