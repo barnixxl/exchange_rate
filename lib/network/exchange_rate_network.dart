@@ -1,11 +1,12 @@
 import 'package:dio/dio.dart';
 
 class Network {
+  static const String _baseUrl = 'https://api.nbrb.by/exrates/';
   late final Dio _dio;
 
   Network() {
     _dio = Dio(BaseOptions(
-      baseUrl: 'https://api.nbrb.by/exrates/',
+      baseUrl: _baseUrl,
       connectTimeout: const Duration(
         seconds: 20,
       ),
