@@ -30,8 +30,6 @@ class ExchangeRateNetwork {
     );
   }
 
-  Dio get dio => _dio;
-
   Future<Response<T>> get<T>(
     String path, {
     Map<String, dynamic>? queryParameters,
