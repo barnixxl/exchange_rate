@@ -6,21 +6,6 @@ part of 'resp_currency_from_network.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-CurrencyApiResponse _$CurrencyApiResponseFromJson(Map<String, dynamic> json) =>
-    CurrencyApiResponse(
-      date: json['date'] as String,
-      rates: (json['rates'] as List<dynamic>)
-          .map((e) => RateData.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
-
-Map<String, dynamic> _$CurrencyApiResponseToJson(
-        CurrencyApiResponse instance) =>
-    <String, dynamic>{
-      'date': instance.date,
-      'rates': instance.rates,
-    };
-
 RateData _$RateDataFromJson(Map<String, dynamic> json) => RateData(
       cur_ID: (json['Cur_ID'] as num).toInt(),
       cur_Abbreviation: json['Cur_Abbreviation'] as String,

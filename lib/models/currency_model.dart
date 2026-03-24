@@ -22,21 +22,23 @@ class CurrencyModel {
     required this.date,
   });
 
-  factory CurrencyModel.fromResponse(
-      CurrencyApiResponse response, String code) {
-    final rateData = response.rates.firstWhere(
-      (r) => r.cur_Abbreviation == code,
-      orElse: () => throw Exception('Currency $code not found'),
-    );
-
+  factory CurrencyModel.fromRateData(RateData rateData) {
     final rate = rateData.cur_OfficialRate / rateData.cur_Scale;
 
     return CurrencyModel(
-      code: code,
+      code: rateData.cur_Abbreviation,
       name: rateData.cur_Name,
       rate: rate,
-      date: DateTime.parse(response.date),
+      date: DateTime.parse(rateData.date),
     );
+  }
+
+  static CurrencyModel fromResponse(List<RateData> rates, String code) {
+    final rateData = rates.firstWhere(
+      (r) => r.cur_Abbreviation == code,
+      orElse: () => throw Exception('Currency $code not found'),
+    );
+    return CurrencyModel.fromRateData(rateData);
   }
 
   factory CurrencyModel.fromJson(Map<String, dynamic> json) {

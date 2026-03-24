@@ -6,12 +6,15 @@ class CurrencyApi {
 
   CurrencyApi(this._network);
 
-  Future<CurrencyApiResponse> fetchRates() async {
+  Future<List<RateData>> fetchRates() async {
     final url = '/rates?periodicity=0';
     final response = await _network.get(url);
 
     if (response.statusCode == 200) {
-      return CurrencyApiResponse.fromJson(response.data);
+      final data = response.data as List;
+      return data
+          .map((e) => RateData.fromJson(e as Map<String, dynamic>))
+          .toList();
     } else {
       throw Exception('Error loading rates: ${response.statusCode}');
     }
