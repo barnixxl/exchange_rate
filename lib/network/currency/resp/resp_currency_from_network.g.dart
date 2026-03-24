@@ -7,19 +7,19 @@ part of 'resp_currency_from_network.dart';
 // **************************************************************************
 
 RespCurrencyFromNetwork _$RateDataFromJson(Map<String, dynamic> json) => RespCurrencyFromNetwork(
-      cur_ID: (json['Cur_ID'] as num).toInt(),
-      cur_Abbreviation: json['Cur_Abbreviation'] as String,
-      cur_Scale: (json['Cur_Scale'] as num).toInt(),
-      cur_Name: json['Cur_Name'] as String,
-      cur_OfficialRate: (json['Cur_OfficialRate'] as num).toDouble(),
+      curID: (json['Cur_ID'] as num).toInt(),
+      curAbbreviation: json['Cur_Abbreviation'] as String,
+      curScale: (json['Cur_Scale'] as num).toInt(),
+      curName: json['Cur_Name'] as String,
+      curOfficialRate: (json['Cur_OfficialRate'] as num).toDouble(),
       date: json['Date'] as String,
     );
 
 Map<String, dynamic> _$RateDataToJson(RespCurrencyFromNetwork instance) => <String, dynamic>{
-      'Cur_ID': instance.cur_ID,
-      'Cur_Abbreviation': instance.cur_Abbreviation,
-      'Cur_Scale': instance.cur_Scale,
-      'Cur_Name': instance.cur_Name,
-      'Cur_OfficialRate': instance.cur_OfficialRate,
+      'Cur_ID': instance.curID,
+      'Cur_Abbreviation': instance.curAbbreviation,
+      'Cur_Scale': instance.curScale,
+      'Cur_Name': instance.curName,
+      'Cur_OfficialRate': instance.curOfficialRate,
       'Date': instance.date,
     };
