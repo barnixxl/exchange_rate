@@ -36,7 +36,8 @@ class CurrencyModel {
     );
   }
 
-  static CurrencyModel fromResponse(List<RespCurrencyFromNetwork> rates, String code) {
+  static CurrencyModel fromResponse(
+      List<RespCurrencyFromNetwork> rates, String code) {
     final rateData = rates.firstWhere(
       (r) => r.curAbbreviation == code,
       orElse: () => throw Exception('Currency $code not found'),

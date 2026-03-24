@@ -16,7 +16,7 @@ class CurrencyApi {
           .map((e) => RespCurrencyFromNetwork.fromJson(e as Map<String, dynamic>))
           .toList();
     } else {
-      throw Exception('Error loading rates: ${response.statusCode}');
+      throw Exception('Ошибка загрузки данных: ${response.statusCode}');
     }
   }
 }

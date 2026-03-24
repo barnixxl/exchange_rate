@@ -30,4 +30,14 @@ class RespCurrencyFromNetwork {
       _$RateDataFromJson(json);
 
   Map<String, dynamic> toJson() => _$RateDataToJson(this);
+
+  @override
+  String toString() => 'RespCurrencyFromNetwork('
+      'curID: $curID, '
+      'curAbbreviation: $curAbbreviation, '
+      'curScale: $curScale, '
+      'curName: $curName, '
+      'curOfficialRate: $curOfficialRate, '
+      'date: $date'
+      ')';
 }
