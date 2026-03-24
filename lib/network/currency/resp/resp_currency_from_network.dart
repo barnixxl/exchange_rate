@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'resp_currency_from_network.g.dart';
 
 @JsonSerializable()
-class RateData {
+class RespCurrencyFromNetwork {
   @JsonKey(name: 'Cur_ID')
   final int cur_ID;
   @JsonKey(name: 'Cur_Abbreviation')
@@ -17,7 +17,7 @@ class RateData {
   @JsonKey(name: 'Date')
   final String date;
 
-  RateData({
+  RespCurrencyFromNetwork({
     required this.cur_ID,
     required this.cur_Abbreviation,
     required this.cur_Scale,
@@ -26,7 +26,7 @@ class RateData {
     required this.date,
   });
 
-  factory RateData.fromJson(Map<String, dynamic> json) =>
+  factory RespCurrencyFromNetwork.fromJson(Map<String, dynamic> json) =>
       _$RateDataFromJson(json);
 
   Map<String, dynamic> toJson() => _$RateDataToJson(this);

@@ -6,7 +6,7 @@ part of 'resp_currency_from_network.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-RateData _$RateDataFromJson(Map<String, dynamic> json) => RateData(
+RespCurrencyFromNetwork _$RateDataFromJson(Map<String, dynamic> json) => RespCurrencyFromNetwork(
       cur_ID: (json['Cur_ID'] as num).toInt(),
       cur_Abbreviation: json['Cur_Abbreviation'] as String,
       cur_Scale: (json['Cur_Scale'] as num).toInt(),
@@ -15,7 +15,7 @@ RateData _$RateDataFromJson(Map<String, dynamic> json) => RateData(
       date: json['Date'] as String,
     );
 
-Map<String, dynamic> _$RateDataToJson(RateData instance) => <String, dynamic>{
+Map<String, dynamic> _$RateDataToJson(RespCurrencyFromNetwork instance) => <String, dynamic>{
       'Cur_ID': instance.cur_ID,
       'Cur_Abbreviation': instance.cur_Abbreviation,
       'Cur_Scale': instance.cur_Scale,

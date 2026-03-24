@@ -22,18 +22,18 @@ class CurrencyModel {
     required this.date,
   });
 
-  factory CurrencyModel.fromRateData(RateData rateData) {
-    final rate = rateData.cur_OfficialRate / rateData.cur_Scale;
+  factory CurrencyModel.fromRateData(RespCurrencyFromNetwork respCurrencyFromNetwork) {
+    final rate = respCurrencyFromNetwork.cur_OfficialRate / respCurrencyFromNetwork.cur_Scale;
 
     return CurrencyModel(
-      code: rateData.cur_Abbreviation,
-      name: rateData.cur_Name,
+      code: respCurrencyFromNetwork.cur_Abbreviation,
+      name: respCurrencyFromNetwork.cur_Name,
       rate: rate,
-      date: DateTime.parse(rateData.date),
+      date: DateTime.parse(respCurrencyFromNetwork.date),
     );
   }
 
-  static CurrencyModel fromResponse(List<RateData> rates, String code) {
+  static CurrencyModel fromResponse(List<RespCurrencyFromNetwork> rates, String code) {
     final rateData = rates.firstWhere(
       (r) => r.cur_Abbreviation == code,
       orElse: () => throw Exception('Currency $code not found'),
