@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'resp_currency_from_network.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class RespCurrencyFromNetwork {
   @JsonKey(name: 'CurID')
   final int? curID;
