@@ -5,17 +5,17 @@ part 'resp_currency_from_network.g.dart';
 @JsonSerializable()
 class RespCurrencyFromNetwork {
   @JsonKey(name: 'CurID')
-  final int curID;
+  final int? curID;
   @JsonKey(name: 'CurAbbreviation')
-  final String curAbbreviation;
+  final String? curAbbreviation;
   @JsonKey(name: 'CurScale')
-  final int curScale;
+  final int? curScale;
   @JsonKey(name: 'CurName')
-  final String curName;
+  final String? curName;
   @JsonKey(name: 'CurOfficialRate')
-  final double curOfficialRate;
+  final double? curOfficialRate;
   @JsonKey(name: 'Date')
-  final String date;
+  final String? date;
 
   RespCurrencyFromNetwork({
     required this.curID,

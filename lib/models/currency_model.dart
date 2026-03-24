@@ -22,14 +22,17 @@ class CurrencyModel {
     required this.date,
   });
 
-  factory CurrencyModel.fromRateData(RespCurrencyFromNetwork respCurrencyFromNetwork) {
-    final rate = respCurrencyFromNetwork.curOfficialRate / respCurrencyFromNetwork.curScale;
-
+  factory CurrencyModel.fromRateData(RespCurrencyFromNetwork rateData) {
+    final code = rateData.curAbbreviation ?? '';
+    final name = rateData.curName ?? 'Неизвестное название валюты';
+    final scale = rateData.curScale ?? 1;
+    final officialRate = rateData.curOfficialRate ?? 0.0;
+    final dateStr = rateData.date ?? DateTime.now().toIso8601String();
     return CurrencyModel(
-      code: respCurrencyFromNetwork.curAbbreviation,
-      name: respCurrencyFromNetwork.curName,
-      rate: rate,
-      date: DateTime.parse(respCurrencyFromNetwork.date),
+      code: code,
+      name: name,
+      rate: officialRate / scale,
+      date: DateTime.parse(dateStr),
     );
   }
 
