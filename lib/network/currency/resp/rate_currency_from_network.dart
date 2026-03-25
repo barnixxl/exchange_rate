@@ -18,12 +18,12 @@ class RateDataFromNetwork {
   final String? date;
 
   RateDataFromNetwork({
-    required this.curID,
-    required this.curAbbreviation,
-    required this.curScale,
-    required this.curName,
-    required this.curOfficialRate,
-    required this.date,
+    this.curID,
+    this.curAbbreviation,
+    this.curScale,
+    this.curName,
+    this.curOfficialRate,
+    this.date,
   });
 
   factory RateDataFromNetwork.fromJson(Map<String, dynamic> json) =>
