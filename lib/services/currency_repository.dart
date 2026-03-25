@@ -8,18 +8,8 @@ class CurrencyRepository {
   CurrencyRepository(this._api);
 
   Future<List<CurrencyModel>> fetchRates() async {
-    final apiResponse = await _api.fetchRates();
-
-    final currencies = <CurrencyModel>[];
-
-    for (final code in CurrencyModel.supportedCurrencies) {
-      currencies.add(CurrencyModel.fromResponse(apiResponse, code));
-    }
-
-    currencies.sort((a, b) => a.code.compareTo(b.code));
-
+    final currencies = await _api.fetchRates();
     _cachedRates = currencies;
-
     return currencies;
   }
 
