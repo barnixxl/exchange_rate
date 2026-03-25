@@ -1,6 +1,6 @@
 import '../network/currency/resp/rate_currency_from_network.dart';
 
-class CurrencyModel {
+class RateData {
   final String code;
   final String name;
   final double rate;
@@ -15,20 +15,20 @@ class CurrencyModel {
     'JPY',
   ];
 
-  CurrencyModel({
+  RateData({
     required this.code,
     required this.name,
     required this.rate,
     required this.date,
   });
 
-  factory CurrencyModel.fromRateData(RateDataFromNetwork rateData) {
+  factory RateData.fromRateData(RateDataFromNetwork rateData) {
     final code = rateData.curAbbreviation ?? '';
     final name = rateData.curName ?? 'Неизвестное название валюты';
     final scale = rateData.curScale ?? 1;
     final officialRate = rateData.curOfficialRate ?? 0.0;
     final dateStr = rateData.date ?? DateTime.now().toIso8601String();
-    return CurrencyModel(
+    return RateData(
       code: code,
       name: name,
       rate: officialRate / scale,
@@ -36,17 +36,17 @@ class CurrencyModel {
     );
   }
 
-  static CurrencyModel fromResponse(
+  static RateData fromResponse(
       List<RateDataFromNetwork> rates, String code) {
     final rateData = rates.firstWhere(
       (r) => r.curAbbreviation == code,
       orElse: () => throw Exception('Currency $code not found'),
     );
-    return CurrencyModel.fromRateData(rateData);
+    return RateData.fromRateData(rateData);
   }
 
-  factory CurrencyModel.fromJson(Map<String, dynamic> json) {
-    return CurrencyModel(
+  factory RateData.fromJson(Map<String, dynamic> json) {
+    return RateData(
       code: json['code'] ?? '',
       name: json['name'] ?? 'данная валюта отсутствует',
       rate: (json['rate'] ?? 0.0).toDouble(),
@@ -54,15 +54,15 @@ class CurrencyModel {
     );
   }
 
-  static CurrencyModel withRecalculatedRate(
-    CurrencyModel model,
+  static RateData withRecalculatedRate(
+      RateData model,
     String newBaseCurrency,
     Map<String, double> rates,
   ) {
     final baseRate = rates[newBaseCurrency] ?? 1.0;
     final newRate = model.code == newBaseCurrency ? 1.0 : model.rate / baseRate;
 
-    return CurrencyModel(
+    return RateData(
       code: model.code,
       name: model.name,
       rate: double.parse(newRate.toStringAsFixed(6)),

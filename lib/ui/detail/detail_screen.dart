@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../app_router.dart';
 import 'detail_controller.dart';
-import '../../models/currency_model.dart';
+import '../../models/rate_data.dart';
 
 class DetailScreen extends StatefulWidget {
   final CurrencyArgument currency;
@@ -24,7 +24,7 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   void initState() {
     super.initState();
-    final currencyModel = CurrencyModel(
+    final currencyModel = RateData(
       code: widget.currency.code,
       name: widget.currency.name,
       rate: widget.currency.rate,

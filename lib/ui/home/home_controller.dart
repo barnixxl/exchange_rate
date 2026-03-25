@@ -1,5 +1,5 @@
 import 'package:mobx/mobx.dart';
-import '../../models/currency_model.dart';
+import '../../models/rate_data.dart';
 import '../../services/currency_repository.dart';
 
 class HomeController {
@@ -7,8 +7,8 @@ class HomeController {
 
   final CurrencyRepository _repository;
 
-  late final ObservableList<CurrencyModel> currencies =
-      ObservableList<CurrencyModel>();
+  late final ObservableList<RateData> currencies =
+      ObservableList<RateData>();
   late final Observable<bool> isLoading = Observable(false);
   late final Observable<String?> errorMessage = Observable<String?>(null);
 
@@ -60,7 +60,7 @@ class HomeController {
     }
   }
 
-  CurrencyModel? getCurrencyByCode(String code) {
+  RateData? getCurrencyByCode(String code) {
     try {
       return currencies.firstWhere((c) => c.code == code);
     } catch (e) {

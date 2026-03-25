@@ -1,9 +1,9 @@
-import '../../models/currency_model.dart';
+import '../../models/rate_data.dart';
 
 class DetailController {
   DetailController(this._currency);
 
-  final CurrencyModel _currency;
+  final RateData _currency;
 
   String get code => _currency.code;
   String get name => _currency.name;

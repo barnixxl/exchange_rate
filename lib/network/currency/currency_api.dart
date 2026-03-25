@@ -1,4 +1,4 @@
-import '../../models/currency_model.dart';
+import '../../models/rate_data.dart';
 import '../exchange_rate_network.dart';
 import 'resp/rate_currency_from_network.dart';
 
@@ -7,7 +7,7 @@ class CurrencyApi {
 
   CurrencyApi(this._network);
 
-  Future<List<CurrencyModel>> fetchRates() async {
+  Future<List<RateData>> fetchRates() async {
     final url = '/rates?periodicity=0';
     final response = await _network.get(url);
 
@@ -18,9 +18,9 @@ class CurrencyApi {
           RateDataFromNetwork.fromJson(e as Map<String, dynamic>))
           .toList();
 
-      final currencies = <CurrencyModel>[];
-      for (final code in CurrencyModel.supportedCurrencies) {
-        currencies.add(CurrencyModel.fromResponse(rates, code));
+      final currencies = <RateData>[];
+      for (final code in RateData.supportedCurrencies) {
+        currencies.add(RateData.fromResponse(rates, code));
       }
       currencies.sort((a, b) => a.code.compareTo(b.code));
       return currencies;
