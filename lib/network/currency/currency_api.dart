@@ -1,6 +1,6 @@
 import '../../models/currency_model.dart';
 import '../exchange_rate_network.dart';
-import 'resp/resp_currency_from_network.dart';
+import 'resp/rate_currency_from_network.dart';
 
 class CurrencyApi {
   final ExchangeRateNetwork _network;
@@ -15,7 +15,7 @@ class CurrencyApi {
       final data = response.data as List;
       final rates = data
           .map((e) =>
-              RespCurrencyFromNetwork.fromJson(e as Map<String, dynamic>))
+          RateDataFromNetwork.fromJson(e as Map<String, dynamic>))
           .toList();
 
       final currencies = <CurrencyModel>[];

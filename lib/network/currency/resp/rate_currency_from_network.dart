@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'resp_currency_from_network.g.dart';
+part 'rate_currency_from_network.g.dart';
 
 @JsonSerializable(createToJson: false)
-class RespCurrencyFromNetwork {
+class RateDataFromNetwork {
   @JsonKey(name: 'CurID')
   final int? curID;
   @JsonKey(name: 'CurAbbreviation')
@@ -17,7 +17,7 @@ class RespCurrencyFromNetwork {
   @JsonKey(name: 'Date')
   final String? date;
 
-  RespCurrencyFromNetwork({
+  RateDataFromNetwork({
     required this.curID,
     required this.curAbbreviation,
     required this.curScale,
@@ -26,13 +26,13 @@ class RespCurrencyFromNetwork {
     required this.date,
   });
 
-  factory RespCurrencyFromNetwork.fromJson(Map<String, dynamic> json) =>
+  factory RateDataFromNetwork.fromJson(Map<String, dynamic> json) =>
       _$RateDataFromJson(json);
 
   Map<String, dynamic> toJson() => _$RateDataToJson(this);
 
   @override
-  String toString() => 'RespCurrencyFromNetwork('
+  String toString() => 'RateDataFromNetwork('
       'curID: $curID, '
       'curAbbreviation: $curAbbreviation, '
       'curScale: $curScale, '

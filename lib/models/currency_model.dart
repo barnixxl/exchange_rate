@@ -1,4 +1,4 @@
-import '../network/currency/resp/resp_currency_from_network.dart';
+import '../network/currency/resp/rate_currency_from_network.dart';
 
 class CurrencyModel {
   final String code;
@@ -22,7 +22,7 @@ class CurrencyModel {
     required this.date,
   });
 
-  factory CurrencyModel.fromRateData(RespCurrencyFromNetwork rateData) {
+  factory CurrencyModel.fromRateData(RateDataFromNetwork rateData) {
     final code = rateData.curAbbreviation ?? '';
     final name = rateData.curName ?? 'Неизвестное название валюты';
     final scale = rateData.curScale ?? 1;
@@ -37,7 +37,7 @@ class CurrencyModel {
   }
 
   static CurrencyModel fromResponse(
-      List<RespCurrencyFromNetwork> rates, String code) {
+      List<RateDataFromNetwork> rates, String code) {
     final rateData = rates.firstWhere(
       (r) => r.curAbbreviation == code,
       orElse: () => throw Exception('Currency $code not found'),

@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'resp_currency_from_network.dart';
+part of 'rate_currency_from_network.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-RespCurrencyFromNetwork _$RateDataFromJson(Map<String, dynamic> json) => RespCurrencyFromNetwork(
+RateDataFromNetwork _$RateDataFromJson(Map<String, dynamic> json) => RateDataFromNetwork(
       curID: (json['Cur_ID'] as num).toInt(),
       curAbbreviation: json['Cur_Abbreviation'] as String,
       curScale: (json['Cur_Scale'] as num).toInt(),
@@ -15,7 +15,7 @@ RespCurrencyFromNetwork _$RateDataFromJson(Map<String, dynamic> json) => RespCur
       date: json['Date'] as String,
     );
 
-Map<String, dynamic> _$RateDataToJson(RespCurrencyFromNetwork instance) => <String, dynamic>{
+Map<String, dynamic> _$RateDataToJson(RateDataFromNetwork instance) => <String, dynamic>{
       'Cur_ID': instance.curID,
       'Cur_Abbreviation': instance.curAbbreviation,
       'Cur_Scale': instance.curScale,
