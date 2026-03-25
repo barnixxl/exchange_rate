@@ -4,15 +4,15 @@ part 'rate_currency_from_network.g.dart';
 
 @JsonSerializable(createToJson: false)
 class RateDataFromNetwork {
-  @JsonKey(name: 'CurID')
+  @JsonKey(name: 'Cur_ID')
   final int? curID;
-  @JsonKey(name: 'CurAbbreviation')
+  @JsonKey(name: 'Cur_Abbreviation')
   final String? curAbbreviation;
-  @JsonKey(name: 'CurScale')
+  @JsonKey(name: 'Cur_Scale')
   final int? curScale;
-  @JsonKey(name: 'CurName')
+  @JsonKey(name: 'Cur_Name')
   final String? curName;
-  @JsonKey(name: 'CurOfficialRate')
+  @JsonKey(name: 'Cur_OfficialRate')
   final double? curOfficialRate;
   @JsonKey(name: 'Date')
   final String? date;
