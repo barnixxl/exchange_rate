@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'rate_currency_from_network.dart';
+part of 'rate_data_from_network.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

@@ -1,4 +1,4 @@
-import '../network/currency/resp/rate_currency_from_network.dart';
+import '../network/currency/resp/rate_data_from_network.dart';
 
 class RateData {
   final String code;

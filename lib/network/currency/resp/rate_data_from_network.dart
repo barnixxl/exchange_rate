@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'rate_currency_from_network.g.dart';
+part 'rate_data_from_network.g.dart';
 
 @JsonSerializable(createToJson: false)
 class RateDataFromNetwork {
