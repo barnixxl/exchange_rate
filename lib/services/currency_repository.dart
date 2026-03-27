@@ -1,5 +1,6 @@
 import '../models/rate_data.dart';
 import '../network/currency/currency_api.dart';
+import '../network/currency/currency_error.dart';
 
 class CurrencyRepository {
   final CurrencyApi _api;
@@ -17,14 +18,14 @@ class CurrencyRepository {
 
   Map<String, double> getCachedRatesMap() {
     if (_cachedRates == null) {
-      throw Exception('Нет закэшированных данных');
+      throw CurrencyError.noData();
     }
     return {for (var c in _cachedRates!) c.code: c.rate};
   }
 
   List<RateData> recalculateToBaseCurrency(String newBaseCurrency) {
     if (_cachedRates == null) {
-      throw Exception('Нет закэшированных данных');
+      throw CurrencyError.noData();
     }
 
     final ratesMap = getCachedRatesMap();

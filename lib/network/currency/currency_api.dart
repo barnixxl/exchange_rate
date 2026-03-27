@@ -1,5 +1,6 @@
 import '../../models/rate_data.dart';
 import '../currency_rate_network.dart';
+import 'currency_error.dart';
 import 'resp/rate_data_from_network.dart';
 
 class CurrencyApi {
@@ -14,8 +15,7 @@ class CurrencyApi {
     if (response.statusCode == 200) {
       final data = response.data as List;
       final rates = data
-          .map((e) =>
-          RateDataFromNetwork.fromJson(e as Map<String, dynamic>))
+          .map((e) => RateDataFromNetwork.fromJson(e as Map<String, dynamic>))
           .toList();
 
       final currencies = <RateData>[];
@@ -25,7 +25,7 @@ class CurrencyApi {
       currencies.sort((a, b) => a.code.compareTo(b.code));
       return currencies;
     } else {
-      throw Exception('Ошибка загрузки данных: ${response.statusCode}');
+      throw CurrencyError.loadFailed();
     }
   }
 }
