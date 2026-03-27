@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'home_controller.dart';
 import '../../services/currency_repository.dart';
-import '../../network/exchange_rate_network.dart';
+import '../../network/currency_rate_network.dart';
 import '../../network/currency/currency_api.dart';
 import '../../app_router.dart';
 
@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
 
     _homeController =
-        HomeController(CurrencyRepository(CurrencyApi(ExchangeRateNetwork())));
+        HomeController(CurrencyRepository(CurrencyApi(CurrencyRateNetwork())));
 
     _loadData();
   }

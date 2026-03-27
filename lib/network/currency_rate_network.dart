@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-class ExchangeRateNetwork {
+class CurrencyRateNetwork {
   static const String _baseUrl = 'https://api.nbrb.by/exrates/';
   late final Dio _dio;
 
