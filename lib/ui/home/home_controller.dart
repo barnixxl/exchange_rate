@@ -1,5 +1,6 @@
 import 'package:mobx/mobx.dart';
 import '../../models/rate_data.dart';
+import '../../network/currency/currency_error.dart';
 import '../../services/currency_repository.dart';
 
 class HomeController {
@@ -7,8 +8,7 @@ class HomeController {
 
   final CurrencyRepository _repository;
 
-  late final ObservableList<RateData> currencies =
-      ObservableList<RateData>();
+  late final ObservableList<RateData> currencies = ObservableList<RateData>();
   late final Observable<bool> isLoading = Observable(false);
   late final Observable<String?> errorMessage = Observable<String?>(null);
 
@@ -49,10 +49,11 @@ class HomeController {
         currencies.addAll(loadedCurrencies);
       });
     } catch (e) {
+      final error = CurrencyError.fromException(e);
       runInAction(() {
-        errorMessage.value = e.toString().replaceFirst('Exception: ', '');
+        errorMessage.value = error.toString();
       });
-      print('Ошибка загрузки: $e');
+      print(' ${error.message}');
     } finally {
       runInAction(() {
         isLoading.value = false;
