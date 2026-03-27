@@ -13,7 +13,8 @@ class CurrencyApi {
     final response = await _network.get(url);
 
     if (response.statusCode == 200) {
-      final data = response.data as List;
+      final data = response.data;
+      if (data is! List) throw CurrencyError.parsing();
       final rates = data
           .map((e) => RateDataFromNetwork.fromJson(e as Map<String, dynamic>))
           .toList();
