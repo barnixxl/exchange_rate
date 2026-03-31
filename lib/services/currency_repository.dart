@@ -9,7 +9,14 @@ class CurrencyRepository {
   CurrencyRepository(this._api);
 
   Future<List<RateData>> fetchRates() async {
-    final currencies = await _api.fetchRates();
+    final rawRates = await _api.fetchRates();
+
+    final currencies = <RateData>[];
+    for (final code in RateData.supportedCurrencies) {
+      currencies.add(RateData.fromResponse(rawRates, code));
+    }
+    currencies.sort((a, b) => a.code.compareTo(b.code));
+
     _cachedRates = currencies;
     return currencies;
   }
