@@ -1,6 +1,6 @@
 import '../../models/rate_data.dart';
 import '../currency_rate_network.dart';
-import 'currency_error.dart';
+import '../../models/currency_error.dart';
 import 'resp/rate_data_from_network.dart';
 
 class CurrencyApi {

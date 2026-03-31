@@ -1,6 +1,6 @@
 import '../models/rate_data.dart';
 import '../network/currency/currency_api.dart';
-import '../network/currency/currency_error.dart';
+import '../models/currency_error.dart';
 
 class CurrencyRepository {
   final CurrencyApi _api;

@@ -1,6 +1,6 @@
 import 'package:mobx/mobx.dart';
 import '../../models/rate_data.dart';
-import '../../network/currency/currency_error.dart';
+import '../../models/currency_error.dart';
 import '../../services/currency_repository.dart';
 
 class HomeController {

@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'currency/currency_error.dart';
+import '../models/currency_error.dart';
 
 class CurrencyRateNetwork {
   static const String _baseUrl = 'https://api.nbrb.by/exrates/';

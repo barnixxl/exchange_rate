@@ -1,4 +1,4 @@
-import 'package:currency_converter/network/currency/currency_error.dart';
+import 'package:currency_converter/models/currency_error.dart';
 
 import '../network/currency/resp/rate_data_from_network.dart';
 
