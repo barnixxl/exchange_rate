@@ -1,6 +1,6 @@
 import 'package:mobx/mobx.dart';
 import '../../models/rate_data.dart';
-import '../../models/currency_error.dart';
+import '../../models/currency_result.dart';
 import '../../services/currency_repository.dart';
 
 class HomeController {
@@ -8,13 +8,18 @@ class HomeController {
 
   final CurrencyRepository _repository;
 
-  late final ObservableList<RateData> currencies = ObservableList<RateData>();
-  late final Observable<bool> isLoading = Observable(false);
-  late final Observable<String?> errorMessage = Observable<String?>(null);
+  late final Observable<CurrencyResult<List<RateData>>> currencyResult =
+      Observable(const CurrencyLoading());
+
+  List<RateData> get currencies => currencyResult.value.dataOrNull ?? [];
 
   late final Computed<String> lastUpdateDate = Computed(() {
-    if (currencies.isEmpty) return 'Нет данных';
-    final date = currencies.first.date;
+    final result = currencyResult.value;
+    if (result.isFailure) return 'Ошибка';
+    if (result.isLoading) return 'Загрузка...';
+    final data = result.dataOrNull;
+    if (data == null || data.isEmpty) return 'Нет данных';
+    final date = data.first.date;
     return '${date.day} ${_getMonthName(date.month)} ${date.year}, ${date.hour}:${date.minute.toString().padLeft(2, '0')}';
   });
 
@@ -38,27 +43,13 @@ class HomeController {
 
   Future<void> loadCurrencies() async {
     runInAction(() {
-      errorMessage.value = null;
-      isLoading.value = true;
+      currencyResult.value = const CurrencyLoading();
     });
 
-    try {
-      final loadedCurrencies = await _repository.fetchRates();
-      runInAction(() {
-        currencies.clear();
-        currencies.addAll(loadedCurrencies);
-      });
-    } catch (e) {
-      final error = CurrencyError.fromException(e);
-      runInAction(() {
-        errorMessage.value = error.toString();
-      });
-      print(' ${error.message}');
-    } finally {
-      runInAction(() {
-        isLoading.value = false;
-      });
-    }
+    final result = await _repository.fetchRates();
+    runInAction(() {
+      currencyResult.value = result;
+    });
   }
 
   RateData? getCurrencyByCode(String code) {

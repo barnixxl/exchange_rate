@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
             color: Colors.blue.shade700,
             child: Observer(
               builder: (_) {
-                _homeController.currencies.length;
+                _homeController.currencyResult.value;
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -65,19 +65,22 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         actions: [
           Observer(
-            builder: (_) => IconButton(
-              icon: _homeController.isLoading.value
-                  ? const SizedBox(
-                      width: 20,
-                      height: 20,
-                      child: CircularProgressIndicator(
-                        color: Colors.white,
-                        strokeWidth: 2,
-                      ),
-                    )
-                  : const Icon(Icons.refresh),
-              onPressed: _homeController.isLoading.value ? null : _loadData,
-            ),
+            builder: (_) {
+              final isLoading = _homeController.currencyResult.value.isLoading;
+              return IconButton(
+                icon: isLoading
+                    ? const SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                          strokeWidth: 2,
+                        ),
+                      )
+                    : const Icon(Icons.refresh),
+                onPressed: isLoading ? null : _loadData,
+              );
+            },
           ),
         ],
       ),
@@ -85,8 +88,18 @@ class _HomeScreenState extends State<HomeScreen> {
         onRefresh: _loadData,
         child: Observer(
           builder: (_) {
-            if (_homeController.errorMessage.value != null) {
-              return Center(
+            return _homeController.currencyResult.value.when(
+              loading: () => const Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircularProgressIndicator(),
+                    SizedBox(height: 16),
+                    Text('Загрузка курсов валют...'),
+                  ],
+                ),
+              ),
+              failure: (message) => Center(
                 child: Padding(
                   padding: const EdgeInsets.all(16),
                   child: Column(
@@ -99,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       const SizedBox(height: 16),
                       Text(
-                        _homeController.errorMessage.value!,
+                        message,
                         textAlign: TextAlign.center,
                         style: const TextStyle(fontSize: 16),
                       ),
@@ -111,29 +124,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 ),
-              );
-            }
-
-            if (_homeController.isLoading.value &&
-                _homeController.currencies.isEmpty) {
-              return const Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircularProgressIndicator(),
-                    SizedBox(height: 16),
-                    Text('Загрузка курсов валют...'),
-                  ],
-                ),
-              );
-            }
-
-            if (_homeController.currencies.isNotEmpty) {
-              return ListView.builder(
+              ),
+              success: (currencies) => ListView.builder(
                 padding: const EdgeInsets.all(8),
-                itemCount: _homeController.currencies.length,
+                itemCount: currencies.length,
                 itemBuilder: (context, index) {
-                  final currency = _homeController.currencies[index];
+                  final currency = currencies[index];
 
                   return Card(
                     margin: const EdgeInsets.symmetric(
@@ -173,11 +169,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   );
                 },
-              );
-            }
-
-            return const Center(
-              child: Text('Нет данных'),
+              ),
             );
           },
         ),

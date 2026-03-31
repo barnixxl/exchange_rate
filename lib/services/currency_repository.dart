@@ -1,4 +1,5 @@
 import '../models/rate_data.dart';
+import '../models/currency_result.dart';
 import '../network/currency/currency_api.dart';
 import '../models/currency_error.dart';
 
@@ -8,17 +9,21 @@ class CurrencyRepository {
 
   CurrencyRepository(this._api);
 
-  Future<List<RateData>> fetchRates() async {
-    final rawRates = await _api.fetchRates();
+  Future<CurrencyResult<List<RateData>>> fetchRates() async {
+    try {
+      final rawRates = await _api.fetchRates();
 
-    final currencies = <RateData>[];
-    for (final code in RateData.supportedCurrencies) {
-      currencies.add(RateData.fromResponse(rawRates, code));
+      final currencies = <RateData>[];
+      for (final code in RateData.supportedCurrencies) {
+        currencies.add(RateData.fromResponse(rawRates, code));
+      }
+      currencies.sort((a, b) => a.code.compareTo(b.code));
+
+      _cachedRates = currencies;
+      return CurrencySuccess(currencies);
+    } catch (e) {
+      return CurrencyFailure(CurrencyError.fromException(e).toString());
     }
-    currencies.sort((a, b) => a.code.compareTo(b.code));
-
-    _cachedRates = currencies;
-    return currencies;
   }
 
   bool hasCachedRates() => _cachedRates != null;
