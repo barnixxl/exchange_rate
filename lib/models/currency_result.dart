@@ -1,64 +1,39 @@
+enum Status { loading, success, failure }
+
 class CurrencyResult<T> {
-  bool get isLoading => this is CurrencyLoading<T>;
+  final T? data;
+  final String? error;
+  final Status status;
 
-  bool get isSuccess => this is CurrencySuccess<T>;
+  CurrencyResult()
+      : data = null,
+        error = null,
+        status = Status.loading;
 
-  bool get isFailure => this is CurrencyFailure<T>;
+  CurrencyResult.success(this.data)
+      : error = null,
+        status = Status.success;
 
-  T? get dataOrNull {
-    if (this is CurrencySuccess<T>) {
-      return (this as CurrencySuccess<T>).data;
-    }
-    return null;
-  }
+  CurrencyResult.failure(this.error)
+      : data = null,
+        status = Status.failure;
 
-  String? get errorOrNull {
-    if (this is CurrencyFailure<T>) {
-      return (this as CurrencyFailure<T>).message;
-    }
-    return null;
-  }
+  bool get isLoading => status == Status.loading;
+  bool get isSuccess => status == Status.success;
+  bool get isFailure => status == Status.failure;
+
+  T? get dataOrNull => isSuccess ? data : null;
+  String? get errorOrNull => isFailure ? error : null;
 
   R when<R>({
     required R Function(T data) success,
-    required R Function(String message) failure,
-    required R Function() loading,
-  }) {
-    if (this is CurrencySuccess<T>) {
-      return success((this as CurrencySuccess<T>).data);
-    } else if (this is CurrencyFailure<T>) {
-      return failure((this as CurrencyFailure<T>).message);
-    } else {
-      return loading();
+    required R Function(String error) failure,
+  required R Function() loading,
+}) {
+    switch (status) {
+      case Status.success: return success(data as T);
+      case Status.failure: return failure(error!);
+      case Status.loading: return loading();
     }
   }
-
-  @override
-  String toString() => when(
-        success: (data) => 'CurrencySuccess($data)',
-        failure: (message) => 'CurrencyFailure($message)',
-        loading: () => 'CurrencyLoading()',
-      );
-}
-
-enum CurrencySuccessState {
-  success,
-  failure,
-  loading,
-}
-
-class CurrencySuccess<T> extends CurrencyResult<T> {
-  final T data;
-
-  CurrencySuccess(this.data);
-}
-
-class CurrencyFailure<T> extends CurrencyResult<T> {
-  final String message;
-
-  CurrencyFailure(this.message);
-}
-
-class CurrencyLoading<T> extends CurrencyResult<T> {
-  CurrencyLoading();
 }

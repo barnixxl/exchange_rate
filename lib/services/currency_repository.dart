@@ -20,9 +20,9 @@ class CurrencyRepository {
       currencies.sort((a, b) => a.code.compareTo(b.code));
 
       _cachedRates = currencies;
-      return CurrencySuccess(currencies);
+      return CurrencyResult.success(currencies);
     } catch (e) {
-      return CurrencyFailure(CurrencyError.fromException(e).toString());
+      return CurrencyResult.failure(CurrencyError.fromException(e).toString());
     }
   }
 

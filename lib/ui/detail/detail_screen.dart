@@ -114,7 +114,6 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
               ),
             const Spacer(),
-//---------------------------------------------------//
             const SizedBox(height: 24),
             TextField(
               keyboardType: TextInputType.numberWithOptions(decimal: true),
