@@ -41,6 +41,12 @@ sealed class CurrencyResult<T> {
       );
 }
 
+enum CurrencySuccessState {
+  success,
+  failure,
+  loading,
+}
+
 class CurrencySuccess<T> extends CurrencyResult<T> {
   final T data;
   const CurrencySuccess(this.data);
