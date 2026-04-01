@@ -1,8 +1,10 @@
+import 'package:currency_converter/models/currency_error.dart';
+
 enum Status { loading, success, failure }
 
 class CurrencyResult<T> {
   final T? data;
-  final String? error;
+  final CurrencyError? error;
   final Status status;
 
   CurrencyResult()
@@ -19,16 +21,16 @@ class CurrencyResult<T> {
         status = Status.failure;
 
   bool get isLoading => status == Status.loading;
+  bool get isError => status == Status.failure;
   bool get isSuccess => status == Status.success;
-  bool get isFailure => status == Status.failure;
 
   T? get dataOrNull => isSuccess ? data : null;
-  String? get errorOrNull => isFailure ? error : null;
+  CurrencyError? get errorOrNull => isError ? error : null;
 
   R when<R>({
     required R Function(T data) success,
-    required R Function(String error) failure,
-  required R Function() loading,
+    required R Function(CurrencyError error) failure,
+    required R Function() loading,
 }) {
     switch (status) {
       case Status.success: return success(data as T);

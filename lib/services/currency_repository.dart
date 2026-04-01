@@ -22,7 +22,7 @@ class CurrencyRepository {
       _cachedRates = currencies;
       return CurrencyResult.success(currencies);
     } catch (e) {
-      return CurrencyResult.failure(CurrencyError.fromException(e).toString());
+      return CurrencyResult.failure(CurrencyError.fromException(e));
     }
   }
 

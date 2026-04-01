@@ -15,7 +15,7 @@ class HomeController {
 
   late final Computed<String> lastUpdateDate = Computed(() {
     final result = currencyResult.value;
-    if (result.isFailure) return 'Ошибка';
+    if (result.isError) return 'Ошибка';
     if (result.isLoading) return 'Загрузка...';
     final data = result.dataOrNull;
     if (data == null || data.isEmpty) return 'Нет данных';

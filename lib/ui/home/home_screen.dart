@@ -99,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              failure: (message) => Center(
+              failure: (error) => Center(
                 child: Padding(
                   padding: const EdgeInsets.all(16),
                   child: Column(
@@ -112,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       const SizedBox(height: 16),
                       Text(
-                        message,
+                        error.toString(),
                         textAlign: TextAlign.center,
                         style: const TextStyle(fontSize: 16),
                       ),
