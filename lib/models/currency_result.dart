@@ -1,4 +1,4 @@
-sealed class CurrencyResult<T> {
+abstract class CurrencyResult<T> {
   const CurrencyResult();
 
   bool get isLoading => this is CurrencyLoading<T>;
