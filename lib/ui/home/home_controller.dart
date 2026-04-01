@@ -9,7 +9,7 @@ class HomeController {
   final CurrencyRepository _repository;
 
   late final Observable<CurrencyResult<List<RateData>>> currencyResult =
-      Observable(const CurrencyLoading());
+      Observable(CurrencyLoading());
 
   List<RateData> get currencies => currencyResult.value.dataOrNull ?? [];
 
@@ -43,7 +43,7 @@ class HomeController {
 
   Future<void> loadCurrencies() async {
     runInAction(() {
-      currencyResult.value = const CurrencyLoading();
+      currencyResult.value = CurrencyLoading();
     });
 
     final result = await _repository.fetchRates();

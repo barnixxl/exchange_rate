@@ -1,8 +1,8 @@
-abstract class CurrencyResult<T> {
-  const CurrencyResult();
-
+class CurrencyResult<T> {
   bool get isLoading => this is CurrencyLoading<T>;
+
   bool get isSuccess => this is CurrencySuccess<T>;
+
   bool get isFailure => this is CurrencyFailure<T>;
 
   T? get dataOrNull {
@@ -49,14 +49,16 @@ enum CurrencySuccessState {
 
 class CurrencySuccess<T> extends CurrencyResult<T> {
   final T data;
-  const CurrencySuccess(this.data);
+
+  CurrencySuccess(this.data);
 }
 
 class CurrencyFailure<T> extends CurrencyResult<T> {
   final String message;
-  const CurrencyFailure(this.message);
+
+  CurrencyFailure(this.message);
 }
 
 class CurrencyLoading<T> extends CurrencyResult<T> {
-  const CurrencyLoading();
+  CurrencyLoading();
 }
