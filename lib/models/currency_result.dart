@@ -7,9 +7,8 @@ class CurrencyResult<T> {
   final CurrencyError? error;
   final Status status;
 
-  CurrencyResult()
-      : data = null,
-        error = null,
+  CurrencyResult.loading({this.data})
+      : error = null,
         status = Status.loading;
 
   CurrencyResult.success(this.data)
@@ -21,21 +20,12 @@ class CurrencyResult<T> {
         status = Status.failure;
 
   bool get isLoading => status == Status.loading;
+
   bool get isError => status == Status.failure;
+
   bool get isSuccess => status == Status.success;
 
   T? get dataOrNull => isSuccess ? data : null;
-  CurrencyError? get errorOrNull => isError ? error : null;
 
-  R when<R>({
-    required R Function(T data) success,
-    required R Function(CurrencyError error) failure,
-    required R Function() loading,
-}) {
-    switch (status) {
-      case Status.success: return success(data as T);
-      case Status.failure: return failure(error!);
-      case Status.loading: return loading();
-    }
-  }
+  CurrencyError? get errorOrNull => isError ? error : null;
 }

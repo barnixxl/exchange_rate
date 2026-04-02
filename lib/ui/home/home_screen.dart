@@ -88,8 +88,10 @@ class _HomeScreenState extends State<HomeScreen> {
         onRefresh: _loadData,
         child: Observer(
           builder: (_) {
-            return _homeController.currencyResult.value.when(
-              loading: () => const Center(
+            final result = _homeController.currencyResult.value;
+
+            if (result.isLoading) {
+              return const Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -98,8 +100,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     Text('Загрузка курсов валют...'),
                   ],
                 ),
-              ),
-              failure: (error) => Center(
+              );
+            }
+
+            if (result.isError) {
+              return Center(
                 child: Padding(
                   padding: const EdgeInsets.all(16),
                   child: Column(
@@ -112,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       const SizedBox(height: 16),
                       Text(
-                        error.toString(),
+                        result.errorOrNull.toString(),
                         textAlign: TextAlign.center,
                         style: const TextStyle(fontSize: 16),
                       ),
@@ -124,52 +129,55 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 ),
-              ),
-              success: (currencies) => ListView.builder(
-                padding: const EdgeInsets.all(8),
-                itemCount: currencies.length,
-                itemBuilder: (context, index) {
-                  final currency = currencies[index];
+              );
+            }
 
-                  return Card(
-                    margin: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 4,
-                    ),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundColor: Colors.blue.shade100,
-                        child: Text(
-                          currency.code,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blue,
-                          ),
+            final currencies = result.dataOrNull ?? [];
+
+            return ListView.builder(
+              padding: const EdgeInsets.all(8),
+              itemCount: currencies.length,
+              itemBuilder: (context, index) {
+                final currency = currencies[index];
+
+                return Card(
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      backgroundColor: Colors.blue.shade100,
+                      child: Text(
+                        currency.code,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue,
                         ),
                       ),
-                      title: Text(currency.name),
-                      subtitle: Text(
-                        '1 ${currency.code} = ${currency.rate.toStringAsFixed(4)} BYN',
-                      ),
-                      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-                      onTap: () {
-                        Navigator.pushNamed(
-                          context,
-                          '/detail',
-                          arguments: CurrencyArgument(
-                            code: currency.code,
-                            name: currency.name,
-                            rate: currency.rate,
-                            date: currency.date,
-                            baseCurrencyCode: 'BYN',
-                            baseCurrencyName: 'Белорусский рубль (BYN)',
-                          ),
-                        );
-                      },
                     ),
-                  );
-                },
-              ),
+                    title: Text(currency.name),
+                    subtitle: Text(
+                      '1 ${currency.code} = ${currency.rate.toStringAsFixed(4)} BYN',
+                    ),
+                    trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        '/detail',
+                        arguments: CurrencyArgument(
+                          code: currency.code,
+                          name: currency.name,
+                          rate: currency.rate,
+                          date: currency.date,
+                          baseCurrencyCode: 'BYN',
+                          baseCurrencyName: 'Белорусский рубль (BYN)',
+                        ),
+                      );
+                    },
+                  ),
+                );
+              },
             );
           },
         ),
