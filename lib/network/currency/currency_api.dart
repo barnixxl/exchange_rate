@@ -12,17 +12,17 @@ class CurrencyApi {
     const url = '/rates?periodicity=0';
     final response = await _network.get(url);
 
-    if (response.statusCode == 200) {
-      final data = response.data as List<dynamic>?;
-    if(data == null) {
+    if (response.statusCode != 200) {
+      return CurrencyResult.failure(CurrencyError.loadFailed());
+    }
+    final data = response.data as List<dynamic>?;
+    if (data == null) {
       return CurrencyResult.failure(CurrencyError.parsing());
     }
+
     final rates = data
         .map((e) => RateDataFromNetwork.fromJson(e as Map<String, dynamic>))
         .toList();
     return CurrencyResult.success(rates);
-    } else {
-    return CurrencyResult.failure(CurrencyError.loadFailed());
-    }
   }
 }
