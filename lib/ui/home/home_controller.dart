@@ -11,10 +11,9 @@ class HomeController {
   late final Observable<CurrencyResult<List<RateData>>> currencyResult =
       Observable(CurrencyResult.notInitialized());
 
-  List<RateData> get currencies =>
-  currencyResult.value.status == Status.success
+  List<RateData> get currencies => currencyResult.value.status == Status.success
       ? currencyResult.value.data ?? []
-  : [];
+      : [];
 
   late final Computed<String> lastUpdateDate = Computed(() {
     final result = currencyResult.value;

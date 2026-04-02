@@ -130,7 +130,6 @@ class _DetailScreenState extends State<DetailScreen> {
                 });
               },
             ),
-
             if (_inputAmount.isNotEmpty)
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),

@@ -19,7 +19,7 @@ class CurrencyApi {
         if (ratesData != null) {
           final rates = ratesData
               .map((e) =>
-              RateDataFromNetwork.fromJson(e as Map<String, dynamic>))
+                  RateDataFromNetwork.fromJson(e as Map<String, dynamic>))
               .toList();
           return CurrencyResult.success(rates);
         }

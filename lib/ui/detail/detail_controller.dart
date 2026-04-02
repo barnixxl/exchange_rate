@@ -6,8 +6,11 @@ class DetailController {
   final RateData _currency;
 
   String get code => _currency.code;
+
   String get name => _currency.name;
+
   double get rate => _currency.rate;
+
   DateTime get date => _currency.date;
 
   String formatDate() {

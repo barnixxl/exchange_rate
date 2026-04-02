@@ -38,15 +38,10 @@ class RateData {
     );
   }
 
-  static RateData fromResponse(
-      List<RateDataFromNetwork> rates, String code) {
-    final rateData = rates.firstWhere(
-      (r) => r.curAbbreviation == code,
-      orElse: () => throw CurrencyError(
-        code: 'CURRENCY_NOT_FOUND',
-        message: 'Валюта $code не найдена'
-      )
-    );
+  static RateData fromResponse(List<RateDataFromNetwork> rates, String code) {
+    final rateData = rates.firstWhere((r) => r.curAbbreviation == code,
+        orElse: () => throw CurrencyError(
+            code: 'CURRENCY_NOT_FOUND', message: 'Валюта $code не найдена'));
     return RateData.fromRateData(rateData);
   }
 
@@ -60,7 +55,7 @@ class RateData {
   }
 
   static RateData withRecalculatedRate(
-      RateData model,
+    RateData model,
     String newBaseCurrency,
     Map<String, double> rates,
   ) {
