@@ -117,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       const SizedBox(height: 16),
                       Text(
-                        result.errorOrNull.toString(),
+                        result.data.toString(),
                         textAlign: TextAlign.center,
                         style: const TextStyle(fontSize: 16),
                       ),
@@ -132,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             }
 
-            final currencies = result.dataOrNull ?? [];
+            final currencies = result.data ?? [];
 
             return ListView.builder(
               padding: const EdgeInsets.all(8),

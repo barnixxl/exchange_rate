@@ -9,15 +9,19 @@ class HomeController {
   final CurrencyRepository _repository;
 
   late final Observable<CurrencyResult<List<RateData>>> currencyResult =
-      Observable(CurrencyResult.loading());
+      Observable(CurrencyResult.notInitialized());
 
-  List<RateData> get currencies => currencyResult.value.dataOrNull ?? [];
+  List<RateData> get currencies =>
+  currencyResult.value.status == Status.success
+      ? currencyResult.value.data ?? []
+  : [];
 
   late final Computed<String> lastUpdateDate = Computed(() {
     final result = currencyResult.value;
-    if (result.isError) return 'Ошибка';
+    if (result.status == Status.notInitialized) return 'Ошибка...';
+    if (result.isError) return 'Ошибка...';
     if (result.isLoading) return 'Загрузка...';
-    final data = result.dataOrNull;
+    final data = result.data;
     if (data == null || data.isEmpty) return 'Нет данных';
     final date = data.first.date;
     return '${date.day} ${_getMonthName(date.month)} ${date.year}, ${date.hour}:${date.minute.toString().padLeft(2, '0')}';
