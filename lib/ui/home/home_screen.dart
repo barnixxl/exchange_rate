@@ -117,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       const SizedBox(height: 16),
                       Text(
-                        result.data.toString(),
+                        result.error?.toString() ?? 'Ошибка...',
                         textAlign: TextAlign.center,
                         style: const TextStyle(fontSize: 16),
                       ),
