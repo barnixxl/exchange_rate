@@ -1,7 +1,6 @@
 import '../models/rate_data.dart';
 import '../models/currency_result.dart';
 import '../network/currency/currency_api.dart';
-import '../models/currency_error.dart';
 
 class CurrencyRepository {
   final CurrencyApi _api;
@@ -10,34 +9,35 @@ class CurrencyRepository {
   CurrencyRepository(this._api);
 
   Future<CurrencyResult<List<RateData>>> fetchRates() async {
-    try {
-      final rawRates = await _api.fetchRates();
+    final result = await _api.fetchRates();
 
-      final currencies = <RateData>[];
-      for (final code in RateData.supportedCurrencies) {
-        currencies.add(RateData.fromResponse(rawRates, code));
-      }
-      currencies.sort((a, b) => a.code.compareTo(b.code));
-
-      _cachedRates = currencies;
-      return CurrencyResult.success(currencies);
-    } catch (e) {
-      return CurrencyResult.failure(CurrencyError.fromException(e));
+    if (result.isError) {
+      return CurrencyResult.failure(result.error!);
     }
+
+    final rawRates = result.data!;
+
+    final currencies = <RateData>[];
+    for (final code in RateData.supportedCurrencies) {
+      currencies.add(RateData.fromResponse(rawRates, code));
+    }
+    currencies.sort((a, b) => a.code.compareTo(b.code));
+    _cachedRates = currencies;
+    return CurrencyResult.success(currencies);
   }
 
   bool hasCachedRates() => _cachedRates != null;
 
   Map<String, double> getCachedRatesMap() {
     if (_cachedRates == null) {
-      throw CurrencyError.noData();
+      throw Exception('Нет закэшированных данных');
     }
     return {for (var c in _cachedRates!) c.code: c.rate};
   }
 
   List<RateData> recalculateToBaseCurrency(String newBaseCurrency) {
     if (_cachedRates == null) {
-      throw CurrencyError.noData();
+      throw Exception('Нет закэшированных данных');
     }
 
     final ratesMap = getCachedRatesMap();
