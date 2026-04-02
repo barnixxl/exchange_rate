@@ -11,7 +11,6 @@ class CurrencyApi {
   Future<CurrencyResult<List<RateDataFromNetwork>>> fetchRates() async {
     const url = '/rates?periodicity=0';
     final response = await _network.get(url);
-
     if (response.statusCode == 200) {
       final data = response.data as List<dynamic>?;
       if (data != null) {
@@ -20,12 +19,14 @@ class CurrencyApi {
             .toList();
         return CurrencyResult.success(rates);
       }
+    } else {
+      return CurrencyResult.failure(
+        CurrencyError(
+          code: 'LOAD_FAILED',
+          message: response.statusMessage ?? 'Ошибка загрузки',
+        ),
+      );
     }
-
-    if (response.statusCode != 200) {
-      return CurrencyResult.failure(CurrencyError.loadFailed());
-    }
-
     return CurrencyResult.failure(CurrencyError.parsing());
   }
 }
