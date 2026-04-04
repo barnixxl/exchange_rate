@@ -12,27 +12,19 @@ class CurrencyApi {
     const url = '/rates?periodicity=0';
 
     try {
-      final response = await _network.get(url);
+      final List<dynamic>? ratesData = await _network.get(url);
 
-      if (response.statusCode == 200) {
-        final List<dynamic>? ratesData = response.data;
-        if (ratesData != null) {
-          final rates = ratesData
-              .map((e) =>
-                  RateDataFromNetwork.fromJson(e as Map<String, dynamic>))
-              .toList();
-          return CurrencyResult.success(rates);
-        }
-      } else {
-        return CurrencyResult.failure(
-          CurrencyError(
-            code: 'LOAD_FAILED',
-            message: response.statusMessage ?? 'Ошибка загрузки',
-          ),
-        );
+      if (ratesData != null) {
+        final rates = ratesData
+            .map((e) => RateDataFromNetwork.fromJson(e as Map<String, dynamic>))
+            .toList();
+        return CurrencyResult.success(rates);
       }
       return CurrencyResult.failure(CurrencyError.parsing());
     } catch (e) {
+      if (e is CurrencyError) {
+        return CurrencyResult.failure(e);
+      }
       return CurrencyResult.failure(CurrencyError.fromException(e));
     }
   }

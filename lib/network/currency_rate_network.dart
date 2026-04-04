@@ -31,15 +31,16 @@ class CurrencyRateNetwork {
     );
   }
 
-  Future<Response<T>> get<T>(
+  Future<T> get<T>(
     String path, {
     Map<String, dynamic>? queryParameters,
   }) async {
     try {
-      return await _dio.get<T>(
+      final response = await _dio.get<T>(
         path,
         queryParameters: queryParameters,
       );
+      return response.data as T;
     } on DioException catch (e) {
       throw _mapDioError(e);
     } catch (e) {
