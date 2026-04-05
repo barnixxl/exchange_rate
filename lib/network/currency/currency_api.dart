@@ -12,19 +12,20 @@ class CurrencyApi {
     const url = '/rates?periodicity=0';
 
     try {
-      final List<dynamic>? ratesData = await _network.get(url);
+      final result = await _network.get(url);
 
-      if (ratesData != null) {
-        final rates = ratesData
-            .map((e) => RateDataFromNetwork.fromJson(e as Map<String, dynamic>))
-            .toList();
-        return CurrencyResult.success(rates);
+      if (result.isError) {
+        return CurrencyResult.failure(result.error!);
       }
-      return CurrencyResult.failure(CurrencyError.parsing());
+      final data = result.rates as List<dynamic>?;
+      if (data == null) {
+        return CurrencyResult.failure(CurrencyError.parsing());
+      }
+      final rates = data
+          .map((e) => RateDataFromNetwork.fromJson(e as Map<String, dynamic>))
+          .toList();
+      return CurrencyResult.success(rates);
     } catch (e) {
-      if (e is CurrencyError) {
-        return CurrencyResult.failure(e);
-      }
       return CurrencyResult.failure(CurrencyError.fromException(e));
     }
   }

@@ -1,3 +1,4 @@
+import 'package:currency_converter/models/currency_result.dart';
 import 'package:dio/dio.dart';
 import '../models/currency_error.dart';
 
@@ -31,7 +32,7 @@ class CurrencyRateNetwork {
     );
   }
 
-  Future<T> get<T>(
+  Future<CurrencyResult<T>> get<T>(
     String path, {
     Map<String, dynamic>? queryParameters,
   }) async {
@@ -40,11 +41,11 @@ class CurrencyRateNetwork {
         path,
         queryParameters: queryParameters,
       );
-      return response.data as T;
+      return CurrencyResult.success(response.data as T);
     } on DioException catch (e) {
-      throw _mapDioError(e);
+      return CurrencyResult.failure(_mapDioError(e));
     } catch (e) {
-      throw CurrencyError.fromException(e);
+      return CurrencyResult.failure(CurrencyError.fromException(e));
     }
   }
 

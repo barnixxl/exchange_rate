@@ -15,7 +15,7 @@ class CurrencyRepository {
       return CurrencyResult.failure(result.error!);
     }
 
-    final rawRates = result.data!;
+    final rawRates = result.rates!;
 
     final currencies = <RateData>[];
     for (final code in RateData.supportedCurrencies) {

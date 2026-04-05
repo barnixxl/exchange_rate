@@ -12,7 +12,7 @@ class HomeController {
       Observable(CurrencyResult.notInitialized());
 
   List<RateData> get currencies => currencyResult.value.status == Status.success
-      ? currencyResult.value.data ?? []
+      ? currencyResult.value.rates ?? []
       : [];
 
   late final Computed<String> lastUpdateDate = Computed(() {
@@ -20,7 +20,7 @@ class HomeController {
     if (result.status == Status.notInitialized) return 'Ошибка...';
     if (result.isError) return 'Ошибка...';
     if (result.isLoading) return 'Загрузка...';
-    final data = result.data;
+    final data = result.rates;
     if (data == null || data.isEmpty) return 'Нет данных';
     final date = data.first.date;
     return '${date.day} ${_getMonthName(date.month)} ${date.year}, ${date.hour}:${date.minute.toString().padLeft(2, '0')}';

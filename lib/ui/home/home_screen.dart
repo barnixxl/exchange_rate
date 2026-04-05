@@ -132,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             }
 
-            final currencies = result.data ?? [];
+            final currencies = result.rates ?? [];
 
             return ListView.builder(
               padding: const EdgeInsets.all(8),
