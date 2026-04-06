@@ -17,11 +17,7 @@ class CurrencyApi {
       if (result.isError) {
         return CurrencyResult.failure(result.error!);
       }
-      final data = result.rates as List<dynamic>?;
-      if (data == null) {
-        return CurrencyResult.failure(CurrencyError.parsing());
-      }
-      final rates = data
+      final rates = (result.rates as List<dynamic>)
           .map((e) => RateDataFromNetwork.fromJson(e as Map<String, dynamic>))
           .toList();
       return CurrencyResult.success(rates);
