@@ -13,10 +13,6 @@ class CurrencyApi {
 
     try {
       final result = await _network.get(url);
-
-      if (result.isError) {
-        return CurrencyResult.failure(result.error!);
-      }
       final rates = (result.rates as List<dynamic>)
           .map((e) => RateDataFromNetwork.fromJson(e as Map<String, dynamic>))
           .toList();
