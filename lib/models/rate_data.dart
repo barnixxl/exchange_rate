@@ -70,6 +70,20 @@ class RateData {
     );
   }
 
+  static List<RateData> fromNetworkList(List<RateDataFromNetwork> rates) {
+    final currencies = <RateData>[];
+    for(final code in supportedCurrencies) {
+      final rateData = rates.firstWhere(
+          (r) => r.curAbbreviation == code,
+        orElse: () => throw CurrencyError(code: 'CURRENCY_NOT_FOUND', message: 'Валюта $code не найдена',
+      ),
+      );
+      currencies.add(RateData.fromRateData(rateData));
+    }
+    currencies.sort((a,b) => a.code.compareTo(b.code));
+    return currencies;
+  }
+
   @override
   String toString() {
     return 'CurrencyModel(code: $code, name: $name, rate: $rate)';

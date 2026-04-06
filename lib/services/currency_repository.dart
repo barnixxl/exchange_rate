@@ -15,15 +15,8 @@ class CurrencyRepository {
       return CurrencyResult.failure(result.error!);
     }
 
-    final rawRates = result.rates!;
-
-    final currencies = <RateData>[];
-    for (final code in RateData.supportedCurrencies) {
-      currencies.add(RateData.fromResponse(rawRates, code));
-    }
-    currencies.sort((a, b) => a.code.compareTo(b.code));
-    _cachedRates = currencies;
-    return CurrencyResult.success(currencies);
+    _cachedRates =  result.rates!;
+    return result;
   }
 
   bool hasCachedRates() => _cachedRates != null;
