@@ -35,114 +35,116 @@ class _DetailScreenState extends State<DetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(controller.code),
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Card(
-              elevation: 4,
-              child: Padding(
-                padding: const EdgeInsets.all(24),
-                child: Column(
-                  children: [
-                    Text(
-                      controller.code,
-                      style: const TextStyle(
-                        fontSize: 48,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue,
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(controller.code),
+          backgroundColor: Colors.blue,
+          foregroundColor: Colors.white,
+        ),
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Card(
+                elevation: 4,
+                child: Padding(
+                  padding: const EdgeInsets.all(24),
+                  child: Column(
+                    children: [
+                      Text(
+                        controller.code,
+                        style: const TextStyle(
+                          fontSize: 48,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      controller.name,
-                      style: const TextStyle(
-                        fontSize: 20,
-                        color: Colors.grey,
+                      const SizedBox(height: 8),
+                      Text(
+                        controller.name,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          color: Colors.grey,
+                        ),
                       ),
-                    ),
-                    const Divider(height: 32),
-                    _buildInfoRow(
-                      'Курс',
-                      '1 ${controller.code} = ${controller.rate.toStringAsFixed(4)} BYN',
-                    ),
-                    const SizedBox(height: 16),
-                    _buildInfoRow(
-                      'Базовая валюта',
-                      widget.currency.baseCurrencyName,
-                    ),
-                    const SizedBox(height: 16),
-                    _buildInfoRow(
-                      'Дата обновления',
-                      '${controller.date.day} ${_getMonthName(controller.date.month)} ${controller.date.year}, ${controller.date.hour}:${controller.date.minute.toString().padLeft(2, '0')}',
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 24),
-            TextField(
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
-              decoration: InputDecoration(
-                labelText: 'Сумма в ${widget.currency.baseCurrencyCode}',
-                border: OutlineInputBorder(),
-              ),
-              onChanged: (value) {
-                setState(() {
-                  _inputAmount = value;
-                  final amount = double.tryParse(value) ?? 0.0;
-                  _convertedAmount = controller.calculate(amount);
-                });
-              },
-            ),
-            if (_inputAmount.isNotEmpty)
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: Text(
-                  '$_convertedAmount ${widget.currency.name} (${widget.currency.code})', //{widget.currency.code}
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
+                      const Divider(height: 32),
+                      _buildInfoRow(
+                        'Курс',
+                        '1 ${controller.code} = ${controller.rate.toStringAsFixed(4)} BYN',
+                      ),
+                      const SizedBox(height: 16),
+                      _buildInfoRow(
+                        'Базовая валюта',
+                        widget.currency.baseCurrencyName,
+                      ),
+                      const SizedBox(height: 16),
+                      _buildInfoRow(
+                        'Дата обновления',
+                        '${controller.date.day} ${_getMonthName(controller.date.month)} ${controller.date.year}, ${controller.date.hour}:${controller.date.minute.toString().padLeft(2, '0')}',
+                      ),
+                    ],
                   ),
                 ),
               ),
-            const Spacer(),
-            const SizedBox(height: 24),
-            TextField(
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
-              decoration: InputDecoration(
-                labelText: 'Сумма в ${widget.currency.code}',
-                border: OutlineInputBorder(),
+              const SizedBox(height: 24),
+              TextField(
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                decoration: InputDecoration(
+                  labelText: 'Сумма в ${widget.currency.baseCurrencyCode}',
+                  border: const OutlineInputBorder(),
+                ),
+                onChanged: (value) {
+                  setState(() {
+                    _inputAmount = value;
+                    final amount = double.tryParse(value) ?? 0.0;
+                    _convertedAmount = controller.calculate(amount);
+                  });
+                },
               ),
-              onChanged: (value) {
-                setState(() {
-                  _inputAmount = value;
-                  final amount = double.tryParse(value) ?? 0.0;
-                  _convertedAmountRevert =
-                      (amount * controller.rate).toStringAsFixed(2);
-                });
-              },
-            ),
-            if (_inputAmount.isNotEmpty)
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: Text(
-                  '$_convertedAmountRevert ${widget.currency.baseCurrencyName}',
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
+              if (_inputAmount.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Text(
+                    '$_convertedAmount ${widget.currency.name} (${widget.currency.code})',
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
+              const SizedBox(height: 24),
+              TextField(
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                decoration: InputDecoration(
+                  labelText: 'Сумма в ${widget.currency.code}',
+                  border: const OutlineInputBorder(),
+                ),
+                onChanged: (value) {
+                  setState(() {
+                    _inputAmount = value;
+                    final amount = double.tryParse(value) ?? 0.0;
+                    _convertedAmountRevert =
+                        (amount * controller.rate).toStringAsFixed(2);
+                  });
+                },
               ),
-            const Spacer(),
-          ],
+              if (_inputAmount.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Text(
+                    '$_convertedAmountRevert ${widget.currency.baseCurrencyName}',
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              const SizedBox(height: 24),
+            ],
+          ),
         ),
       ),
     );
