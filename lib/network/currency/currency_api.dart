@@ -13,10 +13,14 @@ class CurrencyApi {
 
     try {
       final result = await _network.get(url);
-      final rates = (result.rates as List<dynamic>)
-          .map((e) => RateDataFromNetwork.fromJson(e as Map<String, dynamic>))
-          .toList();
-      return CurrencyResult.success(rates);
+      if (result.error == null) {
+        final rates = (result.rates as List<dynamic>)
+            .map((e) => RateDataFromNetwork.fromJson(e as Map<String, dynamic>))
+            .toList();
+        return CurrencyResult.success(rates);
+      } else {
+        return CurrencyResult.failure(result.error);
+      }
     } catch (e) {
       return CurrencyResult.failure(CurrencyError.fromException(e));
     }
