@@ -1,5 +1,4 @@
 import 'package:currency_converter/models/rate_data.dart';
-import '../../models/rate_data.dart';
 import '../currency_rate_network.dart';
 import '../../models/currency_error.dart';
 import 'resp/rate_data_from_network.dart';
@@ -20,7 +19,9 @@ class CurrencyApi {
             .map((e) => RateDataFromNetwork.fromJson(e as Map<String, dynamic>))
             .toList();
 
-        final rates = RateData.fromNetworkList(networkRates);
+        final rates = networkRates
+            .map((e) => RateData.fromNetworkModel(e))
+            .toList();
         return CurrencyResult.success(rates);
       } else {
         return CurrencyResult.failure(result.error);

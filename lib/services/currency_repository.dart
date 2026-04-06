@@ -15,7 +15,7 @@ class CurrencyRepository {
       return CurrencyResult.failure(result.error!);
     }
 
-    _cachedRates =  result.rates!;
+    _cachedRates = result.rates!;
     return result;
   }
 

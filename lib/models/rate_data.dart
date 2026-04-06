@@ -41,7 +41,8 @@ class RateData {
   static RateData fromResponse(List<RateDataFromNetwork> rates, String code) {
     final rateData = rates.firstWhere((r) => r.curAbbreviation == code,
         orElse: () => throw CurrencyError(
-            code: 'CURRENCY_NOT_FOUND', message: 'Валюта $code не найдена'));
+            code: 'CURRENCY_NOT_FOUND', message: 'Валюта $code не найдена')
+    );
     return RateData.fromRateData(rateData);
   }
 
@@ -50,7 +51,8 @@ class RateData {
       code: json['code'] ?? '',
       name: json['name'] ?? 'данная валюта отсутствует',
       rate: (json['rate'] ?? 0.0).toDouble(),
-      date: DateTime.parse(json['date'] ?? DateTime.now().toIso8601String()),
+      date: DateTime.parse(json['date'] ?? DateTime.now().toIso8601String()
+      ),
     );
   }
 
@@ -70,18 +72,18 @@ class RateData {
     );
   }
 
-  static List<RateData> fromNetworkList(List<RateDataFromNetwork> rates) {
-    final currencies = <RateData>[];
-    for(final code in supportedCurrencies) {
-      final rateData = rates.firstWhere(
-          (r) => r.curAbbreviation == code,
-        orElse: () => throw CurrencyError(code: 'CURRENCY_NOT_FOUND', message: 'Валюта $code не найдена',
-      ),
-      );
-      currencies.add(RateData.fromRateData(rateData));
-    }
-    currencies.sort((a,b) => a.code.compareTo(b.code));
-    return currencies;
+  static RateData fromNetworkModel(RateDataFromNetwork? model){
+    final code = model?.curAbbreviation ?? '';
+    final name = model?.curName ?? 'Неизвестное название валюты';
+    final scale = model?.curScale ?? 1;
+    final officialRate = model?.curOfficialRate ?? 0.0;
+    final dateStr = model?.date ?? DateTime.now().toIso8601String();
+    return RateData(
+      code: code,
+      name: name,
+      rate: officialRate / scale,
+      date: DateTime.parse(dateStr),
+    );
   }
 
   @override
