@@ -13,15 +13,6 @@ class RateData {
     required this.date,
   });
 
-  factory RateData.fromJson(Map<String, dynamic> json) {
-    return RateData(
-      code: json['code'] ?? '',
-      name: json['name'] ?? 'данная валюта отсутствует',
-      rate: (json['rate'] ?? 0.0).toDouble(),
-      date: DateTime.parse(json['date'] ?? DateTime.now().toIso8601String()),
-    );
-  }
-
   static RateData fromNetworkModel(RateDataFromNetwork model) {
     return RateData(
       code: model.curAbbreviation ?? '',
@@ -29,10 +20,5 @@ class RateData {
       rate: (model.curOfficialRate ?? 0.0) / (model.curScale ?? 1),
       date: DateTime.parse(model.date ?? DateTime.now().toIso8601String()),
     );
-  }
-
-  @override
-  String toString() {
-    return 'CurrencyModel(code: $code, name: $name, rate: $rate)';
   }
 }
