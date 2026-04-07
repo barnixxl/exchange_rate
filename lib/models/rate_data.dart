@@ -16,14 +16,12 @@ class RateData {
   });
 
   static RateData fromNetworkModel(RateDataFromNetwork model) {
-    print(
-        'curOfficialRate: ${model.curOfficialRate}, curScale: ${model.curScale}');
     return RateData(
       code: model.curAbbreviation ?? '',
       name: model.curName ?? 'Неизвестное название валюты',
       rate: model.curOfficialRate ?? 0.0,
-      scale: (model.curScale ?? 1).toInt(),
       date: DateTime.parse(model.date ?? DateTime.now().toIso8601String()),
+      scale: (model.curScale ?? 1).toInt(),
     );
   }
 }

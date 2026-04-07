@@ -28,8 +28,8 @@ class _DetailScreenState extends State<DetailScreen> {
       code: widget.currency.code,
       name: widget.currency.name,
       rate: widget.currency.rate,
-      scale: widget.currency.scale,
       date: widget.currency.date,
+      scale: widget.currency.scale,
     );
     controller = DetailController(currencyModel);
   }
