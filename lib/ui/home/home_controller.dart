@@ -48,7 +48,6 @@ class HomeController {
     runInAction(() {
       currencyResult.value = CurrencyResult.loading();
     });
-
     final result = await _repository.fetchRates();
     runInAction(() {
       currencyResult.value = result;

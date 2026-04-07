@@ -10,12 +10,6 @@ class CurrencyRepository {
 
   Future<CurrencyResult<List<RateData>>> fetchRates() async {
     final result = await _api.fetchRates();
-
-    if (result.isError) {
-      return CurrencyResult.failure(result.error!);
-    }
-
-    _cachedRates = result.rates!;
     return result;
   }
 

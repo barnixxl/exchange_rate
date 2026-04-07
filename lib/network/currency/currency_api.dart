@@ -11,17 +11,14 @@ class CurrencyApi {
 
   Future<CurrencyResult<List<RateData>>> fetchRates() async {
     const url = '/rates?periodicity=0';
-
     try {
       final result = await _network.get(url);
       if (result.error == null) {
         final networkRates = (result.rates as List<dynamic>)
             .map((e) => RateDataFromNetwork.fromJson(e as Map<String, dynamic>))
             .toList();
-
-        final rates = networkRates
-            .map((e) => RateData.fromNetworkModel(e))
-            .toList();
+        final rates =
+            networkRates.map((e) => RateData.fromNetworkModel(e)).toList();
         return CurrencyResult.success(rates);
       } else {
         return CurrencyResult.failure(result.error);
