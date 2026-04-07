@@ -14,6 +14,8 @@ class RateData {
   });
 
   static RateData fromNetworkModel(RateDataFromNetwork model) {
+    print(
+        'curOfficialRate: ${model.curOfficialRate}, curScale: ${model.curScale}');
     return RateData(
       code: model.curAbbreviation ?? '',
       name: model.curName ?? 'Неизвестное название валюты',

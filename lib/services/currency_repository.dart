@@ -18,14 +18,12 @@ class CurrencyRepository {
   RateData recalculateRate(
       RateData model, String newBaseCurrency, Map<String, double> rates) {
     final baseRate = rates[newBaseCurrency] ?? 1.0;
-    final newRate = model.code == newBaseCurrency
-        ? 1.0
-        : model.rate / baseRate;
+    final newRate = model.code == newBaseCurrency ? 1.0 : model.rate / baseRate;
     return RateData(
-        code: model.code,
-        name: model.name,
-        rate: double.parse(newRate.toStringAsFixed(6)),
-        date: model.date,
+      code: model.code,
+      name: model.name,
+      rate: double.parse(newRate.toStringAsFixed(6)),
+      date: model.date,
     );
   }
 
