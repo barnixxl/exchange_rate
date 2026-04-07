@@ -1,5 +1,3 @@
-import 'package:currency_converter/models/currency_error.dart';
-
 import '../network/currency/resp/rate_data_from_network.dart';
 
 class RateData {
@@ -14,13 +12,6 @@ class RateData {
     required this.rate,
     required this.date,
   });
-
-  static RateData fromResponse(List<RateDataFromNetwork> rates, String code) {
-    final rateData = rates.firstWhere((r) => r.curAbbreviation == code,
-        orElse: () => throw CurrencyError(
-            code: 'CURRENCY_NOT_FOUND', message: 'Валюта $code не найдена'));
-    return RateData.fromNetworkModel(rateData);
-  }
 
   factory RateData.fromJson(Map<String, dynamic> json) {
     return RateData(
