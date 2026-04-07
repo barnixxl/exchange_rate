@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'home_controller.dart';
 import '../../services/currency_repository.dart';
-import '../../network/currency_rate_network.dart';
-import '../../network/currency/currency_api.dart';
+import 'package:get_it/get_it.dart';
+import '../../dependency_injection.dart';
 import '../../app_router.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
 
     _homeController =
-        HomeController(CurrencyRepository(CurrencyApi(CurrencyRateNetwork())));
+        HomeController(getIt<CurrencyRepository>());
 
     _loadData();
   }
