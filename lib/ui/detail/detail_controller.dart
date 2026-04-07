@@ -13,6 +13,8 @@ class DetailController {
 
   DateTime get date => _currency.date;
 
+  int get scale => _currency.scale;
+
   String formatDate() {
     return '${date.day} ${_getMonthName(date.month)} ${date.year}, ${date.hour}:${date.minute.toString().padLeft(2, '0')}';
   }

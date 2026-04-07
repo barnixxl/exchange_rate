@@ -23,6 +23,7 @@ class CurrencyRepository {
       code: model.code,
       name: model.name,
       rate: double.parse(newRate.toStringAsFixed(6)),
+      scale: model.scale,
       date: model.date,
     );
   }

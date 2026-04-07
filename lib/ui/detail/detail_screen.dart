@@ -28,6 +28,7 @@ class _DetailScreenState extends State<DetailScreen> {
       code: widget.currency.code,
       name: widget.currency.name,
       rate: widget.currency.rate,
+      scale: widget.currency.scale,
       date: widget.currency.date,
     );
     controller = DetailController(currencyModel);
@@ -73,7 +74,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       const Divider(height: 32),
                       _buildInfoRow(
                         'Курс',
-                        '1 ${controller.code} = ${controller.rate.toStringAsFixed(4)} BYN',
+                        '${controller.scale} ${controller.code} = ${controller.rate.toStringAsFixed(4)} BYN',
                       ),
                       const SizedBox(height: 16),
                       _buildInfoRow(

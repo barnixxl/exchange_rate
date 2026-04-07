@@ -158,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     title: Text(currency.name),
                     subtitle: Text(
-                      '1 ${currency.code} = ${currency.rate.toStringAsFixed(4)} BYN',
+                      '${currency.scale} = ${currency.rate.toStringAsFixed(4)} BYN',
                     ),
                     trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                     onTap: () {
@@ -170,6 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           name: currency.name,
                           rate: currency.rate,
                           date: currency.date,
+                          scale: currency.scale,
                           baseCurrencyCode: 'BYN',
                           baseCurrencyName: 'Белорусский рубль (BYN)',
                         ),
