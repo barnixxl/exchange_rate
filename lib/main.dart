@@ -1,9 +1,9 @@
+import 'package:currency_converter/services/currency_repository.dart';
 import 'package:flutter/material.dart';
 import 'app_router.dart';
-import 'dependency_injection.dart';
 
 void main() {
-  setupDependencies();
+  CurrencyRepository.initDependencies();
   runApp(const MyApp());
 }
 
