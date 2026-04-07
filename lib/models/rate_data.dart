@@ -22,9 +22,7 @@ class RateData {
       code: model.curAbbreviation ?? '',
       name: model.curName ?? 'Неизвестное название валюты',
       rate: model.curOfficialRate ?? 0.0,
-      scale: model.curScale ?? 1,
-      //scale: (model.curScale ?? 1).toInt(),
-      //rate: (model.curOfficialRate ?? 0.0) / (model.curScale ?? 1),
+      scale: (model.curScale ?? 1).toInt(),
       date: DateTime.parse(model.date ?? DateTime.now().toIso8601String()),
     );
   }
