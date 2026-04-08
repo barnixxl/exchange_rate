@@ -23,6 +23,10 @@ class DetailController {
     return (amount * _currency.scale / _currency.rate).toStringAsFixed(2);
   }
 
+  String calculateReverse(double amount) {
+    return (amount * _currency.rate / _currency.scale).toStringAsFixed(2);
+  }
+
   String _getMonthName(int month) {
     const months = [
       'января',
