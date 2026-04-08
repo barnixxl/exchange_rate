@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
 import 'home_controller.dart';
+import '../../services/currency_repository.dart';
 import '../../app_router.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -17,7 +19,8 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
 
-    _homeController = HomeController();
+    final repository = Provider.of<CurrencyRepository>(context, listen: false);
+    _homeController = HomeController(repository);
 
     _loadData();
   }

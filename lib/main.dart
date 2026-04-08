@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'app_router.dart';
+import 'services/currency_repository.dart';
+import 'network/currency/currency_api.dart';
+import 'network/currency_rate_network.dart';
 
 void main() {
-  runApp(const MyApp());
+  final repository = CurrencyRepository(
+    CurrencyApi(CurrencyRateNetwork()),
+  );
+  runApp(
+    Provider<CurrencyRepository>.value(
+      value: repository,
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

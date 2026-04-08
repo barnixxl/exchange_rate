@@ -1,4 +1,3 @@
-import 'package:currency_converter/network/currency_rate_network.dart';
 import '../models/rate_data.dart';
 import '../models/currency_result.dart';
 import '../network/currency/currency_api.dart';
