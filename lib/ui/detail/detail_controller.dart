@@ -20,7 +20,7 @@ class DetailController {
   }
 
   String calculate(double amount) {
-    return (amount / _currency.rate).toStringAsFixed(2);
+    return (amount * _currency.scale / _currency.rate).toStringAsFixed(2);
   }
 
   String _getMonthName(int month) {

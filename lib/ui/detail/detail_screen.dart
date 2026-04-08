@@ -128,7 +128,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     _inputAmount = value;
                     final amount = double.tryParse(value) ?? 0.0;
                     _convertedAmountRevert =
-                        (amount * controller.rate).toStringAsFixed(2);
+                    (amount * controller.rate / controller.scale).toStringAsFixed(2);
                   });
                 },
               ),
