@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import 'home_controller.dart';
-import '../../services/currency_repository.dart';
 import '../../app_router.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,15 +13,22 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late final HomeController _homeController;
+  bool _isInitialized = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if(!_isInitialized){
+      _isInitialized = true;
+      _homeController = Provider.of<HomeController>(context, listen: false);
+      _loadData();
+    }
+  }
 
   @override
   void initState() {
     super.initState();
 
-    final repository = Provider.of<CurrencyRepository>(context, listen: false);
-    _homeController = HomeController(repository);
-
-    _loadData();
   }
 
   Future<void> _loadData() async {

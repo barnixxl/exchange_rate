@@ -1,3 +1,4 @@
+import 'package:currency_converter/UI/home/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'app_router.dart';
@@ -12,7 +13,12 @@ void main() {
   runApp(
     Provider<CurrencyRepository>.value(
       value: repository,
-      child: const MyApp(),
+      child: Provider<HomeController>(
+        create: (context) => HomeController(
+          Provider.of<CurrencyRepository>(context, listen: false),
+        ),
+        child: const MyApp(),
+      )
     ),
   );
 }
