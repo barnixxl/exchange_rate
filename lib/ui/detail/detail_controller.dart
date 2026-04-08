@@ -15,33 +15,11 @@ class DetailController {
 
   int get scale => _currency.scale;
 
-  String formatDate() {
-    return '${date.day} ${_getMonthName(date.month)} ${date.year}, ${date.hour}:${date.minute.toString().padLeft(2, '0')}';
-  }
-
   String calculate(double amount) {
     return (amount * _currency.scale / _currency.rate).toStringAsFixed(2);
   }
 
   String calculateReverse(double amount) {
     return (amount * _currency.rate / _currency.scale).toStringAsFixed(2);
-  }
-
-  String _getMonthName(int month) {
-    const months = [
-      'января',
-      'февраля',
-      'марта',
-      'апреля',
-      'мая',
-      'июня',
-      'июля',
-      'августа',
-      'сентября',
-      'октября',
-      'ноября',
-      'декабря'
-    ];
-    return months[month - 1];
   }
 }

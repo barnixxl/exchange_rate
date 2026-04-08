@@ -1,3 +1,4 @@
+import 'package:currency_converter/utils/date_formatter.dart';
 import 'package:mobx/mobx.dart';
 import '../../models/rate_data.dart';
 import '../../models/currency_result.dart';
@@ -23,26 +24,8 @@ class HomeController {
     final data = result.rates;
     if (data == null || data.isEmpty) return 'Нет данных';
     final date = data.first.date;
-    return '${date.day} ${_getMonthName(date.month)} ${date.year}, ${date.hour}:${date.minute.toString().padLeft(2, '0')}';
+    return formatDate(date);
   });
-
-  String _getMonthName(int month) {
-    const months = [
-      'января',
-      'февраля',
-      'марта',
-      'апреля',
-      'мая',
-      'июня',
-      'июля',
-      'августа',
-      'сентября',
-      'октября',
-      'ноября',
-      'декабря'
-    ];
-    return months[month - 1];
-  }
 
   Future<void> loadCurrencies() async {
     runInAction(() {
@@ -52,13 +35,5 @@ class HomeController {
     runInAction(() {
       currencyResult.value = result;
     });
-  }
-
-  RateData? getCurrencyByCode(String code) {
-    try {
-      return currencies.firstWhere((c) => c.code == code);
-    } catch (e) {
-      return null;
-    }
   }
 }

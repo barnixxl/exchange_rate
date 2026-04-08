@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../app_router.dart';
 import 'detail_controller.dart';
+import '../../utils/date_formatter.dart';
 import '../../models/rate_data.dart';
 
 class DetailScreen extends StatefulWidget {
@@ -85,7 +86,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       const SizedBox(height: 16),
                       _buildInfoRow(
                         'Дата обновления',
-                        '${controller.date.day} ${_getMonthName(controller.date.month)} ${controller.date.year}, ${controller.date.hour}:${controller.date.minute.toString().padLeft(2, '0')}',
+                        formatDate(controller.date),
                       ),
                     ],
                   ),
@@ -179,23 +180,5 @@ class _DetailScreenState extends State<DetailScreen> {
         ),
       ],
     );
-  }
-
-  String _getMonthName(int month) {
-    const months = [
-      'января',
-      'февраля',
-      'марта',
-      'апреля',
-      'мая',
-      'июня',
-      'июля',
-      'августа',
-      'сентября',
-      'октября',
-      'ноября',
-      'декабря'
-    ];
-    return months[month - 1];
   }
 }
