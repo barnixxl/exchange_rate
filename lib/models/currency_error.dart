@@ -7,8 +7,6 @@ class CurrencyError {
   @override
   String toString() => message;
 
-  String toDebugString() => '$code: $message';
-
   factory CurrencyError.fromException(Object e) {
     if (e is CurrencyError) return e;
     return CurrencyError(code: 'UNKNOWN', message: e.toString());

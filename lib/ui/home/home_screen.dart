@@ -19,8 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
 
-    _homeController =
-        HomeController(GetIt.I<CurrencyRepository>());
+    _homeController = HomeController(GetIt.I<CurrencyRepository>());
 
     _loadData();
   }
