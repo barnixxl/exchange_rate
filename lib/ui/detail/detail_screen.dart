@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../app_router.dart';
 import 'detail_controller.dart';
-import '../../utils/date_formatter.dart';
 import '../../models/rate_data.dart';
 
 class DetailScreen extends StatefulWidget {
@@ -86,7 +85,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       const SizedBox(height: 16),
                       _buildInfoRow(
                         'Дата обновления',
-                        formatDate(controller.date),
+                        controller.formatteDate
                       ),
                     ],
                   ),
