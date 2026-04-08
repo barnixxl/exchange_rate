@@ -92,7 +92,8 @@ class _DetailScreenState extends State<DetailScreen> {
               ),
               const SizedBox(height: 24),
               TextField(
-                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
                 decoration: InputDecoration(
                   labelText: 'Сумма в ${widget.currency.baseCurrencyCode}',
                   border: const OutlineInputBorder(),
@@ -118,7 +119,8 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
               const SizedBox(height: 24),
               TextField(
-                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
                 decoration: InputDecoration(
                   labelText: 'Сумма в ${widget.currency.code}',
                   border: const OutlineInputBorder(),
@@ -128,7 +130,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     _inputAmount = value;
                     final amount = double.tryParse(value) ?? 0.0;
                     _convertedAmountRevert =
-                    controller.calculateReverse(amount);
+                        controller.calculateReverse(amount);
                   });
                 },
               ),

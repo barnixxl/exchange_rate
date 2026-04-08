@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'rate_data_from_network.g.dart';
 
-@JsonSerializable(createToJson: false)
+@JsonSerializable(createToJson: false, explicitToJson: false)
 class RateDataFromNetwork {
   @JsonKey(name: 'Cur_ID')
   final int? curID;
@@ -27,7 +27,7 @@ class RateDataFromNetwork {
   });
 
   factory RateDataFromNetwork.fromJson(Map<String, dynamic> json) =>
-      _$RateDataFromJson(json);
+      _$RateDataFromNetworkFromJson(json);
 
   @override
   String toString() => 'RateDataFromNetwork('
