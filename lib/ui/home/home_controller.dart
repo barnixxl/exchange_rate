@@ -1,12 +1,15 @@
+import 'package:currency_converter/network/currency_rate_network.dart';
 import 'package:mobx/mobx.dart';
 import '../../models/rate_data.dart';
 import '../../models/currency_result.dart';
 import '../../services/currency_repository.dart';
+import '../../network/currency/currency_api.dart';
 
 class HomeController {
-  HomeController(this._repository);
-
-  final CurrencyRepository _repository;
+  late final CurrencyRepository _repository;
+  HomeController(){
+    _repository = CurrencyRepository(CurrencyApi(CurrencyRateNetwork()));
+  }
 
   late final Observable<CurrencyResult<List<RateData>>> currencyResult =
       Observable(CurrencyResult.notInitialized());

@@ -10,8 +10,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-  get_it: ^8.3.0
-
   # MobX для управления состоянием (MVVM)
   mobx: ^2.3.0+1              # Основная библиотека MobX
   flutter_mobx: ^2.2.0+1       # Интеграция с Flutter (Observer виджет)
