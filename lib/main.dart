@@ -2,10 +2,14 @@ import 'package:currency_converter/UI/home/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'app_router.dart';
-import 'utils/date_formatter.dart';
 import 'services/currency_repository.dart';
 import 'network/currency/currency_api.dart';
 import 'network/currency_rate_network.dart';
+import 'package:intl/date_symbol_data_local.dart';
+
+void initializeLocale() {
+  initializeDateFormatting('ru', null);
+}
 
 void main() {
   initializeLocale();
