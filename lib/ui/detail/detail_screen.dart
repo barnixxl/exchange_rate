@@ -85,7 +85,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       const SizedBox(height: 16),
                       _buildInfoRow(
                         'Дата обновления',
-                        controller.formatteDate
+                        controller.formattedDate
                       ),
                     ],
                   ),

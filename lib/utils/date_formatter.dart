@@ -1,27 +1,10 @@
-String formatDate(DateTime date) {
-  return ''
-      '${date.day}'
-      ' ${getMonthName(date.month)}'
-      ' ${date.year},'
-      ' ${date.hour}:'
-      '${date.minute.toString().padLeft(2, '0')}'
-      '';
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
+void initializeLocale() {
+  initializeDateFormatting('ru', null);
 }
-
-String getMonthName(int month) {
-  const months = [
-    'января',
-    'февраля',
-    'марта',
-    'апреля',
-    'мая',
-    'июня',
-    'июля',
-    'августа',
-    'сентября',
-    'октября',
-    'ноября',
-    'декабря'
-  ];
-  return months[month - 1];
+extension DateUtils on DateTime {
+  String formatDate() {
+    return DateFormat('d MMMM y, HH:mm', 'ru').format(this);
+  }
 }
