@@ -1,5 +1,5 @@
 import '../../models/rate_data.dart';
-import 'package:currency_converter/utils/date_formatter.dart';
+import 'package:currency_converter/utils/string_extensions.dart';
 
 class DetailController {
   DetailController(this._currency);
@@ -12,7 +12,7 @@ class DetailController {
 
   double get rate => _currency.rate;
 
-  DateTime get date => _currency.date;
+  DateTime? get date => _currency.date;
 
   int get scale => _currency.scale;
 

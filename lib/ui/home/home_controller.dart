@@ -1,9 +1,8 @@
-import 'package:currency_converter/utils/date_formatter.dart';
 import 'package:mobx/mobx.dart';
 import '../../models/rate_data.dart';
 import '../../models/currency_result.dart';
 import '../../services/currency_repository.dart';
-import '../../utils/date_formatter.dart';
+import '../../utils/string_extensions.dart';
 
 class HomeController {
   HomeController(this._repository);

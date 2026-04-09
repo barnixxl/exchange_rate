@@ -1,10 +1,11 @@
 import '../network/currency/resp/rate_data_from_network.dart';
+import '../utils/string_extensions.dart';
 
 class RateData {
   final String code;
   final String name;
   final double rate;
-  final DateTime date;
+  final DateTime? date;
   final int scale;
 
   RateData({
@@ -20,7 +21,7 @@ class RateData {
       code: model.curAbbreviation ?? '',
       name: model.curName ?? 'Неизвестное название валюты',
       rate: model.curOfficialRate ?? 0.0,
-      date: DateTime.parse(model.date ?? DateTime.now().toIso8601String()),
+      date: model.date?.toIsoDateTime(),
       scale: (model.curScale ?? 1).toInt(),
     );
   }

@@ -18,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    if(!_isInitialized){
+    if (!_isInitialized) {
       _isInitialized = true;
       _homeController = Provider.of<HomeController>(context, listen: false);
       _loadData();
@@ -28,7 +28,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-
   }
 
   Future<void> _loadData() async {
@@ -174,7 +173,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           code: currency.code,
                           name: currency.name,
                           rate: currency.rate,
-                          date: currency.date,
+                          date: currency.date ?? DateTime.now(),
                           scale: currency.scale,
                           baseCurrencyCode: 'BYN',
                           baseCurrencyName: 'Белорусский рубль (BYN)',
