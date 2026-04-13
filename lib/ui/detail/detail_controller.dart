@@ -17,7 +17,7 @@ class DetailController {
   int get scale => _currency.scale;
 
   String get formattedDate =>
-      date?.toDayMonthYearTextDateFormat() ?? 'Дата отсутствует';
+      date.toDayMonthYearTextDateFormat() ?? 'Дата отсутствует';
 
   String calculate(double amount) {
     return (amount * _currency.scale / _currency.rate).toStringAsFixed(2);

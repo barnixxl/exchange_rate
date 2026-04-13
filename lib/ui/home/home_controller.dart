@@ -24,7 +24,7 @@ class HomeController {
     final data = result.rates;
     if (data == null || data.isEmpty) return 'Нет данных';
     final date = data.first.date;
-    return date?.toDayMonthYearTextDateFormat() ?? 'Дата отсутствует';
+    return date.toDayMonthYearTextDateFormat() ?? 'Дата отсутствует';
   });
 
   Future<void> loadCurrencies() async {
