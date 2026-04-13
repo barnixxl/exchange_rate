@@ -13,15 +13,12 @@ extension StringNullableUtils on String? {
   }
 
   String? toDayMonthYearTextDateFormat() {
-    if (this == null) {
-      return null;
-    }
     try {
       final date = DateTime.tryParse(this!);
-      if (date == null) {
-        return null;
+      if (date != null) {
+        return date.toDayMonthYearTextDateFormat();
       }
-      return date.toDayMonthYearTextDateFormat();
+      return null;
     } catch (e) {
       return null;
     }
