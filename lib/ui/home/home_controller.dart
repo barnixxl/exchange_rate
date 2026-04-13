@@ -2,7 +2,7 @@ import 'package:mobx/mobx.dart';
 import '../../models/rate_data.dart';
 import '../../models/currency_result.dart';
 import '../../services/currency_repository.dart';
-import '../../utils/string_extensions.dart';
+import '../../utils/date_formatter.dart';
 
 class HomeController {
   HomeController(this._repository);
@@ -24,7 +24,7 @@ class HomeController {
     final data = result.rates;
     if (data == null || data.isEmpty) return 'Нет данных';
     final date = data.first.date;
-    return toDayMonthYearTextDateFormat(date) ?? 'Дата отсутствует';
+    return date?.toDayMonthYearTextDateFormat() ?? 'Дата отсутствует';
   });
 
   Future<void> loadCurrencies() async {

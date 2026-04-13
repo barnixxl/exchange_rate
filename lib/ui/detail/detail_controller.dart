@@ -1,5 +1,5 @@
 import '../../models/rate_data.dart';
-import 'package:currency_converter/utils/string_extensions.dart';
+import '../../utils/date_formatter.dart';
 
 class DetailController {
   DetailController(this._currency);
@@ -17,7 +17,7 @@ class DetailController {
   int get scale => _currency.scale;
 
   String get formattedDate =>
-      toDayMonthYearTextDateFormat(date) ?? 'Дата отсутствует';
+      date?.toDayMonthYearTextDateFormat() ?? 'Дата отсутствует';
 
   String calculate(double amount) {
     return (amount * _currency.scale / _currency.rate).toStringAsFixed(2);
