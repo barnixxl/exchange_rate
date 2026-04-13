@@ -1,8 +1,10 @@
+import 'date_formatter.dart';
+
 extension StringNullableUtils on String? {
   DateTime? toIsoDateTime() {
     if (this != null) {
       try {
-        return DateTime.tryParse(this!);
+        return DateTimeUtils.formatter.parse(this!);
       } catch (e) {
         return null;
       }
