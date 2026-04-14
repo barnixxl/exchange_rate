@@ -7,12 +7,13 @@ import 'network/currency/currency_api.dart';
 import 'network/currency_rate_network.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
-void initializeLocale() {
-  initializeDateFormatting('ru', null);
+Future<void> initializeLocale() async {
+  await initializeDateFormatting('ru', null);
 }
 
-void main() {
-  initializeLocale();
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initializeLocale();
 
   final repository = CurrencyRepository(
     CurrencyApi(CurrencyRateNetwork()),

@@ -1,15 +1,12 @@
 import 'package:intl/intl.dart';
 
-extension DateTimeUtils on DateTime? {
-  static final DateFormat _formatter = DateFormat('d MMMM y, HH:mm', 'ru');
-
-  static DateTime parseDayMonthYearText(String value) {
-    return _formatter.parseStrict(value);
-  }
+extension DateUtils on DateTime? {
+  static final DateFormat dayMonthYearTextDateFormat =
+      DateFormat('d MMMM y, HH:mm', 'ru');
 
   String? toDayMonthYearTextDateFormat() {
     if (this != null) {
-      return _formatter.format(this!);
+      return dayMonthYearTextDateFormat.format(this!);
     }
     return null;
   }
