@@ -6,7 +6,7 @@ class CurrencyArgument {
   final String code;
   final String name;
   final double rate;
-  final DateTime date;
+  final DateTime? date;
   final int scale;
   final String baseCurrencyCode;
   final String baseCurrencyName;

@@ -6,6 +6,7 @@ import 'services/currency_repository.dart';
 import 'network/currency/currency_api.dart';
 import 'network/currency_rate_network.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'resources/l10n/app_localizations.dart';
 
 Future<void> initializeLocale() async {
   await initializeDateFormatting('ru', null);
@@ -36,7 +37,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Конвертер валют',
+      title: AppLocalizations.of(context)?.appTitle,
+      locale: const Locale('ru'),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         useMaterial3: true,

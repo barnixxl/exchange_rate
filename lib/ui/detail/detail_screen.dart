@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../app_router.dart';
 import 'detail_controller.dart';
 import '../../models/rate_data.dart';
+import '../../resources/l10n/app_localizations.dart';
 
 class DetailScreen extends StatefulWidget {
   final CurrencyArgument currency;
@@ -37,6 +38,7 @@ class _DetailScreenState extends State<DetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -74,18 +76,22 @@ class _DetailScreenState extends State<DetailScreen> {
                       ),
                       const Divider(height: 32),
                       _buildInfoRow(
-                        'Курс',
-                        '${controller.scale} ${controller.code} = ${controller.rate.toStringAsFixed(4)} BYN',
+                        l10n.exchangeRate,
+                        l10n.scaleEqualsRateByn(
+                          controller.scale,
+                          controller.code,
+                          controller.rate.toStringAsFixed(4),
+                        ),
                       ),
                       const SizedBox(height: 16),
                       _buildInfoRow(
-                        'Базовая валюта',
+                        l10n.baseCurrency,
                         widget.currency.baseCurrencyName,
                       ),
                       const SizedBox(height: 16),
                       _buildInfoRow(
-                        'Дата обновления',
-                        controller.formattedDate
+                        l10n.updateDate,
+                        controller.formattedDate ?? l10n.absentDate,
                       ),
                     ],
                   ),
@@ -96,7 +102,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 keyboardType:
                     const TextInputType.numberWithOptions(decimal: true),
                 decoration: InputDecoration(
-                  labelText: 'Сумма в ${widget.currency.baseCurrencyCode}',
+                  labelText: l10n.amountIn(widget.currency.baseCurrencyCode),
                   border: const OutlineInputBorder(),
                 ),
                 onChanged: (value) {
@@ -111,7 +117,11 @@ class _DetailScreenState extends State<DetailScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0),
                   child: Text(
-                    '$_convertedAmount ${widget.currency.name} (${widget.currency.code})',
+                    l10n.convertedResult(
+                      _convertedAmount,
+                      widget.currency.name,
+                      widget.currency.code,
+                    ),
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
@@ -123,7 +133,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 keyboardType:
                     const TextInputType.numberWithOptions(decimal: true),
                 decoration: InputDecoration(
-                  labelText: 'Сумма в ${widget.currency.code}',
+                  labelText: l10n.amountIn(widget.currency.code),
                   border: const OutlineInputBorder(),
                 ),
                 onChanged: (value) {
@@ -139,7 +149,10 @@ class _DetailScreenState extends State<DetailScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0),
                   child: Text(
-                    '$_convertedAmountRevert ${widget.currency.baseCurrencyName}',
+                    l10n.convertedResultReverse(
+                      _convertedAmountRevert,
+                      widget.currency.baseCurrencyName,
+                    ),
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,

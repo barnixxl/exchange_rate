@@ -3,6 +3,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import 'home_controller.dart';
 import '../../app_router.dart';
+import '../../resources/l10n/app_localizations.dart';
+import '../../utils/date_formatter.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -36,9 +38,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Курсы валют НБРБ'),
+        title: Text(l10n.homeTitle),
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
         bottom: PreferredSize(
@@ -55,7 +58,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     const Icon(Icons.update, size: 16, color: Colors.white70),
                     const SizedBox(width: 4),
                     Text(
-                      'Обновлено: ${_homeController.lastUpdateDate.value}',
+                      l10n.updatedAt(
+                        _homeController.lastUpdateDate.value
+                                .toDayMonthYearTextDateFormat() ??
+                            l10n.absentDate,
+                      ),
                       style: const TextStyle(
                         color: Colors.white70,
                         fontSize: 12,
@@ -95,13 +102,13 @@ class _HomeScreenState extends State<HomeScreen> {
             final result = _homeController.currencyResult.value;
 
             if (result.isLoading) {
-              return const Center(
+              return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CircularProgressIndicator(),
-                    SizedBox(height: 16),
-                    Text('Загрузка курсов валют...'),
+                    const CircularProgressIndicator(),
+                    const SizedBox(height: 16),
+                    Text(l10n.loadingCurrencies),
                   ],
                 ),
               );
@@ -121,14 +128,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       const SizedBox(height: 16),
                       Text(
-                        result.error?.toString() ?? 'Ошибка...',
+                        result.error?.toString() ?? l10n.error,
                         textAlign: TextAlign.center,
                         style: const TextStyle(fontSize: 16),
                       ),
                       const SizedBox(height: 16),
                       ElevatedButton(
                         onPressed: _loadData,
-                        child: const Text('Повторить'),
+                        child: Text(l10n.retry),
                       ),
                     ],
                   ),
@@ -162,7 +169,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     title: Text(currency.name),
                     subtitle: Text(
-                      '${currency.scale} = ${currency.rate.toStringAsFixed(4)} BYN',
+                      l10n.scaleEqualsRateByn(
+                        currency.scale,
+                        currency.code,
+                        currency.rate.toStringAsFixed(4),
+                      ),
                     ),
                     trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                     onTap: () {
@@ -173,10 +184,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           code: currency.code,
                           name: currency.name,
                           rate: currency.rate,
-                          date: currency.date ?? DateTime.now(),
+                          date: currency.date,
                           scale: currency.scale,
-                          baseCurrencyCode: 'BYN',
-                          baseCurrencyName: 'Белорусский рубль (BYN)',
+                          baseCurrencyCode: l10n.baseCurCode,
+                          baseCurrencyName: l10n.baseCurrencyName,
                         ),
                       );
                     },

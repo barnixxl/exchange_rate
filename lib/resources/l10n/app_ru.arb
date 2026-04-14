@@ -1,0 +1,69 @@
+{
+  "@@locale": "ru",
+  "appTitle": "Конвертер валют",
+  "homeTitle": "Курсы валют НБРБ",
+  "updatedAt": "Обновлено: {date}",
+  "@updatedAt": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "loadingCurrencies": "Загрузка курсов валют...",
+  "error": "Ошибка...",
+  "retry": "Повторить",
+  "baseCurrencyName": "Белорусский рубль (BYN)",
+  "exchangeRate": "Курс",
+  "baseCurCode": "BYN",
+  "baseCurrency": "Базовая валюта",
+  "updateDate": "Дата обновления",
+  "absentDate": "Дата отсутствует",
+  "amountIn": "Сумма в {currency}",
+  "@amountIn": {
+    "placeholders": {
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "scaleEqualsRateByn": "{scale} {code} = {rate} BYN",
+  "@scaleEqualsRateByn": {
+    "placeholders": {
+      "scale": {
+        "type": "int"
+      },
+      "code": {
+        "type": "String"
+      },
+      "rate": {
+        "type": "String"
+      }
+    }
+  },
+  "convertedResult": "{amount} {currencyName} ({currencyCode})",
+  "@convertedResult": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currencyName": {
+        "type": "String"
+      },
+      "currencyCode": {
+        "type": "String"
+      }
+    }
+  },
+  "convertedResultReverse": "{amount} {currencyName}",
+  "@convertedResultReverse": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currencyName": {
+        "type": "String"
+      }
+    }
+  }
+}

@@ -2,7 +2,6 @@ import 'package:mobx/mobx.dart';
 import '../../models/rate_data.dart';
 import '../../models/currency_result.dart';
 import '../../services/currency_repository.dart';
-import '../../utils/date_formatter.dart';
 
 class HomeController {
   HomeController(this._repository);
@@ -16,15 +15,14 @@ class HomeController {
       ? currencyResult.value.rates ?? []
       : [];
 
-  late final Computed<String> lastUpdateDate = Computed(() {
+  late final Computed<DateTime?> lastUpdateDate = Computed(() {
     final result = currencyResult.value;
-    if (result.status == Status.notInitialized) return 'Ошибка...';
-    if (result.isError) return 'Ошибка...';
-    if (result.isLoading) return 'Загрузка...';
+    if (result.status == Status.notInitialized) return null;
+    if (result.isError) return null;
+    if (result.isLoading) return null;
     final data = result.rates;
-    if (data == null || data.isEmpty) return 'Нет данных';
-    final date = data.first.date;
-    return date.toDayMonthYearTextDateFormat() ?? 'Дата отсутствует';
+    if (data == null || data.isEmpty) return null;
+    return data.first.date;
   });
 
   Future<void> loadCurrencies() async {
