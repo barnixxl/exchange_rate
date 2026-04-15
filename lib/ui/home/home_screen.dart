@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
+import 'package:currency_converter/main.dart';
 import 'home_controller.dart';
 import '../../app_router.dart';
-import '../../resources/l10n/app_localizations.dart';
 import '../../utils/date_formatter.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -38,10 +38,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.home_title),
+        title: Text(strings.home_title),
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
         bottom: PreferredSize(
@@ -58,10 +57,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     const Icon(Icons.update, size: 16, color: Colors.white70),
                     const SizedBox(width: 4),
                     Text(
-                      l10n.updated_at(
+                      strings.updated_at(
                         _homeController.lastUpdateDate.value
                                 .toDayMonthYearTextDateFormat() ??
-                            l10n.absent_date,
+                            strings.absent_date,
                       ),
                       style: const TextStyle(
                         color: Colors.white70,
@@ -108,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     const CircularProgressIndicator(),
                     const SizedBox(height: 16),
-                    Text(l10n.loading_currencies),
+                    Text(strings.loading_currencies),
                   ],
                 ),
               );
@@ -128,14 +127,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       const SizedBox(height: 16),
                       Text(
-                        result.error?.toString() ?? l10n.error,
+                        result.error?.toString() ?? strings.error,
                         textAlign: TextAlign.center,
                         style: const TextStyle(fontSize: 16),
                       ),
                       const SizedBox(height: 16),
                       ElevatedButton(
                         onPressed: _loadData,
-                        child: Text(l10n.retry),
+                        child: Text(strings.retry),
                       ),
                     ],
                   ),
@@ -169,7 +168,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     title: Text(currency.name),
                     subtitle: Text(
-                      l10n.scale_equals_rate_byn(
+                      strings.scale_equals_rate_byn(
                         currency.scale,
                         currency.code,
                         currency.rate.toStringAsFixed(4),
@@ -186,8 +185,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           rate: currency.rate,
                           date: currency.date,
                           scale: currency.scale,
-                          baseCurrencyCode: l10n.base_cur_code,
-                          baseCurrencyName: l10n.base_currency_name,
+                          baseCurrencyCode: strings.base_cur_code,
+                          baseCurrencyName: strings.base_currency_name,
                         ),
                       );
                     },
