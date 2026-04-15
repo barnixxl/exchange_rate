@@ -1,34 +1,34 @@
 {
   "@@locale": "ru",
-  "appTitle": "Конвертер валют",
-  "homeTitle": "Курсы валют НБРБ",
-  "updatedAt": "Обновлено: {date}",
-  "@updatedAt": {
+  "app_title": "Конвертер валют",
+  "home_title": "Курсы валют НБРБ",
+  "updated_at": "Обновлено: {date}",
+  "@updated_at": {
     "placeholders": {
       "date": {
         "type": "String"
       }
     }
   },
-  "loadingCurrencies": "Загрузка курсов валют...",
+  "loading_currencies": "Загрузка курсов валют...",
   "error": "Ошибка...",
   "retry": "Повторить",
-  "baseCurrencyName": "Белорусский рубль (BYN)",
-  "exchangeRate": "Курс",
-  "baseCurCode": "BYN",
-  "baseCurrency": "Базовая валюта",
-  "updateDate": "Дата обновления",
-  "absentDate": "Дата отсутствует",
-  "amountIn": "Сумма в {currency}",
-  "@amountIn": {
+  "base_currency_name": "Белорусский рубль (BYN)",
+  "exchange_rate": "Курс",
+  "base_cur_code": "BYN",
+  "base_currency": "Базовая валюта",
+  "update_date": "Дата обновления",
+  "absent_date": "Дата отсутствует",
+  "amount_in": "Сумма в {currency}",
+  "@amount_in": {
     "placeholders": {
       "currency": {
         "type": "String"
       }
     }
   },
-  "scaleEqualsRateByn": "{scale} {code} = {rate} BYN",
-  "@scaleEqualsRateByn": {
+  "scale_equals_rate_byn": "{scale} {code} = {rate} BYN",
+  "@scale_equals_rate_byn": {
     "placeholders": {
       "scale": {
         "type": "int"
@@ -41,8 +41,8 @@
       }
     }
   },
-  "convertedResult": "{amount} {currencyName} ({currencyCode})",
-  "@convertedResult": {
+  "converted_result": "{amount} {currencyName} ({currencyCode})",
+  "@converted_result": {
     "placeholders": {
       "amount": {
         "type": "String"
@@ -55,8 +55,8 @@
       }
     }
   },
-  "convertedResultReverse": "{amount} {currencyName}",
-  "@convertedResultReverse": {
+  "converted_result_reverse": "{amount} {currencyName}",
+  "@converted_result_reverse": {
     "placeholders": {
       "amount": {
         "type": "String"

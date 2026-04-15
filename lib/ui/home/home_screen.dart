@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.homeTitle),
+        title: Text(l10n.home_title),
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
         bottom: PreferredSize(
@@ -58,10 +58,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     const Icon(Icons.update, size: 16, color: Colors.white70),
                     const SizedBox(width: 4),
                     Text(
-                      l10n.updatedAt(
+                      l10n.updated_at(
                         _homeController.lastUpdateDate.value
                                 .toDayMonthYearTextDateFormat() ??
-                            l10n.absentDate,
+                            l10n.absent_date,
                       ),
                       style: const TextStyle(
                         color: Colors.white70,
@@ -108,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     const CircularProgressIndicator(),
                     const SizedBox(height: 16),
-                    Text(l10n.loadingCurrencies),
+                    Text(l10n.loading_currencies),
                   ],
                 ),
               );
@@ -169,7 +169,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     title: Text(currency.name),
                     subtitle: Text(
-                      l10n.scaleEqualsRateByn(
+                      l10n.scale_equals_rate_byn(
                         currency.scale,
                         currency.code,
                         currency.rate.toStringAsFixed(4),
@@ -186,8 +186,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           rate: currency.rate,
                           date: currency.date,
                           scale: currency.scale,
-                          baseCurrencyCode: l10n.baseCurCode,
-                          baseCurrencyName: l10n.baseCurrencyName,
+                          baseCurrencyCode: l10n.base_cur_code,
+                          baseCurrencyName: l10n.base_currency_name,
                         ),
                       );
                     },

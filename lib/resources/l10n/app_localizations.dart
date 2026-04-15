@@ -94,29 +94,29 @@ abstract class AppLocalizations {
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[Locale('ru')];
 
-  /// No description provided for @appTitle.
+  /// No description provided for @app_title.
   ///
   /// In ru, this message translates to:
   /// **'Конвертер валют'**
-  String get appTitle;
+  String get app_title;
 
-  /// No description provided for @homeTitle.
+  /// No description provided for @home_title.
   ///
   /// In ru, this message translates to:
   /// **'Курсы валют НБРБ'**
-  String get homeTitle;
+  String get home_title;
 
-  /// No description provided for @updatedAt.
+  /// No description provided for @updated_at.
   ///
   /// In ru, this message translates to:
   /// **'Обновлено: {date}'**
-  String updatedAt(String date);
+  String updated_at(String date);
 
-  /// No description provided for @loadingCurrencies.
+  /// No description provided for @loading_currencies.
   ///
   /// In ru, this message translates to:
   /// **'Загрузка курсов валют...'**
-  String get loadingCurrencies;
+  String get loading_currencies;
 
   /// No description provided for @error.
   ///
@@ -130,66 +130,66 @@ abstract class AppLocalizations {
   /// **'Повторить'**
   String get retry;
 
-  /// No description provided for @baseCurrencyName.
+  /// No description provided for @base_currency_name.
   ///
   /// In ru, this message translates to:
   /// **'Белорусский рубль (BYN)'**
-  String get baseCurrencyName;
+  String get base_currency_name;
 
-  /// No description provided for @exchangeRate.
+  /// No description provided for @exchange_rate.
   ///
   /// In ru, this message translates to:
   /// **'Курс'**
-  String get exchangeRate;
+  String get exchange_rate;
 
-  /// No description provided for @baseCurCode.
+  /// No description provided for @base_cur_code.
   ///
   /// In ru, this message translates to:
   /// **'BYN'**
-  String get baseCurCode;
+  String get base_cur_code;
 
-  /// No description provided for @baseCurrency.
+  /// No description provided for @base_currency.
   ///
   /// In ru, this message translates to:
   /// **'Базовая валюта'**
-  String get baseCurrency;
+  String get base_currency;
 
-  /// No description provided for @updateDate.
+  /// No description provided for @update_date.
   ///
   /// In ru, this message translates to:
   /// **'Дата обновления'**
-  String get updateDate;
+  String get update_date;
 
-  /// No description provided for @absentDate.
+  /// No description provided for @absent_date.
   ///
   /// In ru, this message translates to:
   /// **'Дата отсутствует'**
-  String get absentDate;
+  String get absent_date;
 
-  /// No description provided for @amountIn.
+  /// No description provided for @amount_in.
   ///
   /// In ru, this message translates to:
   /// **'Сумма в {currency}'**
-  String amountIn(String currency);
+  String amount_in(String currency);
 
-  /// No description provided for @scaleEqualsRateByn.
+  /// No description provided for @scale_equals_rate_byn.
   ///
   /// In ru, this message translates to:
   /// **'{scale} {code} = {rate} BYN'**
-  String scaleEqualsRateByn(int scale, String code, String rate);
+  String scale_equals_rate_byn(int scale, String code, String rate);
 
-  /// No description provided for @convertedResult.
+  /// No description provided for @converted_result.
   ///
   /// In ru, this message translates to:
   /// **'{amount} {currencyName} ({currencyCode})'**
-  String convertedResult(
+  String converted_result(
       String amount, String currencyName, String currencyCode);
 
-  /// No description provided for @convertedResultReverse.
+  /// No description provided for @converted_result_reverse.
   ///
   /// In ru, this message translates to:
   /// **'{amount} {currencyName}'**
-  String convertedResultReverse(String amount, String currencyName);
+  String converted_result_reverse(String amount, String currencyName);
 }
 
 class _AppLocalizationsDelegate

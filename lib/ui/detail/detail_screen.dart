@@ -76,8 +76,8 @@ class _DetailScreenState extends State<DetailScreen> {
                       ),
                       const Divider(height: 32),
                       _buildInfoRow(
-                        l10n.exchangeRate,
-                        l10n.scaleEqualsRateByn(
+                        l10n.exchange_rate,
+                        l10n.scale_equals_rate_byn(
                           controller.scale,
                           controller.code,
                           controller.rate.toStringAsFixed(4),
@@ -85,13 +85,13 @@ class _DetailScreenState extends State<DetailScreen> {
                       ),
                       const SizedBox(height: 16),
                       _buildInfoRow(
-                        l10n.baseCurrency,
+                        l10n.base_currency,
                         widget.currency.baseCurrencyName,
                       ),
                       const SizedBox(height: 16),
                       _buildInfoRow(
-                        l10n.updateDate,
-                        controller.formattedDate ?? l10n.absentDate,
+                        l10n.update_date,
+                        controller.formattedDate ?? l10n.absent_date,
                       ),
                     ],
                   ),
@@ -102,7 +102,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 keyboardType:
                     const TextInputType.numberWithOptions(decimal: true),
                 decoration: InputDecoration(
-                  labelText: l10n.amountIn(widget.currency.baseCurrencyCode),
+                  labelText: l10n.amount_in(widget.currency.baseCurrencyCode),
                   border: const OutlineInputBorder(),
                 ),
                 onChanged: (value) {
@@ -117,7 +117,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0),
                   child: Text(
-                    l10n.convertedResult(
+                    l10n.converted_result(
                       _convertedAmount,
                       widget.currency.name,
                       widget.currency.code,
@@ -133,7 +133,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 keyboardType:
                     const TextInputType.numberWithOptions(decimal: true),
                 decoration: InputDecoration(
-                  labelText: l10n.amountIn(widget.currency.code),
+                  labelText: l10n.amount_in(widget.currency.code),
                   border: const OutlineInputBorder(),
                 ),
                 onChanged: (value) {
@@ -149,7 +149,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0),
                   child: Text(
-                    l10n.convertedResultReverse(
+                    l10n.converted_result_reverse(
                       _convertedAmountRevert,
                       widget.currency.baseCurrencyName,
                     ),

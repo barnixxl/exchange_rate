@@ -21,7 +21,7 @@ class RateData {
       code: model.curAbbreviation ?? '',
       name: model.curName ?? 'Неизвестное название валюты',
       rate: model.curOfficialRate ?? 0.0,
-      date: model.date?.toApiOrDisplayDateParse(),
+      date: model.date?.toDayMonthYearDateParse(),
       scale: (model.curScale ?? 1).toInt(),
     );
   }

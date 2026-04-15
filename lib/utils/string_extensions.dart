@@ -1,7 +1,7 @@
 import 'date_formatter.dart';
 
 extension StringNullableUtils on String? {
-  DateTime? toApiOrDisplayDateParse() {
+  DateTime? toDayMonthYearDateParse() {
     if (this != null) {
       try {
         final parsedIso = DateTime.tryParse(this!);

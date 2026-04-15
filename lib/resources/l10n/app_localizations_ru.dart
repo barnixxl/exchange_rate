@@ -9,18 +9,18 @@ class AppLocalizationsRu extends AppLocalizations {
   AppLocalizationsRu([String locale = 'ru']) : super(locale);
 
   @override
-  String get appTitle => 'Конвертер валют';
+  String get app_title => 'Конвертер валют';
 
   @override
-  String get homeTitle => 'Курсы валют НБРБ';
+  String get home_title => 'Курсы валют НБРБ';
 
   @override
-  String updatedAt(String date) {
+  String updated_at(String date) {
     return 'Обновлено: $date';
   }
 
   @override
-  String get loadingCurrencies => 'Загрузка курсов валют...';
+  String get loading_currencies => 'Загрузка курсов валют...';
 
   @override
   String get error => 'Ошибка...';
@@ -29,41 +29,41 @@ class AppLocalizationsRu extends AppLocalizations {
   String get retry => 'Повторить';
 
   @override
-  String get baseCurrencyName => 'Белорусский рубль (BYN)';
+  String get base_currency_name => 'Белорусский рубль (BYN)';
 
   @override
-  String get exchangeRate => 'Курс';
+  String get exchange_rate => 'Курс';
 
   @override
-  String get baseCurCode => 'BYN';
+  String get base_cur_code => 'BYN';
 
   @override
-  String get baseCurrency => 'Базовая валюта';
+  String get base_currency => 'Базовая валюта';
 
   @override
-  String get updateDate => 'Дата обновления';
+  String get update_date => 'Дата обновления';
 
   @override
-  String get absentDate => 'Дата отсутствует';
+  String get absent_date => 'Дата отсутствует';
 
   @override
-  String amountIn(String currency) {
+  String amount_in(String currency) {
     return 'Сумма в $currency';
   }
 
   @override
-  String scaleEqualsRateByn(int scale, String code, String rate) {
+  String scale_equals_rate_byn(int scale, String code, String rate) {
     return '$scale $code = $rate BYN';
   }
 
   @override
-  String convertedResult(
+  String converted_result(
       String amount, String currencyName, String currencyCode) {
     return '$amount $currencyName ($currencyCode)';
   }
 
   @override
-  String convertedResultReverse(String amount, String currencyName) {
+  String converted_result_reverse(String amount, String currencyName) {
     return '$amount $currencyName';
   }
 }
