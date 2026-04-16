@@ -9,7 +9,6 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'resources/l10n/app_localizations.dart';
 
 late final AppLocalizations strings;
-bool _isStringsInitialized = false;
 
 Future<void> initializeLocale() async {
   await initializeDateFormatting('ru', null);
@@ -40,12 +39,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      onGenerateTitle: (context) {
-        if (!_isStringsInitialized) {
-          strings = AppLocalizations.of(context)!;
-          _isStringsInitialized = true;
-        }
-        return strings.app_title;
+      builder: (context, child) {
+        strings = AppLocalizations.of(context)!;
+        return child ?? const SizedBox.shrink();
       },
       locale: const Locale('ru'),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
