@@ -18,7 +18,7 @@
   "base_cur_code": "BYN",
   "base_currency": "Базовая валюта",
   "update_date": "Дата обновления",
-  "absent_date": "Дата отсутствует",
+  "common_absent_date": "Дата отсутствует",
   "amount_in": "Сумма в {currency}",
   "@amount_in": {
     "placeholders": {
@@ -27,8 +27,8 @@
       }
     }
   },
-  "scale_equals_rate_byn": "{scale} {code} = {rate} BYN",
-  "@scale_equals_rate_byn": {
+  "common_scale_equals_rate_byn": "{scale} {code} = {rate} BYN",
+  "@common_scale_equals_rate_byn": {
     "placeholders": {
       "scale": {
         "type": "int"

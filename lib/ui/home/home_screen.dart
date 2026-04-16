@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       strings.updated_at(
                         _homeController.lastUpdateDate.value
                                 .toDayMonthYearTextDateFormat() ??
-                            strings.absent_date,
+                            strings.common_absent_date,
                       ),
                       style: const TextStyle(
                         color: Colors.white70,
@@ -168,7 +168,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     title: Text(currency.name),
                     subtitle: Text(
-                      strings.scale_equals_rate_byn(
+                      strings.common_scale_equals_rate_byn(
                         currency.scale,
                         currency.code,
                         currency.rate.toStringAsFixed(4),

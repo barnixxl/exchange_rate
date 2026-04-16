@@ -76,7 +76,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       const Divider(height: 32),
                       _buildInfoRow(
                         strings.exchange_rate,
-                        strings.scale_equals_rate_byn(
+                        strings.common_scale_equals_rate_byn(
                           controller.scale,
                           controller.code,
                           controller.rate.toStringAsFixed(4),
@@ -90,7 +90,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       const SizedBox(height: 16),
                       _buildInfoRow(
                         strings.update_date,
-                        controller.formattedDate ?? strings.absent_date,
+                        controller.formattedDate ?? strings.common_absent_date,
                       ),
                     ],
                   ),

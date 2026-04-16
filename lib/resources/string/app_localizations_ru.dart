@@ -44,7 +44,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get update_date => 'Дата обновления';
 
   @override
-  String get absent_date => 'Дата отсутствует';
+  String get common_absent_date => 'Дата отсутствует';
 
   @override
   String amount_in(String currency) {
@@ -52,7 +52,7 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String scale_equals_rate_byn(int scale, String code, String rate) {
+  String common_scale_equals_rate_byn(int scale, String code, String rate) {
     return '$scale $code = $rate BYN';
   }
 

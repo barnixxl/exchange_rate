@@ -160,11 +160,11 @@ abstract class AppLocalizations {
   /// **'Дата обновления'**
   String get update_date;
 
-  /// No description provided for @absent_date.
+  /// No description provided for @common_absent_date.
   ///
   /// In ru, this message translates to:
   /// **'Дата отсутствует'**
-  String get absent_date;
+  String get common_absent_date;
 
   /// No description provided for @amount_in.
   ///
@@ -172,11 +172,11 @@ abstract class AppLocalizations {
   /// **'Сумма в {currency}'**
   String amount_in(String currency);
 
-  /// No description provided for @scale_equals_rate_byn.
+  /// No description provided for @common_scale_equals_rate_byn.
   ///
   /// In ru, this message translates to:
   /// **'{scale} {code} = {rate} BYN'**
-  String scale_equals_rate_byn(int scale, String code, String rate);
+  String common_scale_equals_rate_byn(int scale, String code, String rate);
 
   /// No description provided for @converted_result.
   ///
