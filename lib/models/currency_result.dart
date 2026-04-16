@@ -3,25 +3,25 @@ import 'package:currency_converter/models/currency_error.dart';
 enum Status { notInitialized, loading, success, failure }
 
 class CurrencyResult<T> {
-  final T? rates;
+  final T? data;
   final CurrencyError? error;
   final Status status;
 
   CurrencyResult.notInitialized()
-      : rates = null,
+      : data = null,
         error = null,
         status = Status.notInitialized;
 
-  CurrencyResult.loading({this.rates})
+  CurrencyResult.loading({this.data})
       : error = null,
         status = Status.loading;
 
-  CurrencyResult.success(this.rates)
+  CurrencyResult.success(this.data)
       : error = null,
         status = Status.success;
 
   CurrencyResult.failure(this.error)
-      : rates = null,
+      : data = null,
         status = Status.failure;
 
   bool get isLoading => status == Status.loading;
