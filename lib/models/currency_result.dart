@@ -24,6 +24,8 @@ class CurrencyResult<T> {
       : data = null,
         status = Status.failure;
 
+  bool get isSuccess => status == Status.success;
+
   bool get isLoading => status == Status.loading;
 
   bool get isError => status == Status.failure;
