@@ -6,7 +6,7 @@ import 'services/currency_repository.dart';
 import 'network/currency/currency_api.dart';
 import 'network/currency_rate_network.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'resources/l10n/app_localizations.dart';
+import 'resources/string/app_localizations.dart';
 
 late final AppLocalizations strings;
 
@@ -17,6 +17,8 @@ Future<void> initializeLocale() async {
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeLocale();
+
+  strings = lookupAppLocalizations(const Locale('ru'));
 
   final repository = CurrencyRepository(
     CurrencyApi(CurrencyRateNetwork()),
@@ -39,10 +41,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      builder: (context, child) {
-        strings = AppLocalizations.of(context)!;
-        return child ?? const SizedBox.shrink();
-      },
       locale: const Locale('ru'),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
