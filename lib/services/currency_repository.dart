@@ -1,27 +1,34 @@
+import '../models/currency_error.dart';
 import '../models/rate_data.dart';
-import '../models/currency_result.dart';
 import '../network/currency/currency_api.dart';
 
 class CurrencyRepository {
-  static const _targerCurrencies = ["USD", "EUR", "CNY", "PLN", "UAH"];
+  static const _targetCurrencies = ["USD", "EUR", "CNY", "PLN", "UAH"];
 
   final CurrencyApi _api;
 
   CurrencyRepository(this._api);
 
-  Future<CurrencyResult<List<RateData>>> fetchRates() async {
+  Future<(List<RateData>?, CurrencyError?)> fetchRates() async {
     final result = await _api.fetchRates();
-    if(result.isSuccess) {
-      final filtered = result.data!
-          .where((r) => _targerCurrencies.contains(r.code))
-          .toList()
-          ..sort((a, b){
-            final indexA = _targerCurrencies.indexOf(a.code);
-            final indexB = _targerCurrencies.indexOf(b.code);
-            return indexA.compareTo(indexB);
-          });
-      return CurrencyResult.success(filtered);
+    if (!result.isSuccess) {
+      return (null, result.error);
     }
-    return result;
+    return (_filterAndSortRates(result.data), null);
+  }
+
+  List<RateData> _filterAndSortRates(List<RateData>? rates) {
+    if (rates != null) {
+      final filtered =
+          rates.where((r) => _targetCurrencies.contains(r.code)).toList();
+
+      filtered.sort((a, b) {
+        final indexA = _targetCurrencies.indexOf(a.code);
+        final indexB = _targetCurrencies.indexOf(b.code);
+        return indexA.compareTo(indexB);
+      });
+      return filtered;
+    }
+    return [];
   }
 }

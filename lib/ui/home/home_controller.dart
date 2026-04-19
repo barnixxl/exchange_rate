@@ -29,9 +29,13 @@ class HomeController {
     runInAction(() {
       currencyResult.value = CurrencyResult.loading();
     });
-    final result = await _repository.fetchRates();
+    final (rates, error) = await _repository.fetchRates();
     runInAction(() {
-      currencyResult.value = result;
+      if (error != null) {
+        currencyResult.value = CurrencyResult.failure(error);
+      } else {
+        currencyResult.value = CurrencyResult.success(rates ?? []);
+      }
     });
   }
 }
