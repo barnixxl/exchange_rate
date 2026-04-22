@@ -1,5 +1,4 @@
 import '../models/rate_data.dart';
-import '../models/currency_error.dart';
 import '../models/currency_result.dart';
 import '../network/currency/currency_api.dart';
 
@@ -11,31 +10,18 @@ class CurrencyRepository {
   CurrencyRepository(this._api);
 
   Future<CurrencyResult<List<RateData>>> fetchRates() async {
-    final apiResult = await _api.fetchRates();
-    if (apiResult.isSuccess) {
-      final rates = apiResult.data;
-      if (rates == null) {
-        return CurrencyResult.failure(CurrencyError.noData());
-      }
-      final prepared = _filterAndSortRates(rates);
-      return CurrencyResult.success(prepared);
+    final result = await _api.fetchRates();
+    if(result.isSuccess) {
+      final filtered = result.data!
+          .where((r) => _targetCurrencies.contains(r.code))
+          .toList()
+          ..sort((a, b){
+            final indexA = _targetCurrencies.indexOf(a.code);
+            final indexB = _targetCurrencies.indexOf(b.code);
+            return indexA.compareTo(indexB);
+          });
+      return CurrencyResult.success(filtered);
     }
-    if (apiResult.isError) {
-      return CurrencyResult.failure(
-        apiResult.error ?? CurrencyError.loadFailed(),
-      );
-    }
-    return CurrencyResult.failure(CurrencyError.loadFailed());
-  }
-
-  List<RateData> _filterAndSortRates(List<RateData> rates) {
-    final filtered =
-        rates.where((rate) => _targetCurrencies.contains(rate.code)).toList();
-    filtered.sort((a, b) {
-      final indexA = _targetCurrencies.indexOf(a.code);
-      final indexB = _targetCurrencies.indexOf(b.code);
-      return indexA.compareTo(indexB);
-    });
-    return filtered;
+    return result;
   }
 }
