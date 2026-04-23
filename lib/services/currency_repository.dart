@@ -21,12 +21,12 @@ class CurrencyRepository {
     if (rates != null) {
       final filtered =
           rates.where((r) => _targetCurrencies.contains(r.code)).toList();
-    filtered.sort((a, b) {
-    final indexA = _targetCurrencies.indexOf(a.code);
-    final indexB = _targetCurrencies.indexOf(b.code);
-    return indexA. compareTo (indexB);
-    });
-    return filtered;
+      filtered.sort((a, b) {
+        final indexA = _targetCurrencies.indexOf(a.code);
+        final indexB = _targetCurrencies.indexOf(b.code);
+        return indexA.compareTo(indexB);
+      });
+      return filtered;
     }
     return [];
   }
