@@ -6,7 +6,7 @@ import 'services/currency_repository.dart';
 import 'network/currency/currency_api.dart';
 import 'network/currency_rate_network.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'resources/string/app_localizations.dart';
+import 'resources/strings/app_localizations.dart';
 
 late final AppLocalizations strings;
 

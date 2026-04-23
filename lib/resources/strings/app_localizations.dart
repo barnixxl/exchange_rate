@@ -17,7 +17,7 @@ import 'app_localizations_ru.dart';
 /// `supportedLocales` list. For example:
 ///
 /// ```dart
-/// import 'string/app_localizations.dart';
+/// import 'strings/app_localizations.dart';
 ///
 /// return MaterialApp(
 ///   localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -190,6 +190,60 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'{amount} {currencyName}'**
   String converted_result_reverse(String amount, String currencyName);
+
+  /// No description provided for @error_timeout.
+  ///
+  /// In ru, this message translates to:
+  /// **'Время соединения вышло'**
+  String get error_timeout;
+
+  /// No description provided for @error_no_internet.
+  ///
+  /// In ru, this message translates to:
+  /// **'Проверьте соединение с интернетом'**
+  String get error_no_internet;
+
+  /// No description provided for @error_server.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ошибка сервера: {statusCode}'**
+  String error_server(int statusCode);
+
+  /// No description provided for @error_bad_response.
+  ///
+  /// In ru, this message translates to:
+  /// **'Неверный ответ сервера: {statusCode}'**
+  String error_bad_response(int statusCode);
+
+  /// No description provided for @error_cancelled.
+  ///
+  /// In ru, this message translates to:
+  /// **'Запрос отменен'**
+  String get error_cancelled;
+
+  /// No description provided for @error_unknown.
+  ///
+  /// In ru, this message translates to:
+  /// **'Неизвестная ошибка сети'**
+  String get error_unknown;
+
+  /// No description provided for @error_parsing.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ошибка парсинга данных'**
+  String get error_parsing;
+
+  /// No description provided for @error_no_data.
+  ///
+  /// In ru, this message translates to:
+  /// **'Нет закэшированных данных'**
+  String get error_no_data;
+
+  /// No description provided for @error_load_failed.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ошибка загрузки данных'**
+  String get error_load_failed;
 }
 
 class _AppLocalizationsDelegate

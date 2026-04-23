@@ -65,5 +65,28 @@
         "type": "String"
       }
     }
-  }
+  },
+  "error_timeout": "Время соединения вышло",
+  "error_no_internet": "Проверьте соединение с интернетом",
+  "error_server": "Ошибка сервера: {statusCode}",
+  "@error_server": {
+    "placeholders": {
+      "statusCode": {
+        "type": "int"
+      }
+    }
+  },
+  "error_bad_response": "Неверный ответ сервера: {statusCode}",
+  "@error_bad_response": {
+    "placeholders": {
+      "statusCode": {
+        "type": "int"
+      }
+    }
+  },
+  "error_cancelled": "Запрос отменен",
+  "error_unknown": "Неизвестная ошибка сети",
+  "error_parsing": "Ошибка парсинга данных",
+  "error_no_data": "Нет закэшированных данных",
+  "error_load_failed": "Ошибка загрузки данных"
 }

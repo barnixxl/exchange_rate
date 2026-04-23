@@ -66,4 +66,35 @@ class AppLocalizationsRu extends AppLocalizations {
   String converted_result_reverse(String amount, String currencyName) {
     return '$amount $currencyName';
   }
+
+  @override
+  String get error_timeout => 'Время соединения вышло';
+
+  @override
+  String get error_no_internet => 'Проверьте соединение с интернетом';
+
+  @override
+  String error_server(int statusCode) {
+    return 'Ошибка сервера: $statusCode';
+  }
+
+  @override
+  String error_bad_response(int statusCode) {
+    return 'Неверный ответ сервера: $statusCode';
+  }
+
+  @override
+  String get error_cancelled => 'Запрос отменен';
+
+  @override
+  String get error_unknown => 'Неизвестная ошибка сети';
+
+  @override
+  String get error_parsing => 'Ошибка парсинга данных';
+
+  @override
+  String get error_no_data => 'Нет закэшированных данных';
+
+  @override
+  String get error_load_failed => 'Ошибка загрузки данных';
 }
