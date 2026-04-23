@@ -11,18 +11,28 @@ class HomeController {
   late final Observable<CurrencyResult<List<RateData>>> currencyResult =
       Observable(CurrencyResult.notInitialized());
 
-  List<RateData> get currencies => currencyResult.value.status == Status.success
-      ? currencyResult.value.data ?? []
-      : [];
+  List<RateData> _extractCurrencies(CurrencyResult<List<RateData>> result) {
+    if (result.isSuccess) {
+      return result.data ?? [];
+    }
+    return [];
+  }
 
-  late final Computed<DateTime?> lastUpdateDate = Computed(() {
-    final result = currencyResult.value;
+  late final Computed<List<RateData>> currencies = Computed(() {
+    return _extractCurrencies(currencyResult.value);
+  });
+
+  DateTime? _extractLastUpdateDate(CurrencyResult<List<RateData>> result) {
     if (result.status == Status.notInitialized) return null;
     if (result.isError) return null;
     if (result.isLoading) return null;
     final data = result.data;
     if (data == null || data.isEmpty) return null;
     return data.first.date;
+  }
+
+  late final Computed<DateTime?> lastUpdateDate = Computed(() {
+    return _extractLastUpdateDate(currencyResult.value);
   });
 
   Future<void> loadCurrencies() async {
