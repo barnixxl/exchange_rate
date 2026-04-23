@@ -1,42 +1,52 @@
 class CurrencyError {
-  final String code;
+  final int errorCode;
   final String message;
 
-  const CurrencyError({required this.code, required this.message});
+  const CurrencyError({required this.errorCode, required this.message});
+
+  static const int unknowCode = -1;
+  static const int timeoutCode = 1;
+  static const int noInternetCode = 2;
+  static const int serverCode = 3;
+  static const int badResponseCode = 4;
+  static const int cancelledCode = 5;
+  static const int parsingCode = 6;
+  static const int noDataCode = 7;
+  static const int loadFailedCode = 8;
 
   @override
   String toString() => message;
 
   factory CurrencyError.fromException(Object e) {
     if (e is CurrencyError) return e;
-    return CurrencyError(code: 'UNKNOWN', message: e.toString());
+    return CurrencyError(errorCode: unknowCode, message: e.toString());
   }
 
-  factory CurrencyError.timeout() =>
-      const CurrencyError(code: 'TIMEOUT', message: 'Время соединения вышло');
+  factory CurrencyError.timeout() => const CurrencyError(
+      errorCode: timeoutCode, message: 'Время соединения вышло');
 
   factory CurrencyError.noInternet() => const CurrencyError(
-      code: 'NO_INTERNET', message: 'Проверьте соединение с интернетом');
+      errorCode: noInternetCode, message: 'Проверьте соединение с интернетом');
 
   factory CurrencyError.serverError(int statusCode) => CurrencyError(
-      code: 'SERVER: $statusCode', message: 'Ошибка сервера: $statusCode');
+      errorCode: serverCode, message: 'Ошибка сервера: $statusCode');
 
   factory CurrencyError.badResponse(int statusCode) => CurrencyError(
-      code: 'BAD_RESPONSE: $statusCode',
+      errorCode: badResponseCode,
       message: 'Неверный ответ сервера: $statusCode');
 
   factory CurrencyError.cancelled() =>
-      const CurrencyError(code: 'CANCELLED', message: 'Запрос отменен');
+      const CurrencyError(errorCode: cancelledCode, message: 'Запрос отменен');
 
-  factory CurrencyError.unknown() =>
-      const CurrencyError(code: 'UNKNOWN', message: 'Неизвестная ошибка сети');
+  factory CurrencyError.unknown() => const CurrencyError(
+      errorCode: unknowCode, message: 'Неизвестная ошибка сети');
 
-  factory CurrencyError.parsing() =>
-      const CurrencyError(code: 'PARSING', message: 'Ошибка парсинга данных');
+  factory CurrencyError.parsing() => const CurrencyError(
+      errorCode: parsingCode, message: 'Ошибка парсинга данных');
 
   factory CurrencyError.noData() => const CurrencyError(
-      code: 'NO_DATA', message: 'Нет закэшированных данных');
+      errorCode: noDataCode, message: 'Нет закэшированных данных');
 
   factory CurrencyError.loadFailed() => const CurrencyError(
-      code: 'LOAD_FAILED', message: 'Ошибка загрузки данных');
+      errorCode: loadFailedCode, message: 'Ошибка загрузки данных');
 }
