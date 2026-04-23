@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:currency_converter/main.dart';
+import '../../models/rate_data.dart';
 import 'home_controller.dart';
 import '../../app_router.dart';
-import '../../utils/date_formatter.dart';
+import 'home_app_bar.dart';
+import 'loading_widget.dart';
+import 'error_widget.dart';
+import 'currencies_list.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -36,63 +40,29 @@ class _HomeScreenState extends State<HomeScreen> {
     await _homeController.loadCurrencies();
   }
 
+  void _onCurrencyTap(RateData currency) {
+    Navigator.pushNamed(
+      context,
+      '/detail',
+      arguments: CurrencyArgument(
+        code: currency.code,
+        name: currency.name,
+        rate: currency.rate,
+        date: currency.date,
+        scale: currency.scale,
+        baseCurrencyCode: strings.base_cur_code,
+        baseCurrencyName: strings.base_currency_name,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(strings.home_title),
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(40),
-          child: Container(
-            padding: const EdgeInsets.all(8),
-            color: Colors.blue.shade700,
-            child: Observer(
-              builder: (_) {
-                _homeController.currencyResult.value;
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(Icons.update, size: 16, color: Colors.white70),
-                    const SizedBox(width: 4),
-                    Text(
-                      strings.updated_at(
-                        _homeController.lastUpdateDate.value
-                                .toDayMonthYearTextDateFormat() ??
-                            strings.common_absent_date,
-                      ),
-                      style: const TextStyle(
-                        color: Colors.white70,
-                        fontSize: 12,
-                      ),
-                    ),
-                  ],
-                );
-              },
-            ),
-          ),
-        ),
-        actions: [
-          Observer(
-            builder: (_) {
-              final isLoading = _homeController.currencyResult.value.isLoading;
-              return IconButton(
-                icon: isLoading
-                    ? const SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: CircularProgressIndicator(
-                          color: Colors.white,
-                          strokeWidth: 2,
-                        ),
-                      )
-                    : const Icon(Icons.refresh),
-                onPressed: isLoading ? null : _loadData,
-              );
-            },
-          ),
-        ],
+      appBar: HomeAppBar(
+        currencyResult: _homeController.currencyResult,
+        lastUpdateDate: _homeController.lastUpdateDate,
+        onRefresh: _loadData,
       ),
       body: RefreshIndicator(
         onRefresh: _loadData,
@@ -101,98 +71,21 @@ class _HomeScreenState extends State<HomeScreen> {
             final result = _homeController.currencyResult.value;
 
             if (result.isLoading) {
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const CircularProgressIndicator(),
-                    const SizedBox(height: 16),
-                    Text(strings.loading_currencies),
-                  ],
-                ),
-              );
+              return const LoadingWidget();
             }
 
             if (result.isError) {
-              return Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(
-                        Icons.error_outline,
-                        size: 64,
-                        color: Colors.red,
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        result.error?.toString() ?? strings.error,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                      const SizedBox(height: 16),
-                      ElevatedButton(
-                        onPressed: _loadData,
-                        child: Text(strings.retry),
-                      ),
-                    ],
-                  ),
-                ),
+              return AppErrorWidget(
+                errorMessage: result.error?.toString(),
+                onRetry: _loadData,
               );
             }
 
             final currencies = result.data ?? [];
 
-            return ListView.builder(
-              padding: const EdgeInsets.all(8),
-              itemCount: currencies.length,
-              itemBuilder: (context, index) {
-                final currency = currencies[index];
-
-                return Card(
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 4,
-                  ),
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: Colors.blue.shade100,
-                      child: Text(
-                        currency.code,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blue,
-                        ),
-                      ),
-                    ),
-                    title: Text(currency.name),
-                    subtitle: Text(
-                      strings.common_scale_equals_rate_byn(
-                        currency.scale,
-                        currency.code,
-                        currency.rate.toStringAsFixed(4),
-                      ),
-                    ),
-                    trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-                    onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        '/detail',
-                        arguments: CurrencyArgument(
-                          code: currency.code,
-                          name: currency.name,
-                          rate: currency.rate,
-                          date: currency.date,
-                          scale: currency.scale,
-                          baseCurrencyCode: strings.base_cur_code,
-                          baseCurrencyName: strings.base_currency_name,
-                        ),
-                      );
-                    },
-                  ),
-                );
-              },
+            return CurrenciesList(
+              currencies: currencies,
+              onItemTap: _onCurrencyTap,
             );
           },
         ),
