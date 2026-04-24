@@ -5,6 +5,9 @@ import 'package:currency_converter/main.dart';
 import 'home_controller.dart';
 import '../../app_router.dart';
 import '../../utils/date_formatter.dart';
+import '../../models/currency_result.dart';
+
+part 'error_state.part.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -114,32 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
             }
 
             if (result.isError) {
-              return Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(
-                        Icons.error_outline,
-                        size: 64,
-                        color: Colors.red,
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        result.error?.toString() ?? strings.error,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                      const SizedBox(height: 16),
-                      ElevatedButton(
-                        onPressed: _loadData,
-                        child: Text(strings.retry),
-                      ),
-                    ],
-                  ),
-                ),
-              );
+              return _buildErrorBody(result, () => _loadData());
             }
 
             final currencies = result.data ?? [];
