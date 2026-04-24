@@ -6,7 +6,7 @@ import 'home_controller.dart';
 import '../../app_router.dart';
 import '../../utils/date_formatter.dart';
 
-part 'error_state.part.dart';
+part 'home_screen.error_state.part.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -24,7 +24,10 @@ class _HomeScreenState extends State<HomeScreen> {
     super.didChangeDependencies();
     if (!_isInitialized) {
       _isInitialized = true;
-      _homeController = Provider.of<HomeController>(context, listen: false);
+      _homeController = Provider.of<HomeController>(
+        context,
+        listen: false,
+      );
       _loadData();
     }
   }
@@ -39,10 +42,14 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext context,
+  ) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(strings.home_title),
+        title: Text(
+          strings.home_title,
+        ),
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
         bottom: PreferredSize(
@@ -119,12 +126,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(
                       height: 16,
                     ),
-                    Text(strings.loading_currencies),
+                    Text(
+                      strings.loading_currencies,
+                    ),
                   ],
                 ),
               );
             }
-
             if (result.isError) {
               return _buildErrorWidget(
                 result.error?.toString(),
@@ -133,13 +141,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               );
             }
-
             final currencies = result.data ?? [];
 
             return ListView.builder(
               padding: const EdgeInsets.all(8),
               itemCount: currencies.length,
-              itemBuilder: (context, index) {
+              itemBuilder: (
+                context,
+                index,
+              ) {
                 final currency = currencies[index];
 
                 return Card(
@@ -158,7 +168,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     ),
-                    title: Text(currency.name),
+                    title: Text(
+                      currency.name,
+                    ),
                     subtitle: Text(
                       strings.common_scale_equals_rate_byn(
                         currency.scale,

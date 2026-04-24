@@ -1,6 +1,9 @@
 part of 'home_screen.dart';
 
-Widget _buildErrorWidget(String? error, void Function() onRetryPressed) {
+Widget _buildErrorWidget(
+  String? error,
+  void Function() onRetryPressed,
+) {
   return Center(
     child: Padding(
       padding: const EdgeInsets.all(16),
@@ -13,7 +16,7 @@ Widget _buildErrorWidget(String? error, void Function() onRetryPressed) {
             color: Colors.red,
           ),
           const SizedBox(
-              height: 16,
+            height: 16,
           ),
           Text(
             error?.toString() ?? strings.error,
@@ -27,7 +30,9 @@ Widget _buildErrorWidget(String? error, void Function() onRetryPressed) {
           ),
           ElevatedButton(
             onPressed: onRetryPressed,
-            child: Text(strings.retry),
+            child: Text(
+              strings.retry,
+            ),
           ),
         ],
       ),
