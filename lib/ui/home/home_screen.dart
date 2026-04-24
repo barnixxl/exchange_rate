@@ -56,8 +56,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(Icons.update, size: 16, color: Colors.white70),
-                    const SizedBox(width: 4),
+                    const Icon(
+                      Icons.update,
+                      size: 16,
+                      color: Colors.white70,
+                    ),
+                    const SizedBox(
+                      width: 4,
+                    ),
                     Text(
                       strings.updated_at(
                         _homeController.lastUpdateDate.value
@@ -89,7 +95,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           strokeWidth: 2,
                         ),
                       )
-                    : const Icon(Icons.refresh),
+                    : const Icon(
+                        Icons.refresh,
+                      ),
                 onPressed: isLoading ? null : _loadData,
               );
             },
@@ -108,7 +116,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const CircularProgressIndicator(),
-                    const SizedBox(height: 16),
+                    const SizedBox(
+                      height: 16,
+                    ),
                     Text(strings.loading_currencies),
                   ],
                 ),
@@ -156,7 +166,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         currency.rate.toStringAsFixed(4),
                       ),
                     ),
-                    trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                    trailing: const Icon(
+                      Icons.arrow_forward_ios,
+                      size: 16,
+                    ),
                     onTap: () {
                       Navigator.pushNamed(
                         context,
