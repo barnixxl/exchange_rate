@@ -5,7 +5,6 @@ import 'package:currency_converter/main.dart';
 import 'home_controller.dart';
 import '../../app_router.dart';
 import '../../utils/date_formatter.dart';
-import '../../models/currency_result.dart';
 
 part 'error_state.part.dart';
 
@@ -117,7 +116,8 @@ class _HomeScreenState extends State<HomeScreen> {
             }
 
             if (result.isError) {
-              return _buildErrorBody(result, () => _loadData());
+              return _buildErrorBody(result.error.toString(), () => _loadData(),
+              );
             }
 
             final currencies = result.data ?? [];
