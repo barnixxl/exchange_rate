@@ -116,7 +116,11 @@ class _HomeScreenState extends State<HomeScreen> {
             }
 
             if (result.isError) {
-              return _buildErrorBody(result.error.toString(), () => _loadData(),
+              return _buildErrorWidget(
+                result.error?.toString(),
+                () {
+                  _loadData();
+                },
               );
             }
 

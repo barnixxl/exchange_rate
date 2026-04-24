@@ -1,6 +1,6 @@
 part of 'home_screen.dart';
 
-Widget _buildErrorBody(String? error, void Function() onRetry) {
+Widget _buildErrorWidget(String? error, void Function() onRetryPressed) {
   return Center(
     child: Padding(
       padding: const EdgeInsets.all(16),
@@ -15,7 +15,9 @@ Widget _buildErrorBody(String? error, void Function() onRetry) {
             style: const TextStyle(fontSize: 16),
           ),
           const SizedBox(height: 16),
-          ElevatedButton(onPressed: onRetry, child: Text(strings.retry),
+          ElevatedButton(
+            onPressed: onRetryPressed,
+            child: Text(strings.retry),
           ),
         ],
       ),
