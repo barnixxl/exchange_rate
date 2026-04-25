@@ -31,7 +31,6 @@ class HomeController {
   });
 
   DateTime? _extractLastUpdateDate(CurrencyResult<List<RateData>> result) {
-    if (result.status == Status.notInitialized) return null;
     if (result.isError) return null;
     if (result.isLoading) return null;
     final data = result.data;

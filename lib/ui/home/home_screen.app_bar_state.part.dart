@@ -3,7 +3,7 @@ part of 'home_screen.dart';
 Widget _buildAppBarWidget({
   required DateTime? lastUpdateDate,
   required bool isLoading,
-  required VoidCallback onRefresh,
+  required void Function() onRetryPressed,
 }) {
   return AppBar(
     title: Text(
@@ -55,7 +55,7 @@ Widget _buildAppBarWidget({
             : const Icon(
                 Icons.refresh,
               ),
-        onPressed: isLoading ? null : onRefresh,
+        onPressed: isLoading ? null : onRetryPressed,
       ),
     ],
   );

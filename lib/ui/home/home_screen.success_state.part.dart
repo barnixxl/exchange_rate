@@ -1,6 +1,9 @@
 part of 'home_screen.dart';
 
-Widget _buildSuccessWidget(List<RateData> currencies) {
+Widget _buildSuccessWidget({
+  required List<RateData> currencies,
+  required void Function(RateData) onCurrencyPressed,
+}) {
   return ListView.builder(
     padding: const EdgeInsets.all(8),
     itemCount: currencies.length,
@@ -40,18 +43,8 @@ Widget _buildSuccessWidget(List<RateData> currencies) {
             size: 16,
           ),
           onTap: () {
-            Navigator.pushNamed(
-              context,
-              '/detail',
-              arguments: CurrencyArgument(
-                code: currency.code,
-                name: currency.name,
-                rate: currency.rate,
-                date: currency.date,
-                scale: currency.scale,
-                baseCurrencyCode: strings.base_cur_code,
-                baseCurrencyName: strings.base_currency_name,
-              ),
+            onCurrencyPressed(
+              currency,
             );
           },
         ),

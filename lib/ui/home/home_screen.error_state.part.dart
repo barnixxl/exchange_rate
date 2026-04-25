@@ -1,9 +1,9 @@
 part of 'home_screen.dart';
 
-Widget _buildErrorWidget(
-  String? error,
-  void Function() onRetryPressed,
-) {
+Widget _buildErrorWidget({
+  required CurrencyError? error,
+  required void Function() onRetryPressed,
+}) {
   return Center(
     child: Padding(
       padding: const EdgeInsets.all(16),
@@ -37,6 +37,5 @@ Widget _buildErrorWidget(
         ],
       ),
     ),
-
   );
 }

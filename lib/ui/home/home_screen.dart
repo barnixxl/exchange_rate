@@ -6,6 +6,7 @@ import 'home_controller.dart';
 import '../../app_router.dart';
 import '../../utils/date_formatter.dart';
 import '../../models/rate_data.dart';
+import '../../models/currency_error.dart';
 
 part 'home_screen.error_state.part.dart';
 
@@ -64,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
             return _buildAppBarWidget(
               lastUpdateDate: _homeController.lastUpdateDate.value,
               isLoading: _homeController.isLoading.value,
-              onRefresh: _loadData,
+              onRetryPressed: _loadData,
             );
           },
         ),
@@ -79,14 +80,29 @@ class _HomeScreenState extends State<HomeScreen> {
             }
             if (result.isError) {
               return _buildErrorWidget(
-                result.error?.toString(),
-                () {
-                  _loadData();
-                },
+                error: result.error,
+                onRetryPressed: _loadData,
               );
             }
             return _buildSuccessWidget(
-              result.data ?? [],
+              currencies: result.data ?? [],
+              onCurrencyPressed: (
+                currency,
+              ) {
+                Navigator.pushNamed(
+                  context,
+                  '/detail',
+                  arguments: CurrencyArgument(
+                    code: currency.code,
+                    name: currency.name,
+                    rate: currency.rate,
+                    date: currency.date,
+                    scale: currency.scale,
+                    baseCurrencyCode: strings.base_cur_code,
+                    baseCurrencyName: strings.base_currency_name,
+                  ),
+                );
+              },
             );
           },
         ),
