@@ -18,7 +18,9 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeLocale();
 
-  strings = lookupAppLocalizations(const Locale('ru'));
+  strings = lookupAppLocalizations(
+      const Locale('ru'),
+  );
 
   final repository = CurrencyRepository(
     CurrencyApi(CurrencyRateNetwork()),
@@ -28,7 +30,10 @@ Future<void> main() async {
         value: repository,
         child: Provider<HomeController>(
           create: (context) => HomeController(
-            Provider.of<CurrencyRepository>(context, listen: false),
+            Provider.of<CurrencyRepository>(
+                context,
+                listen: false,
+            ),
           ),
           child: const MyApp(),
         )),

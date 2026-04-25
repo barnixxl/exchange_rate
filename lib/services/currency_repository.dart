@@ -3,7 +3,13 @@ import '../models/currency_result.dart';
 import '../network/currency/currency_api.dart';
 
 class CurrencyRepository {
-  static const _targetCurrencies = ["USD", "EUR", "CNY", "PLN", "UAH"];
+  static const _targetCurrencies = [
+    "USD",
+    "EUR",
+    "CNY",
+    "PLN",
+    "UAH",
+  ];
 
   final CurrencyApi _api;
 
@@ -14,7 +20,11 @@ class CurrencyRepository {
     if (result.isError) {
       return result;
     }
-    return CurrencyResult.success(_filterAndSortRates(result.data));
+    return CurrencyResult.success(
+      _filterAndSortRates(
+        result.data,
+      ),
+    );
   }
 
   List<RateData> _filterAndSortRates(List<RateData>? rates) {

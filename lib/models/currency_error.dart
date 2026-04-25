@@ -21,34 +21,54 @@ class CurrencyError {
 
   factory CurrencyError.fromException(Object e) {
     if (e is CurrencyError) return e;
-    return CurrencyError(errorCode: unknownCode, message: e.toString());
+    return CurrencyError(
+      errorCode: unknownCode,
+      message: e.toString(),
+    );
   }
 
-  factory CurrencyError.timeout() =>
-      CurrencyError(errorCode: timeoutCode, message: strings.error_timeout);
+  factory CurrencyError.timeout() => CurrencyError(
+        errorCode: timeoutCode,
+        message: strings.error_timeout,
+      );
 
   factory CurrencyError.noInternet() => CurrencyError(
-      errorCode: noInternetCode, message: strings.error_no_internet);
+        errorCode: noInternetCode,
+        message: strings.error_no_internet,
+      );
 
   factory CurrencyError.serverError(int statusCode) => CurrencyError(
-      errorCode: serverCode, message: strings.error_server(statusCode));
+        errorCode: serverCode,
+        message: strings.error_server(statusCode),
+      );
 
   factory CurrencyError.badResponse(int statusCode) => CurrencyError(
-      errorCode: badResponseCode,
-      message: strings.error_bad_response(statusCode));
+        errorCode: badResponseCode,
+        message: strings.error_bad_response(statusCode),
+      );
 
-  factory CurrencyError.cancelled() =>
-      CurrencyError(errorCode: cancelledCode, message: strings.error_cancelled);
+  factory CurrencyError.cancelled() => CurrencyError(
+        errorCode: cancelledCode,
+        message: strings.error_cancelled,
+      );
 
-  factory CurrencyError.unknown() =>
-      CurrencyError(errorCode: unknownCode, message: strings.error_unknown);
+  factory CurrencyError.unknown() => CurrencyError(
+        errorCode: unknownCode,
+        message: strings.error_unknown,
+      );
 
-  factory CurrencyError.parsing() =>
-      CurrencyError(errorCode: parsingCode, message: strings.error_parsing);
+  factory CurrencyError.parsing() => CurrencyError(
+        errorCode: parsingCode,
+        message: strings.error_parsing,
+      );
 
-  factory CurrencyError.noData() =>
-      CurrencyError(errorCode: noDataCode, message: strings.error_no_data);
+  factory CurrencyError.noData() => CurrencyError(
+        errorCode: noDataCode,
+        message: strings.error_no_data,
+      );
 
   factory CurrencyError.loadFailed() => CurrencyError(
-      errorCode: loadFailedCode, message: strings.error_load_failed);
+        errorCode: loadFailedCode,
+        message: strings.error_load_failed,
+      );
 }

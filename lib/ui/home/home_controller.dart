@@ -4,14 +4,20 @@ import '../../models/currency_result.dart';
 import '../../services/currency_repository.dart';
 
 class HomeController {
-  HomeController(this._repository);
+  HomeController(
+    this._repository,
+  );
 
   final CurrencyRepository _repository;
 
   late final Observable<CurrencyResult<List<RateData>>> currencyResult =
-      Observable(CurrencyResult.notInitialized());
+      Observable(
+    CurrencyResult.notInitialized(),
+  );
 
-  List<RateData> _extractCurrencies(CurrencyResult<List<RateData>> result) {
+  List<RateData> _extractCurrencies(
+    CurrencyResult<List<RateData>> result,
+  ) {
     if (result.isSuccess) {
       return result.data ?? [];
     }

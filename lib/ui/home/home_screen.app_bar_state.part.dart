@@ -66,3 +66,4 @@ Widget _buildAppBarWidget(HomeController controller) {
     ],
   );
 }
+

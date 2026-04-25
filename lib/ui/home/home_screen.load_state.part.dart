@@ -16,3 +16,4 @@ Widget _buildLoadingWidget() {
     ),
   );
 }
+

@@ -12,16 +12,19 @@ class CurrencyResult<T> {
         error = null,
         status = Status.notInitialized;
 
-  CurrencyResult.loading({this.data})
-      : error = null,
+  CurrencyResult.loading({
+    this.data,
+  })  : error = null,
         status = Status.loading;
 
-  CurrencyResult.success(this.data)
-      : error = null,
+  CurrencyResult.success(
+    this.data,
+  )   : error = null,
         status = Status.success;
 
-  CurrencyResult.failure(this.error)
-      : data = null,
+  CurrencyResult.failure(
+    this.error,
+  )   : data = null,
         status = Status.failure;
 
   bool get isSuccess => status == Status.success;

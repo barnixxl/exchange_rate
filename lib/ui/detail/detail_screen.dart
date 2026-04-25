@@ -18,7 +18,7 @@ class DetailScreen extends StatefulWidget {
 
 class _DetailScreenState extends State<DetailScreen> {
   late final DetailController controller;
-  String _inputByn = '';
+  String inputBaseCurrency = '';
   String _inputCurrency = '';
   String _convertedAmount = '0';
   String _convertedAmountRevert = '0';
@@ -106,13 +106,13 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
                 onChanged: (value) {
                   setState(() {
-                    _inputByn = value;
+                    inputBaseCurrency = value;
                     final amount = double.tryParse(value) ?? 0.0;
                     _convertedAmount = controller.calculate(amount);
                   });
                 },
               ),
-              if (_inputByn.isNotEmpty)
+              if (inputBaseCurrency.isNotEmpty)
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0),
                   child: Text(
