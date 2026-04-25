@@ -45,6 +45,16 @@ class HomeController {
     );
   });
 
+  bool _extractIsLoading(CurrencyResult<List<RateData>> result) {
+    return result.isLoading;
+  }
+
+  late final Computed<bool> isLoading = Computed(() {
+    return _extractIsLoading(
+      currencyResult.value,
+    );
+  });
+
   Future<void> loadCurrencies() async {
     runInAction(() {
       currencyResult.value = CurrencyResult.loading();

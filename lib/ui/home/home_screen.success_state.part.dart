@@ -1,7 +1,6 @@
 part of 'home_screen.dart';
 
-Widget _buildSuccessWidget(HomeController controller) {
-  final currencies = controller.currencyResult.value.data ?? [];
+Widget _buildSuccessWidget(List<RateData> currencies) {
   return ListView.builder(
     padding: const EdgeInsets.all(8),
     itemCount: currencies.length,
@@ -60,4 +59,3 @@ Widget _buildSuccessWidget(HomeController controller) {
     },
   );
 }
-

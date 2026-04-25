@@ -5,6 +5,7 @@ import 'package:currency_converter/main.dart';
 import 'home_controller.dart';
 import '../../app_router.dart';
 import '../../utils/date_formatter.dart';
+import '../../models/rate_data.dart';
 
 part 'home_screen.error_state.part.dart';
 
@@ -58,7 +59,15 @@ class _HomeScreenState extends State<HomeScreen> {
         preferredSize: const Size.fromHeight(
           kToolbarHeight + 40,
         ),
-        child: _buildAppBarWidget(_homeController),
+        child: Observer(
+          builder: (_) {
+            return _buildAppBarWidget(
+              lastUpdateDate: _homeController.lastUpdateDate.value,
+              isLoading: _homeController.isLoading.value,
+              onRefresh: _loadData,
+            );
+          },
+        ),
       ),
       body: RefreshIndicator(
         onRefresh: _loadData,
@@ -76,7 +85,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               );
             }
-            return _buildSuccessWidget(_homeController);
+            return _buildSuccessWidget(
+              result.data ?? [],
+            );
           },
         ),
       ),
