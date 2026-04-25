@@ -19,7 +19,9 @@ class HomeController {
   }
 
   late final Computed<List<RateData>> currencies = Computed(() {
-    return _extractCurrencies(currencyResult.value);
+    return _extractCurrencies(
+      currencyResult.value,
+    );
   });
 
   DateTime? _extractLastUpdateDate(CurrencyResult<List<RateData>> result) {
@@ -32,7 +34,9 @@ class HomeController {
   }
 
   late final Computed<DateTime?> lastUpdateDate = Computed(() {
-    return _extractLastUpdateDate(currencyResult.value);
+    return _extractLastUpdateDate(
+      currencyResult.value,
+    );
   });
 
   Future<void> loadCurrencies() async {
