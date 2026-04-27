@@ -72,39 +72,50 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: RefreshIndicator(
         onRefresh: _loadData,
-        child: Observer(
-          builder: (_) {
-            final result = _homeController.currencyResult.value;
-            if (result.isLoading) {
-              return _buildLoadingWidget();
-            }
-            if (result.isError) {
-              return _buildErrorWidget(
-                error: result.error,
-                onRetryPressed: _loadData,
-              );
-            }
-            return _buildSuccessWidget(
-              currencies: result.data ?? [],
-              onCurrencyPressed: (
-                currency,
-              ) {
-                Navigator.pushNamed(
-                  context,
-                  '/detail',
-                  arguments: CurrencyArgument(
-                    code: currency.code,
-                    name: currency.name,
-                    rate: currency.rate,
-                    date: currency.date,
-                    scale: currency.scale,
-                    baseCurrencyCode: strings.base_cur_code,
-                    baseCurrencyName: strings.base_currency_name,
-                  ),
+        child: Stack(
+          children: [
+            Observer(
+              builder: (_) {
+                final result = _homeController.currencyResult.value;
+                if (!result.isLoading) return const SizedBox.shrink();
+                return _buildLoadingWidget();
+              },
+            ),
+            Observer(
+              builder: (_) {
+                final result = _homeController.currencyResult.value;
+                if (!result.isError) return const SizedBox.shrink();
+                return _buildErrorWidget(
+                  error: result.error,
+                  onRetryPressed: _loadData,
                 );
               },
-            );
-          },
+            ),
+            Observer(
+              builder: (_) {
+                final result = _homeController.currencyResult.value;
+                if (!result.isSuccess) return const SizedBox.shrink();
+                return _buildSuccessWidget(
+                  currencies: result.data ?? [],
+                  onCurrencyPressed: (currency) {
+                    Navigator.pushNamed(
+                      context,
+                      '/detail',
+                      arguments: CurrencyArgument(
+                        code: currency.code,
+                        name: currency.name,
+                        rate: currency.rate,
+                        date: currency.date,
+                        scale: currency.scale,
+                        baseCurrencyCode: strings.base_cur_code,
+                        baseCurrencyName: strings.base_currency_name,
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
+          ],
         ),
       ),
     );
