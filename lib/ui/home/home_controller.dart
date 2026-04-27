@@ -15,6 +15,36 @@ class HomeController {
     CurrencyResult.notInitialized(),
   );
 
+  bool _extractIsLoading(CurrencyResult<List<RateData>> result) {
+    return result.isLoading;
+  }
+
+  late final Computed<bool> isLoading = Computed(() {
+    return _extractIsLoading(
+      currencyResult.value,
+    );
+  });
+
+  bool _extractHasError(CurrencyResult<List<RateData>> result) {
+    return result.isError;
+  }
+
+  late final Computed<bool> hasError = Computed(() {
+    return _extractHasError(
+      currencyResult.value,
+    );
+  });
+
+  bool _extractHasSuccess(CurrencyResult<List<RateData>> result) {
+    return result.isSuccess;
+  }
+
+  late final Computed<bool> hasSuccess = Computed(() {
+    return _extractHasSuccess(
+      currencyResult.value,
+    );
+  });
+
   List<RateData> _extractCurrencies(
     CurrencyResult<List<RateData>> result,
   ) {
@@ -40,16 +70,6 @@ class HomeController {
 
   late final Computed<DateTime?> lastUpdateDate = Computed(() {
     return _extractLastUpdateDate(
-      currencyResult.value,
-    );
-  });
-
-  bool _extractIsLoading(CurrencyResult<List<RateData>> result) {
-    return result.isLoading;
-  }
-
-  late final Computed<bool> isLoading = Computed(() {
-    return _extractIsLoading(
       currencyResult.value,
     );
   });

@@ -76,15 +76,18 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Observer(
               builder: (_) {
-                final result = _homeController.currencyResult.value;
-                if (!result.isLoading) return const SizedBox.shrink();
+                if (!_homeController.isLoading.value) {
+                  return const SizedBox.shrink();
+                }
                 return _buildLoadingWidget();
               },
             ),
             Observer(
               builder: (_) {
+                if (!_homeController.hasError.value) {
+                  return const SizedBox.shrink();
+                }
                 final result = _homeController.currencyResult.value;
-                if (!result.isError) return const SizedBox.shrink();
                 return _buildErrorWidget(
                   error: result.error,
                   onRetryPressed: _loadData,
@@ -93,8 +96,10 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Observer(
               builder: (_) {
+                if (!_homeController.hasSuccess.value) {
+                  return const SizedBox.shrink();
+                }
                 final result = _homeController.currencyResult.value;
-                if (!result.isSuccess) return const SizedBox.shrink();
                 return _buildSuccessWidget(
                   currencies: result.data ?? [],
                   onCurrencyPressed: (currency) {
