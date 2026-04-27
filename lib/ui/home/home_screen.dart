@@ -1,19 +1,17 @@
+import 'package:currency_converter/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
-import 'package:currency_converter/main.dart';
-import 'home_controller.dart';
+
 import '../../app_router.dart';
-import '../../utils/date_formatter.dart';
-import '../../models/rate_data.dart';
 import '../../models/currency_error.dart';
+import '../../models/rate_data.dart';
+import '../../utils/date_formatter.dart';
+import 'home_controller.dart';
 
 part 'home_screen.error_state.part.dart';
-
 part 'home_screen.app_bar_state.part.dart';
-
 part 'home_screen.load_state.part.dart';
-
 part 'home_screen.success_state.part.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -26,25 +24,33 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late final HomeController _homeController;
+  HomeController? _homeController;
 
   @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    if (_homeController == null) {
       _homeController = context.read<HomeController>();
       _loadData();
-    });
+    }
   }
 
   Future<void> _loadData() async {
-    await _homeController.loadCurrencies();
+    await _homeController?.loadCurrencies();
   }
 
   @override
   Widget build(
-    BuildContext context,
-  ) {
+      BuildContext context,
+      ) {
+    final homeController = _homeController;
+    if (homeController == null) {
+      return const Scaffold(
+        body: SizedBox.shrink(),
+      );
+    }
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(
@@ -53,8 +59,8 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Observer(
           builder: (_) {
             return _buildAppBarWidget(
-              lastUpdateDate: _homeController.lastUpdateDate.value,
-              isLoading: _homeController.isLoading.value,
+              lastUpdateDate: homeController.lastUpdateDate.value,
+              isLoading: homeController.isLoading.value,
               onRetryPressed: _loadData,
             );
           },
@@ -66,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Observer(
               builder: (_) {
-                if (!_homeController.isLoading.value) {
+                if (!homeController.isLoading.value) {
                   return const SizedBox.shrink();
                 }
                 return _buildLoadingWidget();
@@ -74,10 +80,10 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Observer(
               builder: (_) {
-                if (!_homeController.hasError.value) {
+                if (!homeController.hasError.value) {
                   return const SizedBox.shrink();
                 }
-                final result = _homeController.currencyResult.value;
+                final result = homeController.currencyResult.value;
                 return _buildErrorWidget(
                   error: result.error,
                   onRetryPressed: _loadData,
@@ -86,10 +92,10 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Observer(
               builder: (_) {
-                if (!_homeController.hasSuccess.value) {
+                if (!homeController.hasSuccess.value) {
                   return const SizedBox.shrink();
                 }
-                final result = _homeController.currencyResult.value;
+                final result = homeController.currencyResult.value;
                 return _buildSuccessWidget(
                   currencies: result.data ?? [],
                   onCurrencyPressed: (currency) {
