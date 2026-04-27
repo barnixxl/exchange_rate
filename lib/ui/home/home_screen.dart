@@ -27,24 +27,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late final HomeController _homeController;
-  bool _isInitialized = false;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (!_isInitialized) {
-      _isInitialized = true;
-      _homeController = Provider.of<HomeController>(
-        context,
-        listen: false,
-      );
-      _loadData();
-    }
-  }
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _homeController = context.read<HomeController>();
+      _loadData();
+    });
   }
 
   Future<void> _loadData() async {
