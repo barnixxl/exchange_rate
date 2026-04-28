@@ -1,12 +1,12 @@
 import 'package:currency_converter/UI/home/home_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 import 'app_router.dart';
-import 'services/currency_repository.dart';
 import 'network/currency/currency_api.dart';
 import 'network/currency_rate_network.dart';
-import 'package:intl/date_symbol_data_local.dart';
 import 'resources/strings/app_localizations.dart';
+import 'services/currency_repository.dart';
 
 late final AppLocalizations strings;
 
@@ -19,24 +19,22 @@ Future<void> main() async {
   await initializeLocale();
 
   strings = lookupAppLocalizations(
-      const Locale('ru'),
+    const Locale('ru'),
   );
 
-  final repository = CurrencyRepository(
-    CurrencyApi(CurrencyRateNetwork()),
-  );
+  CurrencyRateNetwork.register();
+  CurrencyApi.register();
+  CurrencyRepository.register();
   runApp(
     Provider<CurrencyRepository>.value(
-        value: repository,
-        child: Provider<HomeController>(
-          create: (context) => HomeController(
-            Provider.of<CurrencyRepository>(
-                context,
-                listen: false,
-            ),
-          ),
-          child: const MyApp(),
-        )),
+      value: CurrencyRepository.getInstance(),
+      child: Provider<HomeController>(
+        create: (context) => HomeController(
+          CurrencyRepository.getInstance(),
+        ),
+        child: const MyApp(),
+      ),
+    ),
   );
 }
 

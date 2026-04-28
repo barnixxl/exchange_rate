@@ -1,8 +1,10 @@
 import 'package:currency_converter/models/currency_result.dart';
 import 'package:dio/dio.dart';
+import 'package:get_it/get_it.dart';
 import '../models/currency_error.dart';
 
 class CurrencyRateNetwork {
+  static final GetIt _getIt = GetIt.instance;
   static const String _baseUrl = 'https://api.nbrb.by/exrates/';
   late final Dio _dio;
 
@@ -30,6 +32,19 @@ class CurrencyRateNetwork {
         error: true,
       ),
     );
+  }
+
+  static void register() {
+
+    if (!_getIt.isRegistered<CurrencyRateNetwork>()) {
+      _getIt.registerLazySingleton<CurrencyRateNetwork>(
+        () => CurrencyRateNetwork(),
+      );
+    }
+  }
+
+  static CurrencyRateNetwork getInstance() {
+    return _getIt<CurrencyRateNetwork>();
   }
 
   Future<CurrencyResult<T>> get<T>(

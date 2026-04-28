@@ -1,8 +1,10 @@
+import 'package:get_it/get_it.dart';
 import '../models/rate_data.dart';
 import '../models/currency_result.dart';
 import '../network/currency/currency_api.dart';
 
 class CurrencyRepository {
+  static final GetIt _getIt = GetIt.instance;
   static const _targetCurrencies = [
     "USD",
     "EUR",
@@ -14,6 +16,22 @@ class CurrencyRepository {
   final CurrencyApi _api;
 
   CurrencyRepository(this._api);
+
+  static void register() {
+    CurrencyApi.register();
+    if (!_getIt.isRegistered<CurrencyRepository>()) {
+      _getIt.registerLazySingleton<CurrencyRepository>(
+        () => CurrencyRepository(_getIt<CurrencyApi>()),
+      );
+    }
+  }
+
+  static CurrencyRepository getInstance() {
+    if (!_getIt.isRegistered<CurrencyRepository>()) {
+      register();
+    }
+    return _getIt<CurrencyRepository>();
+  }
 
   Future<CurrencyResult<List<RateData>>> fetchRates() async {
     final result = await _api.fetchRates();

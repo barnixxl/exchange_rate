@@ -13,17 +13,18 @@ dependencies:
     sdk: flutter
 
   provider: ^6.1.0
+  get_it: ^7.7.0
 
   # MobX для управления состоянием (MVVM)
-  mobx: ^2.3.0+1              # Основная библиотека MobX
-  flutter_mobx: ^2.2.0+1       # Интеграция с Flutter (Observer виджет)
+  mobx: ^2.3.0+1
+  flutter_mobx: ^2.2.0+1
 
   # Для HTTP запросов
-  dio: ^5.4.0                  # Продвинутый HTTP клиент
+  dio: ^5.4.0
 
   # Для работы с датами
-  intl: ^0.20.2                # Форматирование дат
-  json_annotation: ^4.9.0     # Для JSON сериализации
+  intl: ^0.20.2
+  json_annotation: ^4.9.0
 
 dev_dependencies:
   flutter_test:
