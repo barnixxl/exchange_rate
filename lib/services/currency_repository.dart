@@ -17,19 +17,13 @@ class CurrencyRepository {
 
   CurrencyRepository(this._api);
 
-  static void register() {
-    CurrencyApi.register();
-    if (!_getIt.isRegistered<CurrencyRepository>()) {
-      _getIt.registerLazySingleton<CurrencyRepository>(
-        () => CurrencyRepository(_getIt<CurrencyApi>()),
-      );
-    }
+  void register() {
+    _getIt.registerSingleton<CurrencyRepository>(
+      this,
+    );
   }
 
   static CurrencyRepository getInstance() {
-    if (!_getIt.isRegistered<CurrencyRepository>()) {
-      register();
-    }
     return _getIt<CurrencyRepository>();
   }
 

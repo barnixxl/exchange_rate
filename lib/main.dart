@@ -1,5 +1,6 @@
 import 'package:currency_converter/UI/home/home_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 import 'app_router.dart';
@@ -22,14 +23,24 @@ Future<void> main() async {
     const Locale('ru'),
   );
 
-  CurrencyRateNetwork.register();
-  CurrencyApi.register();
-  CurrencyRepository.register();
+  final currencyRateNetwork = CurrencyRateNetwork();
+  currencyRateNetwork.register();
+
+  final currencyApi = CurrencyApi(
+    CurrencyRateNetwork.getInstance(),
+  );
+  currencyApi.register();
+
+  final currencyRepository = CurrencyRepository(
+    CurrencyApi.getInstance(),
+  );
+  currencyRepository.register();
+
   runApp(
     Provider<CurrencyRepository>.value(
       value: CurrencyRepository.getInstance(),
       child: Provider<HomeController>(
-        create: (context) => HomeController(
+        create: (_) => HomeController(
           CurrencyRepository.getInstance(),
         ),
         child: const MyApp(),

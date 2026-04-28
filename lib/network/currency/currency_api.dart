@@ -11,19 +11,13 @@ class CurrencyApi {
 
   CurrencyApi(this._network);
 
-  static void register() {
-    CurrencyRateNetwork.register();
-    if (!_getIt.isRegistered<CurrencyApi>()) {
-      _getIt.registerLazySingleton<CurrencyApi>(
-        () => CurrencyApi(_getIt<CurrencyRateNetwork>()),
-      );
-    }
+  void register() {
+    _getIt.registerSingleton<CurrencyApi>(
+      this,
+    );
   }
 
   static CurrencyApi getInstance() {
-    if(_getIt.isRegistered<CurrencyApi>()){
-      register(); 
-    }
     return _getIt<CurrencyApi>();
   }
 

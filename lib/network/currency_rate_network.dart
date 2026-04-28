@@ -24,6 +24,7 @@ class CurrencyRateNetwork {
         },
       ),
     );
+
     _dio.interceptors.add(
       LogInterceptor(
         request: true,
@@ -34,13 +35,10 @@ class CurrencyRateNetwork {
     );
   }
 
-  static void register() {
-
-    if (!_getIt.isRegistered<CurrencyRateNetwork>()) {
-      _getIt.registerLazySingleton<CurrencyRateNetwork>(
-        () => CurrencyRateNetwork(),
-      );
-    }
+  void register() {
+    _getIt.registerSingleton<CurrencyRateNetwork>(
+      this,
+    );
   }
 
   static CurrencyRateNetwork getInstance() {
