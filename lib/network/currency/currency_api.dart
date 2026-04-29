@@ -4,19 +4,16 @@ import '../currency_rate_network.dart';
 import '../../models/currency_error.dart';
 import 'resp/rate_data_from_network.dart';
 import '../../models/currency_result.dart';
-import '../../repository/base_repository.dart';
 
-class CurrencyApi extends BaseRepository {
+class CurrencyApi {
   static final GetIt _getIt = GetIt.instance;
 
   late final CurrencyRateNetwork _network;
 
-  @override
   void register(GetIt getIt) {
     getIt.registerSingleton<CurrencyApi>(this);
   }
 
-  @override
   Future<void> initializeDependencies() async {
     _network = _getIt<CurrencyRateNetwork>();
   }

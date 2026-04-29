@@ -2,19 +2,16 @@ import 'package:currency_converter/models/currency_result.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import '../models/currency_error.dart';
-import '../repository/base_repository.dart';
 
-class CurrencyRateNetwork extends BaseRepository {
+class CurrencyRateNetwork {
   static final GetIt _getIt = GetIt.instance;
   static const String _baseUrl = 'https://api.nbrb.by/exrates/';
   late final Dio _dio;
 
-  @override
   void register(GetIt getIt) {
     getIt.registerSingleton<CurrencyRateNetwork>(this);
   }
 
-  @override
   Future<void> initializeDependencies() async {
     _dio = Dio(
       BaseOptions(
