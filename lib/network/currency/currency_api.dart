@@ -4,17 +4,21 @@ import '../currency_rate_network.dart';
 import '../../models/currency_error.dart';
 import 'resp/rate_data_from_network.dart';
 import '../../models/currency_result.dart';
+import '../../repository/base_repository.dart';
 
-class CurrencyApi {
+class CurrencyApi extends BaseRepository {
   static final GetIt _getIt = GetIt.instance;
-  final CurrencyRateNetwork _network;
 
-  CurrencyApi(this._network);
+  late final CurrencyRateNetwork _network;
 
-  void register() {
-    _getIt.registerSingleton<CurrencyApi>(
-      this,
-    );
+  @override
+  void register(GetIt getIt) {
+    getIt.registerSingleton<CurrencyApi>(this);
+  }
+
+  @override
+  Future<void> initializeDependencies() async {
+    _network = _getIt<CurrencyRateNetwork>();
   }
 
   static CurrencyApi getInstance() {
@@ -30,7 +34,7 @@ class CurrencyApi {
             .map((e) => RateDataFromNetwork.fromJson(e as Map<String, dynamic>))
             .toList();
         final rates =
-            networkRates.map((e) => RateData.fromNetworkModel(e)).toList();
+        networkRates.map((e) => RateData.fromNetworkModel(e)).toList();
         return CurrencyResult.success(rates);
       } else {
         return CurrencyResult.failure(result.error);

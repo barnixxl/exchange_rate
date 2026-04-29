@@ -4,11 +4,7 @@ import '../../models/currency_result.dart';
 import '../../services/currency_repository.dart';
 
 class HomeController {
-  HomeController(
-    this._repository,
-  );
-
-  final CurrencyRepository _repository;
+  final CurrencyRepository _repository = CurrencyRepository.getInstance();
 
   late final Observable<CurrencyResult<List<RateData>>> currencyResult =
       Observable(

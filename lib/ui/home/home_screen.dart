@@ -1,7 +1,6 @@
 import 'package:currency_converter/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:provider/provider.dart';
 
 import '../../app_router.dart';
 import '../../models/currency_error.dart';
@@ -10,8 +9,11 @@ import '../../utils/date_formatter.dart';
 import 'home_controller.dart';
 
 part 'home_screen.error_state.part.dart';
+
 part 'home_screen.app_bar_state.part.dart';
+
 part 'home_screen.load_state.part.dart';
+
 part 'home_screen.success_state.part.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -24,32 +26,23 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  HomeController? _homeController;
+  final HomeController _homeController = HomeController();
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    if (_homeController == null) {
-      _homeController = context.read<HomeController>();
-      _loadData();
-    }
+  void initState() {
+    super.initState();
+    _loadData();
   }
 
   Future<void> _loadData() async {
-    await _homeController?.loadCurrencies();
+    await _homeController.loadCurrencies();
   }
 
   @override
   Widget build(
-      BuildContext context,
-      ) {
+    BuildContext context,
+  ) {
     final homeController = _homeController;
-    if (homeController == null) {
-      return const Scaffold(
-        body: SizedBox.shrink(),
-      );
-    }
 
     return Scaffold(
       appBar: PreferredSize(

@@ -2,8 +2,9 @@ import 'package:get_it/get_it.dart';
 import '../models/rate_data.dart';
 import '../models/currency_result.dart';
 import '../network/currency/currency_api.dart';
+import '../repository/base_repository.dart';
 
-class CurrencyRepository {
+class CurrencyRepository extends BaseRepository {
   static final GetIt _getIt = GetIt.instance;
   static const _targetCurrencies = [
     "USD",
@@ -13,14 +14,16 @@ class CurrencyRepository {
     "UAH",
   ];
 
-  final CurrencyApi _api;
+  late final CurrencyApi _api;
 
-  CurrencyRepository(this._api);
+  @override
+  void register(GetIt getIt) {
+    getIt.registerSingleton<CurrencyRepository>(this);
+  }
 
-  void register() {
-    _getIt.registerSingleton<CurrencyRepository>(
-      this,
-    );
+  @override
+  Future<void> initializeDependencies() async {
+    _api = _getIt<CurrencyApi>();
   }
 
   static CurrencyRepository getInstance() {
@@ -33,16 +36,14 @@ class CurrencyRepository {
       return result;
     }
     return CurrencyResult.success(
-      _filterAndSortRates(
-        result.data,
-      ),
+      _filterAndSortRates(result.data),
     );
   }
 
   List<RateData> _filterAndSortRates(List<RateData>? rates) {
     if (rates != null) {
       final filtered =
-          rates.where((r) => _targetCurrencies.contains(r.code)).toList();
+      rates.where((r) => _targetCurrencies.contains(r.code)).toList();
       filtered.sort((a, b) {
         final indexA = _targetCurrencies.indexOf(a.code);
         final indexB = _targetCurrencies.indexOf(b.code);
