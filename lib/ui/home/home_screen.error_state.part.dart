@@ -19,7 +19,7 @@ Widget _buildErrorWidget({
             height: 16,
           ),
           Text(
-            error?.toString() ?? strings.error,
+            error?.message ?? strings.error,
             textAlign: TextAlign.center,
             style: const TextStyle(
               fontSize: 16,
