@@ -19,23 +19,21 @@ class HomeController {
 
   List<RateData> get currencies {
     final result = currencyResult.value;
-    if (!result.isSuccess) return [];
     return result.data ?? [];
   }
 
   DateTime? get lastUpdateDate {
     final data = currencies;
-    if (data.isEmpty) return null;
     return data.first.date;
   }
 
   Future<void> loadCurrencies() async {
-    runInAction(() {
-      currencyResult.value = CurrencyResult.loading();
-    });
-
+    _updateCurrencyResult(CurrencyResult.loading());
     final result = await _repository.fetchRates();
+    _updateCurrencyResult(result);
+  }
 
+  void _updateCurrencyResult(CurrencyResult<List<RateData>> result) {
     runInAction(() {
       currencyResult.value = result;
     });

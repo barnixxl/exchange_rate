@@ -33,11 +33,15 @@ class _DetailScreenState extends State<DetailScreen> {
       date: widget.currency.date,
       scale: widget.currency.scale,
     );
-    controller = DetailController(currencyModel);
+    controller = DetailController(
+      currencyModel,
+    );
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext context,
+  ) {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -65,7 +69,9 @@ class _DetailScreenState extends State<DetailScreen> {
                           color: Colors.blue,
                         ),
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(
+                        height: 8,
+                      ),
                       Text(
                         controller.name,
                         style: const TextStyle(
@@ -73,7 +79,9 @@ class _DetailScreenState extends State<DetailScreen> {
                           color: Colors.grey,
                         ),
                       ),
-                      const Divider(height: 32),
+                      const Divider(
+                        height: 32,
+                      ),
                       _buildInfoRow(
                         strings.exchange_rate,
                         strings.common_scale_equals_rate_byn(
@@ -82,12 +90,16 @@ class _DetailScreenState extends State<DetailScreen> {
                           controller.rate.toStringAsFixed(4),
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(
+                        height: 16,
+                      ),
                       _buildInfoRow(
                         strings.base_currency,
                         widget.currency.baseCurrencyName,
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(
+                        height: 16,
+                      ),
                       _buildInfoRow(
                         strings.update_date,
                         controller.formattedDate ?? strings.common_absent_date,
@@ -96,25 +108,32 @@ class _DetailScreenState extends State<DetailScreen> {
                   ),
                 ),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(
+                height: 24,
+              ),
               TextField(
                 keyboardType:
                     const TextInputType.numberWithOptions(decimal: true),
                 decoration: InputDecoration(
-                  labelText: strings.amount_in(widget.currency.baseCurrencyCode),
+                  labelText:
+                      strings.amount_in(widget.currency.baseCurrencyCode),
                   border: const OutlineInputBorder(),
                 ),
                 onChanged: (value) {
                   setState(() {
                     inputBaseCurrency = value;
                     final amount = double.tryParse(value) ?? 0.0;
-                    _convertedAmount = controller.calculate(amount);
+                    _convertedAmount = controller.calculate(
+                      amount,
+                    );
                   });
                 },
               ),
               if (inputBaseCurrency.isNotEmpty)
                 Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
+                  padding: const EdgeInsets.only(
+                    top: 8.0,
+                  ),
                   child: Text(
                     strings.converted_result(
                       _convertedAmount,
@@ -127,10 +146,13 @@ class _DetailScreenState extends State<DetailScreen> {
                     ),
                   ),
                 ),
-              const SizedBox(height: 24),
+              const SizedBox(
+                height: 24,
+              ),
               TextField(
-                keyboardType:
-                    const TextInputType.numberWithOptions(decimal: true),
+                keyboardType: const TextInputType.numberWithOptions(
+                  decimal: true,
+                ),
                 decoration: InputDecoration(
                   labelText: strings.amount_in(widget.currency.code),
                   border: const OutlineInputBorder(),
@@ -146,7 +168,9 @@ class _DetailScreenState extends State<DetailScreen> {
               ),
               if (_inputCurrency.isNotEmpty)
                 Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
+                  padding: const EdgeInsets.only(
+                    top: 8.0,
+                  ),
                   child: Text(
                     strings.converted_result_reverse(
                       _convertedAmountRevert,
@@ -158,7 +182,9 @@ class _DetailScreenState extends State<DetailScreen> {
                     ),
                   ),
                 ),
-              const SizedBox(height: 24),
+              const SizedBox(
+                height: 24,
+              ),
             ],
           ),
         ),
@@ -166,7 +192,10 @@ class _DetailScreenState extends State<DetailScreen> {
     );
   }
 
-  Widget _buildInfoRow(String label, String value) {
+  Widget _buildInfoRow(
+    String label,
+    String value,
+  ) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
