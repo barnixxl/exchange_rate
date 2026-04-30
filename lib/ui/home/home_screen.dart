@@ -40,8 +40,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(
-    BuildContext context,
-  ) {
+      BuildContext context,
+      ) {
     final homeController = _homeController;
 
     return Scaffold(
@@ -52,8 +52,8 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Observer(
           builder: (_) {
             return _buildAppBarWidget(
-              lastUpdateDate: homeController.lastUpdateDate.value,
-              isLoading: homeController.isLoading.value,
+              lastUpdateDate: homeController.lastUpdateDate,
+              isLoading: homeController.isLoading,
               onRetryPressed: _loadData,
             );
           },
@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Observer(
               builder: (_) {
-                if (!homeController.isLoading.value) {
+                if (!homeController.isLoading) {
                   return const SizedBox.shrink();
                 }
                 return _buildLoadingWidget();
@@ -73,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Observer(
               builder: (_) {
-                if (!homeController.hasError.value) {
+                if (!homeController.hasError) {
                   return const SizedBox.shrink();
                 }
                 final result = homeController.currencyResult.value;
@@ -85,12 +85,11 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Observer(
               builder: (_) {
-                if (!homeController.hasSuccess.value) {
+                if (!homeController.hasSuccess) {
                   return const SizedBox.shrink();
                 }
-                final result = homeController.currencyResult.value;
                 return _buildSuccessWidget(
-                  currencies: result.data ?? [],
+                  currencies: homeController.currencies,
                   onCurrencyPressed: (currency) {
                     Navigator.pushNamed(
                       context,
