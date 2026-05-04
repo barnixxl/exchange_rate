@@ -1,18 +1,8 @@
-import 'package:currency_converter/main.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-
+import 'package:currency_converter/main.dart';
 import '../../app_router.dart';
-import '../../models/rate_data.dart';
 import 'detail_controller.dart';
-
-part 'detail_screen.base_converter_state.part.dart';
-
-part 'detail_screen.header_state.part.dart';
-
-part 'detail_screen.info_row.part.dart';
-
-part 'detail_screen.reverse_converter_state.part.dart';
+import '../../models/rate_data.dart';
 
 class DetailScreen extends StatefulWidget {
   final CurrencyArgument currency;
@@ -27,12 +17,15 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
-  late final DetailController _controller;
+  late final DetailController controller;
+  String inputBaseCurrency = '';
+  String _inputCurrency = '';
+  String _convertedAmount = '0';
+  String _convertedAmountRevert = '0';
 
   @override
   void initState() {
     super.initState();
-
     final currencyModel = RateData(
       code: widget.currency.code,
       name: widget.currency.name,
@@ -40,25 +33,16 @@ class _DetailScreenState extends State<DetailScreen> {
       date: widget.currency.date,
       scale: widget.currency.scale,
     );
-
-    _controller = DetailController(
-      currencyModel,
-    );
+    controller = DetailController(currencyModel);
   }
 
   @override
-  Widget build(
-    BuildContext context,
-  ) {
-    final detailController = _controller;
-
+  Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
-            detailController.code,
-          ),
+          title: Text(controller.code),
           backgroundColor: Colors.blue,
           foregroundColor: Colors.white,
         ),
@@ -67,57 +51,145 @@ class _DetailScreenState extends State<DetailScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Observer(
-                builder: (_) {
-                  return _buildHeaderWidget(
-                    code: detailController.code,
-                    name: detailController.name,
-                    exchangeRateText: strings.common_scale_equals_rate_byn(
-                      detailController.scale,
-                      detailController.code,
-                      detailController.rate.toStringAsFixed(4),
+              Card(
+                elevation: 4,
+                child: Padding(
+                  padding: const EdgeInsets.all(24),
+                  child: Column(
+                    children: [
+                      Text(
+                        controller.code,
+                        style: const TextStyle(
+                          fontSize: 48,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        controller.name,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          color: Colors.grey,
+                        ),
+                      ),
+                      const Divider(height: 32),
+                      _buildInfoRow(
+                        strings.exchange_rate,
+                        strings.common_scale_equals_rate_byn(
+                          controller.scale,
+                          controller.code,
+                          controller.rate.toStringAsFixed(4),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      _buildInfoRow(
+                        strings.base_currency,
+                        widget.currency.baseCurrencyName,
+                      ),
+                      const SizedBox(height: 16),
+                      _buildInfoRow(
+                        strings.update_date,
+                        controller.formattedDate ?? strings.common_absent_date,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 24),
+              TextField(
+                keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
+                decoration: InputDecoration(
+                  labelText: strings.amount_in(widget.currency.baseCurrencyCode),
+                  border: const OutlineInputBorder(),
+                ),
+                onChanged: (value) {
+                  setState(() {
+                    inputBaseCurrency = value;
+                    final amount = double.tryParse(value) ?? 0.0;
+                    _convertedAmount = controller.calculate(amount);
+                  });
+                },
+              ),
+              if (inputBaseCurrency.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Text(
+                    strings.converted_result(
+                      _convertedAmount,
+                      widget.currency.name,
+                      widget.currency.code,
                     ),
-                    baseCurrencyName: widget.currency.baseCurrencyName,
-                    updatedDateText: detailController.formattedDate ??
-                        strings.common_absent_date,
-                  );
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              const SizedBox(height: 24),
+              TextField(
+                keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
+                decoration: InputDecoration(
+                  labelText: strings.amount_in(widget.currency.code),
+                  border: const OutlineInputBorder(),
+                ),
+                onChanged: (value) {
+                  setState(() {
+                    _inputCurrency = value;
+                    final amount = double.tryParse(value) ?? 0.0;
+                    _convertedAmountRevert =
+                        controller.calculateReverse(amount);
+                  });
                 },
               ),
-              const SizedBox(
-                height: 24,
-              ),
-              Observer(
-                builder: (_) {
-                  return _buildBaseConverterWidget(
-                    baseCurrencyCode: widget.currency.baseCurrencyCode,
-                    resultCurrencyCode: detailController.code,
-                    resultCurrencyName: detailController.name,
-                    hasResult: detailController.hasBaseAmount,
-                    convertedResult: detailController.convertedAmount,
-                    onBaseAmountChanged: detailController.onBaseAmountChanged,
-                  );
-                },
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              Observer(
-                builder: (_) {
-                  return _buildReverseConverterWidget(
-                    sourceCurrencyCode: detailController.code,
-                    resultCurrencyName: widget.currency.baseCurrencyName,
-                    hasResult: detailController.hasCurrencyAmount,
-                    convertedResult: detailController.convertedAmountReverse,
-                    onCurrencyAmountChanged:
-                        detailController.onCurrencyAmountChanged,
-                  );
-                },
-              ),
+              if (_inputCurrency.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Text(
+                    strings.converted_result_reverse(
+                      _convertedAmountRevert,
+                      widget.currency.baseCurrencyName,
+                    ),
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
               const SizedBox(height: 24),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildInfoRow(String label, String value) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Flexible(
+          child: Text(
+            label,
+            style: const TextStyle(
+              fontSize: 16,
+              color: Colors.grey,
+            ),
+          ),
+        ),
+        Flexible(
+          child: Text(
+            value,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+            ),
+            textAlign: TextAlign.right,
+          ),
+        ),
+      ],
     );
   }
 }

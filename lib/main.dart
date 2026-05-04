@@ -11,10 +11,7 @@ import 'services/currency_repository.dart';
 late final AppLocalizations strings;
 
 Future<void> initializeLocale() async {
-  await initializeDateFormatting(
-    'ru',
-    null,
-  );
+  await initializeDateFormatting('ru', null);
 }
 
 Future<void> main() async {
@@ -22,9 +19,7 @@ Future<void> main() async {
   await initializeLocale();
 
   strings = lookupAppLocalizations(
-    const Locale(
-      'ru',
-    ),
+    const Locale('ru'),
   );
 
   final getIt = GetIt.instance;
@@ -47,16 +42,12 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({
-    super.key,
-  });
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      locale: const Locale(
-        'ru',
-      ),
+      locale: const Locale('ru'),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData(

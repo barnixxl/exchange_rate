@@ -1,11 +1,6 @@
 import 'package:currency_converter/models/currency_error.dart';
 
-enum Status {
-  notInitialized,
-  loading,
-  success,
-  failure,
-}
+enum Status { notInitialized, loading, success, failure }
 
 class CurrencyResult<T> {
   final T? data;

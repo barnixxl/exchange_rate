@@ -17,12 +17,8 @@ class CurrencyRepository extends BaseRepository {
   late final CurrencyApi _api;
 
   @override
-  void register(
-    GetIt getIt,
-  ) {
-    getIt.registerSingleton<CurrencyRepository>(
-      this,
-    );
+  void register(GetIt getIt) {
+    getIt.registerSingleton<CurrencyRepository>(this);
   }
 
   @override
@@ -47,7 +43,7 @@ class CurrencyRepository extends BaseRepository {
   List<RateData> _filterAndSortRates(List<RateData>? rates) {
     if (rates != null) {
       final filtered =
-          rates.where((r) => _targetCurrencies.contains(r.code)).toList();
+      rates.where((r) => _targetCurrencies.contains(r.code)).toList();
       filtered.sort((a, b) {
         final indexA = _targetCurrencies.indexOf(a.code);
         final indexB = _targetCurrencies.indexOf(b.code);

@@ -10,9 +10,7 @@ class CurrencyApi {
 
   late final CurrencyRateNetwork _network;
 
-  void register(
-    GetIt getIt,
-  ) {
+  void register(GetIt getIt) {
     getIt.registerSingleton<CurrencyApi>(this);
   }
 
@@ -30,19 +28,13 @@ class CurrencyApi {
       final result = await _network.get(url);
       if (result.error == null) {
         final networkRates = (result.data as List<dynamic>)
-            .map((e) => RateDataFromNetwork.fromJson(
-                  e as Map<String, dynamic>,
-                ))
+            .map((e) => RateDataFromNetwork.fromJson(e as Map<String, dynamic>))
             .toList();
         final rates =
-            networkRates.map((e) => RateData.fromNetworkModel(e)).toList();
-        return CurrencyResult.success(
-          rates,
-        );
+        networkRates.map((e) => RateData.fromNetworkModel(e)).toList();
+        return CurrencyResult.success(rates);
       } else {
-        return CurrencyResult.failure(
-          result.error,
-        );
+        return CurrencyResult.failure(result.error);
       }
     } catch (e) {
       return CurrencyResult.failure(CurrencyError.fromException(e));

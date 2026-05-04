@@ -52,9 +52,7 @@ class CurrencyRateNetwork {
         path,
         queryParameters: queryParameters,
       );
-      return CurrencyResult.success(
-        response.data as T,
-      );
+      return CurrencyResult.success(response.data as T);
     } on DioException catch (e) {
       return CurrencyResult.failure(_mapDioError(e));
     } catch (e) {
