@@ -47,6 +47,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get common_absent_date => 'Дата отсутствует';
 
   @override
+  String get common_unknown_currency_name => 'Неизвестная валюта';
+
+  @override
   String amount_in(String currency) {
     return 'Сумма в $currency';
   }

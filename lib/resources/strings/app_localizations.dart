@@ -166,6 +166,12 @@ abstract class AppLocalizations {
   /// **'Дата отсутствует'**
   String get common_absent_date;
 
+  /// No description provided for @common_unknown_currency_name.
+  ///
+  /// In ru, this message translates to:
+  /// **'Неизвестная валюта'**
+  String get common_unknown_currency_name;
+
   /// No description provided for @amount_in.
   ///
   /// In ru, this message translates to:

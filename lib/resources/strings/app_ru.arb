@@ -19,6 +19,7 @@
   "base_currency": "Базовая валюта",
   "update_date": "Дата обновления",
   "common_absent_date": "Дата отсутствует",
+  "common_unknown_currency_name": "Неизвестная валюта",
   "amount_in": "Сумма в {currency}",
   "@amount_in": {
     "placeholders": {
