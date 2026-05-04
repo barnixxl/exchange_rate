@@ -4,7 +4,10 @@ class CurrencyError {
   final int errorCode;
   final String message;
 
-  const CurrencyError({required this.errorCode, required this.message});
+  const CurrencyError({
+    required this.errorCode,
+    required this.message,
+  });
 
   static const int unknownCode = -1;
   static const int timeoutCode = 1;
@@ -19,7 +22,9 @@ class CurrencyError {
   @override
   String toString() => message;
 
-  factory CurrencyError.fromException(Object e) {
+  factory CurrencyError.fromException(
+    Object e,
+  ) {
     if (e is CurrencyError) return e;
     return CurrencyError(
       errorCode: unknownCode,
@@ -37,12 +42,20 @@ class CurrencyError {
         message: strings.error_no_internet,
       );
 
-  factory CurrencyError.serverError(int statusCode) => CurrencyError(
+  factory CurrencyError.serverError(
+    int statusCode,
+  ) =>
+      CurrencyError(
         errorCode: serverCode,
-        message: strings.error_server(statusCode),
+        message: strings.error_server(
+          statusCode,
+        ),
       );
 
-  factory CurrencyError.badResponse(int statusCode) => CurrencyError(
+  factory CurrencyError.badResponse(
+    int statusCode,
+  ) =>
+      CurrencyError(
         errorCode: badResponseCode,
         message: strings.error_bad_response(statusCode),
       );
