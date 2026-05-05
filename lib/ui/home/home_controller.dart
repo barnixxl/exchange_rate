@@ -19,12 +19,7 @@ class HomeController {
 
   List<RateData> get currencies => currencyResult.value.data ?? [];
 
-  DateTime? get lastUpdateDate {
-    if (currencies.isNotEmpty) {
-      return currencies.first.date;
-    }
-    return null;
-  }
+  DateTime? get lastUpdateDate => currencies.firstOrNull?.date;
 
   Future<void> loadCurrencies() async {
     runInAction(() {
