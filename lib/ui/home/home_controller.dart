@@ -11,38 +11,29 @@ class HomeController {
     CurrencyResult.notInitialized(),
   );
 
-  final Observable<DateTime?> _lastSuccessfulUpdateDate = Observable(null);
-
   bool get isLoading => currencyResult.value.isLoading;
 
   bool get hasError => currencyResult.value.isError;
 
   bool get hasSuccess => currencyResult.value.isSuccess;
 
-  List<RateData> get currencies {
-    final result = currencyResult.value;
-    return result.data ?? [];
-  }
+  List<RateData> get currencies => currencyResult.value.data ?? [];
 
-  DateTime? get lastUpdateDate => _lastSuccessfulUpdateDate.value;
+  DateTime? get lastUpdateDate {
+    if (currencies.isNotEmpty) {
+      return currencies.first.date;
+    }
+    return null;
+  }
 
   Future<void> loadCurrencies() async {
-    _updateCurrencyResult(
-      CurrencyResult.loading(),
-    );
-    final result = await _repository.fetchRates();
-    _updateCurrencyResult(result);
-  }
+    runInAction(() {
+      currencyResult.value = CurrencyResult.loading();
+    });
 
-  void _updateCurrencyResult(
-    CurrencyResult<List<RateData>> result,
-  ) {
+    final result = await _repository.fetchRates();
     runInAction(() {
       currencyResult.value = result;
-
-      if (result.isSuccess && (result.data?.isNotEmpty ?? false)) {
-        _lastSuccessfulUpdateDate.value = result.data!.first.date;
-      }
     });
   }
 }
