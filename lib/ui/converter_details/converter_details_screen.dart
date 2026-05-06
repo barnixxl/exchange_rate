@@ -6,12 +6,13 @@ import '../../app_router.dart';
 import '../../models/rate_data.dart';
 import 'converter_details_controller.dart';
 
-part 'converter_details_screen.base_converter_state.part.dart';
-part 'converter_details_screen.header_state.part.dart';
+part 'converter_details_screen.base_converter.part.dart';
 
-part 'converter_details_screen.info_row_state.part.dart';
+part 'converter_details_screen.header.part.dart';
 
-part 'converter_details_screen.reverse_converter_state.part.dart';
+part 'converter_details_screen.info_row.part.dart';
+
+part 'converter_details_screen.reverse_converter.part.dart';
 
 class ConverterDetailsScreen extends StatefulWidget {
   final CurrencyArgument currency;
@@ -47,7 +48,7 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
   }
 
   String _buildExchangeRateText(
-      ConverterDetailsController detailController,
+    ConverterDetailsController detailController,
   ) {
     return strings.common_scale_equals_rate_byn(
       detailController.scale,
@@ -57,7 +58,7 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
   }
 
   String _buildUpdatedDateText(
-      ConverterDetailsController detailController,
+    ConverterDetailsController detailController,
   ) {
     return detailController.formattedDate ?? strings.common_absent_date;
   }

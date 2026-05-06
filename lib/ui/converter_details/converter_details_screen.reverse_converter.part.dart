@@ -1,6 +1,5 @@
 part of 'converter_details_screen.dart';
 
-
 Widget _buildReverseConverterWidget({
   required String sourceCurrencyCode,
   required String resultCurrencyName,
