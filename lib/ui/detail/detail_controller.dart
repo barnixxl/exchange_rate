@@ -28,18 +28,34 @@ class DetailController {
   bool get hasCurrencyAmount => currencyAmountInput.value.isNotEmpty;
 
   String get convertedAmount {
-    final amount = double.tryParse(
-          baseAmountInput.value,
-        ) ??
-        0.0;
-    return (amount * _currency.scale / _currency.rate).toStringAsFixed(2);
+    final amount = _parseAmount(
+      baseAmountInput.value,
+    );
+    return _calculateForward(amount);
   }
 
   String get convertedAmountReverse {
-    final amount = double.tryParse(
-          currencyAmountInput.value,
-        ) ??
-        0.0;
+    final amount = _parseAmount(
+      currencyAmountInput.value,
+    );
+    return _calculateReverse(amount);
+  }
+
+  double _parseAmount(
+    String input,
+  ) =>
+      double.tryParse(
+        input,
+      ) ??
+      0.0;
+  String _calculateForward(
+    double amount,
+  ) {
+    return (amount * _currency.scale / _currency.rate).toStringAsFixed(2);
+  }
+  String _calculateReverse(
+    double amount,
+  ) {
     return (amount * _currency.rate / _currency.scale).toStringAsFixed(2);
   }
 
@@ -59,4 +75,3 @@ class DetailController {
     });
   }
 }
-
