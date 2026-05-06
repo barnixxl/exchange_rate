@@ -47,22 +47,6 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
     );
   }
 
-  String _buildExchangeRateText(
-    ConverterDetailsController detailController,
-  ) {
-    return strings.common_scale_equals_rate_byn(
-      detailController.scale,
-      detailController.code,
-      detailController.rate.toStringAsFixed(4),
-    );
-  }
-
-  String _buildUpdatedDateText(
-    ConverterDetailsController detailController,
-  ) {
-    return detailController.formattedDate ?? strings.common_absent_date;
-  }
-
   @override
   Widget build(
     BuildContext context,
@@ -89,13 +73,9 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
               _buildHeaderWidget(
                 code: detailController.code,
                 name: detailController.name,
-                exchangeRateText: _buildExchangeRateText(
-                  detailController,
-                ),
+                exchangeRateText: detailController.exchangeRateText,
                 baseCurrencyName: widget.currency.baseCurrencyName,
-                updatedDateText: _buildUpdatedDateText(
-                  detailController,
-                ),
+                updatedDateText: detailController.updatedDateText,
               ),
               const SizedBox(
                 height: 24,

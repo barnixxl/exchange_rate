@@ -1,4 +1,5 @@
 import 'package:mobx/mobx.dart';
+import 'package:currency_converter/main.dart';
 
 import '../../models/rate_data.dart';
 import '../../utils/date_formatter.dart';
@@ -22,6 +23,14 @@ class ConverterDetailsController {
   DateTime? get date => _currency.date;
 
   String? get formattedDate => date.toDayMonthYearTextDateFormat();
+
+  String get exchangeRateText => strings.common_scale_equals_rate_byn(
+        scale,
+        code,
+        rate.toStringAsFixed(4),
+      );
+
+  String get updatedDateText => formattedDate ?? strings.common_absent_date;
 
   bool get hasBaseAmount => baseAmountInput.value.isNotEmpty;
 
