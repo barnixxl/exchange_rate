@@ -43,4 +43,3 @@ Widget _buildReverseConverterWidget({
     ],
   );
 }
-

@@ -45,4 +45,3 @@ Widget _buildBaseConverterWidget({
     ],
   );
 }
-

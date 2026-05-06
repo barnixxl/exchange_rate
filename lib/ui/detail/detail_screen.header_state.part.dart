@@ -57,4 +57,3 @@ Widget _buildHeaderWidget({
     ),
   );
 }
-

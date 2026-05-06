@@ -44,15 +44,14 @@ class DetailController {
   double _parseAmount(
     String input,
   ) =>
-      double.tryParse(
-        input,
-      ) ??
-      0.0;
+      double.tryParse(input) ?? 0.0;
+
   String _calculateForward(
     double amount,
   ) {
     return (amount * _currency.scale / _currency.rate).toStringAsFixed(2);
   }
+
   String _calculateReverse(
     double amount,
   ) {
