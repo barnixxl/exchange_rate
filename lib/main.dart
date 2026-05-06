@@ -6,7 +6,7 @@ import 'app_router.dart';
 import 'network/currency/currency_api.dart';
 import 'network/currency_rate_network.dart';
 import 'resources/strings/app_localizations.dart';
-import 'services/currency_repository.dart';
+import 'repository/currency_repository.dart';
 
 late final AppLocalizations strings;
 
