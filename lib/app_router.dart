@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'UI/home/home_screen.dart';
-import 'UI/detail/detail_screen.dart';
+import 'ui/home/home_screen.dart';
+import 'ui/converter_details/converter_details_screen.dart';
 
 class CurrencyArgument {
   final String code;
@@ -29,10 +29,10 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const HomeScreen(),
         );
-      case '/detail':
+      case '/converter_details':
         final currency = settings.arguments as CurrencyArgument;
         return MaterialPageRoute(
-          builder: (_) => DetailScreen(currency: currency),
+          builder: (_) => ConverterDetailsScreen(currency: currency),
         );
       default:
         return MaterialPageRoute(

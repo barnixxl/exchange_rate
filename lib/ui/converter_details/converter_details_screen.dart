@@ -4,35 +4,34 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../../app_router.dart';
 import '../../models/rate_data.dart';
-import 'detail_controller.dart';
+import 'converter_details_controller.dart';
 
-part 'detail_screen.base_converter_state.part.dart';
+part 'converter_details_screen.base_converter_state.part.dart';
+part 'converter_details_screen.header_state.part.dart';
 
-part 'detail_screen.header_state.part.dart';
+part 'converter_details_screen.info_row_state.part.dart';
 
-part 'detail_screen.info_row.part.dart';
+part 'converter_details_screen.reverse_converter_state.part.dart';
 
-part 'detail_screen.reverse_converter_state.part.dart';
-
-class DetailScreen extends StatefulWidget {
+class ConverterDetailsScreen extends StatefulWidget {
   final CurrencyArgument currency;
 
-  const DetailScreen({
+  const ConverterDetailsScreen({
     super.key,
     required this.currency,
   });
 
   @override
-  State<DetailScreen> createState() => _DetailScreenState();
+  State<ConverterDetailsScreen> createState() => _ConverterDetailsScreenState();
 }
 
-class _DetailScreenState extends State<DetailScreen> {
-  late final DetailController _controller;
+class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
+  late final ConverterDetailsController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = DetailController(
+    _controller = ConverterDetailsController(
       _buildCurrencyModel(),
     );
   }
@@ -48,7 +47,7 @@ class _DetailScreenState extends State<DetailScreen> {
   }
 
   String _buildExchangeRateText(
-    DetailController detailController,
+      ConverterDetailsController detailController,
   ) {
     return strings.common_scale_equals_rate_byn(
       detailController.scale,
@@ -58,7 +57,7 @@ class _DetailScreenState extends State<DetailScreen> {
   }
 
   String _buildUpdatedDateText(
-    DetailController detailController,
+      ConverterDetailsController detailController,
   ) {
     return detailController.formattedDate ?? strings.common_absent_date;
   }

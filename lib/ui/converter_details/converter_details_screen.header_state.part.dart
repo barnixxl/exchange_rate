@@ -1,4 +1,4 @@
-part of 'detail_screen.dart';
+part of 'converter_details_screen.dart';
 
 Widget _buildHeaderWidget({
   required String code,

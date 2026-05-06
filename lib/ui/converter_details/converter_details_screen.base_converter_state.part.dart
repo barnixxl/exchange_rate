@@ -1,13 +1,14 @@
-part of 'detail_screen.dart';
+part of 'converter_details_screen.dart';
 
-Widget _buildReverseConverterWidget({
-  required String sourceCurrencyCode,
+Widget _buildBaseConverterWidget({
+  required String baseCurrencyCode,
+  required String resultCurrencyCode,
   required String resultCurrencyName,
   required bool hasResult,
   required String convertedResult,
   required void Function(
     String,
-  ) onCurrencyAmountChanged,
+  ) onBaseAmountChanged,
 }) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -18,11 +19,11 @@ Widget _buildReverseConverterWidget({
         ),
         decoration: InputDecoration(
           labelText: strings.amount_in(
-            sourceCurrencyCode,
+            baseCurrencyCode,
           ),
           border: const OutlineInputBorder(),
         ),
-        onChanged: onCurrencyAmountChanged,
+        onChanged: onBaseAmountChanged,
       ),
       if (hasResult)
         Padding(
@@ -30,9 +31,10 @@ Widget _buildReverseConverterWidget({
             top: 8,
           ),
           child: Text(
-            strings.converted_result_reverse(
+            strings.converted_result(
               convertedResult,
               resultCurrencyName,
+              resultCurrencyCode,
             ),
             style: const TextStyle(
               fontSize: 18,

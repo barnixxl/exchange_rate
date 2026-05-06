@@ -3,8 +3,8 @@ import 'package:mobx/mobx.dart';
 import '../../models/rate_data.dart';
 import '../../utils/date_formatter.dart';
 
-class DetailController {
-  DetailController(this._currency);
+class ConverterDetailsController {
+  ConverterDetailsController(this._currency);
 
   final RateData _currency;
 

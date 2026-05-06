@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
   ) {
     Navigator.pushNamed(
       context,
-      '/detail',
+      '/converter_details',
       arguments: CurrencyArgument(
         code: currency.code,
         name: currency.name,
