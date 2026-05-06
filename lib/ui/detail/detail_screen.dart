@@ -32,18 +32,35 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   void initState() {
     super.initState();
+    _controller = DetailController(
+      _buildCurrencyModel(),
+    );
+  }
 
-    final currencyModel = RateData(
+  RateData _buildCurrencyModel() {
+    return RateData(
       code: widget.currency.code,
       name: widget.currency.name,
       rate: widget.currency.rate,
       date: widget.currency.date,
       scale: widget.currency.scale,
     );
+  }
 
-    _controller = DetailController(
-      currencyModel,
+  String _buildExchangeRateText(
+    DetailController detailController,
+  ) {
+    return strings.common_scale_equals_rate_byn(
+      detailController.scale,
+      detailController.code,
+      detailController.rate.toStringAsFixed(4),
     );
+  }
+
+  String _buildUpdatedDateText(
+    DetailController detailController,
+  ) {
+    return detailController.formattedDate ?? strings.common_absent_date;
   }
 
   @override
@@ -53,7 +70,9 @@ class _DetailScreenState extends State<DetailScreen> {
     final detailController = _controller;
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(
+        context,
+      ).unfocus(),
       child: Scaffold(
         appBar: AppBar(
           title: Text(
@@ -67,21 +86,16 @@ class _DetailScreenState extends State<DetailScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Observer(
-                builder: (_) {
-                  return _buildHeaderWidget(
-                    code: detailController.code,
-                    name: detailController.name,
-                    exchangeRateText: strings.common_scale_equals_rate_byn(
-                      detailController.scale,
-                      detailController.code,
-                      detailController.rate.toStringAsFixed(4),
-                    ),
-                    baseCurrencyName: widget.currency.baseCurrencyName,
-                    updatedDateText: detailController.formattedDate ??
-                        strings.common_absent_date,
-                  );
-                },
+              _buildHeaderWidget(
+                code: detailController.code,
+                name: detailController.name,
+                exchangeRateText: _buildExchangeRateText(
+                  detailController,
+                ),
+                baseCurrencyName: widget.currency.baseCurrencyName,
+                updatedDateText: _buildUpdatedDateText(
+                  detailController,
+                ),
               ),
               const SizedBox(
                 height: 24,
@@ -113,7 +127,9 @@ class _DetailScreenState extends State<DetailScreen> {
                   );
                 },
               ),
-              const SizedBox(height: 24),
+              const SizedBox(
+                height: 24,
+              ),
             ],
           ),
         ),

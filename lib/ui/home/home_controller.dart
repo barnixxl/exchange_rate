@@ -12,13 +12,9 @@ class HomeController {
   );
 
   bool get isLoading => currencyResult.value.isLoading;
-
   bool get hasError => currencyResult.value.isError;
-
   bool get hasSuccess => currencyResult.value.isSuccess;
-
   List<RateData> get currencies => currencyResult.value.data ?? [];
-
   DateTime? get lastUpdateDate => currencies.firstOrNull?.date;
 
   Future<void> loadCurrencies() async {

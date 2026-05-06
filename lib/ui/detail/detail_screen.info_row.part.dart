@@ -29,3 +29,4 @@ Widget _buildInfoRow({
     ],
   );
 }
+
