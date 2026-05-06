@@ -38,10 +38,28 @@ class _HomeScreenState extends State<HomeScreen> {
     await _homeController.loadCurrencies();
   }
 
+  void _navigateToDetail(
+    RateData currency,
+  ) {
+    Navigator.pushNamed(
+      context,
+      '/detail',
+      arguments: CurrencyArgument(
+        code: currency.code,
+        name: currency.name,
+        rate: currency.rate,
+        date: currency.date,
+        scale: currency.scale,
+        baseCurrencyCode: strings.base_cur_code,
+        baseCurrencyName: strings.base_currency_name,
+      ),
+    );
+  }
+
   @override
   Widget build(
-      BuildContext context,
-      ) {
+    BuildContext context,
+  ) {
     final homeController = _homeController;
 
     return Scaffold(
@@ -90,21 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 }
                 return _buildSuccessWidget(
                   currencies: homeController.currencies,
-                  onCurrencyPressed: (currency) {
-                    Navigator.pushNamed(
-                      context,
-                      '/detail',
-                      arguments: CurrencyArgument(
-                        code: currency.code,
-                        name: currency.name,
-                        rate: currency.rate,
-                        date: currency.date,
-                        scale: currency.scale,
-                        baseCurrencyCode: strings.base_cur_code,
-                        baseCurrencyName: strings.base_currency_name,
-                      ),
-                    );
-                  },
+                  onCurrencyPressed: _navigateToDetail,
                 );
               },
             ),
