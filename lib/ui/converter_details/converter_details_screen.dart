@@ -38,13 +38,7 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
   }
 
   RateData _buildCurrencyModel() {
-    return RateData(
-      code: widget.currency.code,
-      name: widget.currency.name,
-      rate: widget.currency.rate,
-      date: widget.currency.date,
-      scale: widget.currency.scale,
-    );
+    return widget.currency.toRateData();
   }
 
   @override

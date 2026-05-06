@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'ui/home/home_screen.dart';
 import 'ui/converter_details/converter_details_screen.dart';
+import '../../models/rate_data.dart';
 
 class CurrencyArgument {
   final String code;
@@ -20,6 +21,16 @@ class CurrencyArgument {
     required this.baseCurrencyCode,
     required this.baseCurrencyName,
   });
+
+  RateData toRateData() {
+    return RateData(
+      code: code,
+      name: name,
+      rate: rate,
+      date: date,
+      scale: scale,
+    );
+  }
 }
 
 class AppRouter {
