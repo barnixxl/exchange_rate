@@ -6,13 +6,17 @@ import '../../app_router.dart';
 import '../../models/rate_data.dart';
 import 'converter_details_controller.dart';
 
-part 'converter_details_screen.base_converter.part.dart';
+part 'converter_details_screen.base_converter_input.part.dart';
+
+part 'converter_details_screen.base_converter_result.part.dart';
 
 part 'converter_details_screen.header.part.dart';
 
 part 'converter_details_screen.info_row.part.dart';
 
-part 'converter_details_screen.reverse_converter.part.dart';
+part 'converter_details_screen.reverse_converter_input.part.dart';
+
+part 'converter_details_screen.reverse_converter_result.part.dart';
 
 class ConverterDetailsScreen extends StatefulWidget {
   final CurrencyArgument currency;
@@ -74,32 +78,51 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
               const SizedBox(
                 height: 24,
               ),
-              Observer(
-                builder: (_) {
-                  return _buildBaseConverterWidget(
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildBaseConverterInputWidget(
                     baseCurrencyCode: widget.currency.baseCurrencyCode,
-                    resultCurrencyCode: detailController.code,
-                    resultCurrencyName: detailController.name,
-                    hasResult: detailController.hasBaseAmount,
-                    convertedResult: detailController.convertedAmount,
                     onBaseAmountChanged: detailController.onBaseAmountChanged,
-                  );
-                },
+                  ),
+                  Observer(
+                    builder: (_) {
+                      return Visibility(
+                        visible: detailController.hasBaseAmount,
+                        child: _buildBaseConverterResultWidget(
+                          convertedResult: detailController.convertedAmount,
+                          resultCurrencyName: detailController.name,
+                          resultCurrencyCode: detailController.code,
+                        ),
+                      );
+                    },
+                  ),
+                ],
               ),
               const SizedBox(
                 height: 24,
               ),
-              Observer(
-                builder: (_) {
-                  return _buildReverseConverterWidget(
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildReverseConverterInputWidget(
                     sourceCurrencyCode: detailController.code,
-                    resultCurrencyName: widget.currency.baseCurrencyName,
-                    hasResult: detailController.hasCurrencyAmount,
-                    convertedResult: detailController.convertedAmountReverse,
                     onCurrencyAmountChanged:
                         detailController.onCurrencyAmountChanged,
-                  );
-                },
+                  ),
+                  Observer(
+                    builder: (_) {
+                      return Visibility(
+                        visible: detailController.hasBaseAmount,
+                        child: _buildReverseConverterResultWidget(
+                          convertedResult:
+                              detailController.convertedAmountReverse,
+                          resultCurrencyName: widget.currency.baseCurrencyName,
+                        ),
+                      );
+                    },
+                  ),
+                ],
               ),
               const SizedBox(
                 height: 24,
