@@ -88,7 +88,7 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
                   Observer(
                     builder: (_) {
                       return Visibility(
-                        visible: detailController.hasCurrencyAmount,
+                        visible: detailController.hasBaseAmount,
                         child: _buildBaseConverterResultWidget(
                           convertedResult: detailController.convertedAmount,
                           resultCurrencyName: detailController.name,
@@ -113,7 +113,7 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
                   Observer(
                     builder: (_) {
                       return Visibility(
-                        visible: detailController.hasBaseAmount,
+                        visible: detailController.hasCurrencyAmount,
                         child: _buildReverseConverterResultWidget(
                           convertedResult:
                               detailController.convertedAmountReverse,
