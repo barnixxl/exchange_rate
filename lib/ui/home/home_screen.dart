@@ -83,32 +83,31 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Observer(
               builder: (_) {
-                if (!homeController.isLoading) {
-                  return const SizedBox.shrink();
-                }
-                return _buildLoadingWidget();
-              },
-            ),
-            Observer(
-              builder: (_) {
-                if (!homeController.hasError) {
-                  return const SizedBox.shrink();
-                }
-                final result = homeController.currencyResult.value;
-                return _buildErrorWidget(
-                  error: result.error,
-                  onRetryPressed: _loadData,
+                return Visibility(
+                  visible: homeController.isLoading,
+                  child: _buildLoadingWidget(),
                 );
               },
             ),
             Observer(
               builder: (_) {
-                if (!homeController.hasSuccess) {
-                  return const SizedBox.shrink();
-                }
-                return _buildSuccessWidget(
-                  currencies: homeController.currencies,
-                  onCurrencyPressed: _navigateToDetail,
+                return Visibility(
+                  visible: homeController.hasError,
+                  child: _buildErrorWidget(
+                    error: homeController.currencyResult.value.error,
+                    onRetryPressed: _loadData,
+                  ),
+                );
+              },
+            ),
+            Observer(
+              builder: (_) {
+                return Visibility(
+                  visible: homeController.hasSuccess,
+                  child: _buildSuccessWidget(
+                    currencies: homeController.currencies,
+                    onCurrencyPressed: _navigateToDetail,
+                  ),
                 );
               },
             ),
