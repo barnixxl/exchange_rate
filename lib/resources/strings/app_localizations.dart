@@ -275,6 +275,7 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
     case 'ru':
       return AppLocalizationsRu();
   }
+
   throw FlutterError(
       'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
       'an issue with the localizations generation tool. Please file an issue '

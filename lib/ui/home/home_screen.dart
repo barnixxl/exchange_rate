@@ -9,8 +9,11 @@ import '../../utils/date_formatter.dart';
 import 'home_controller.dart';
 
 part 'home_screen.error_state.part.dart';
+
 part 'home_screen.app_bar_state.part.dart';
+
 part 'home_screen.load_state.part.dart';
+
 part 'home_screen.success_state.part.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -29,28 +32,6 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     _loadData();
-  }
-
-  Future<void> _loadData() async {
-    await _homeController.loadCurrencies();
-  }
-
-  void _navigateToDetail(
-    RateData currency,
-  ) {
-    Navigator.pushNamed(
-      context,
-      '/converter_details',
-      arguments: CurrencyArgument(
-        code: currency.code,
-        name: currency.name,
-        rate: currency.rate,
-        date: currency.date,
-        scale: currency.scale,
-        baseCurrencyCode: strings.base_cur_code,
-        baseCurrencyName: strings.base_currency_name,
-      ),
-    );
   }
 
   @override
@@ -109,6 +90,28 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Future<void> _loadData() async {
+    await _homeController.loadCurrencies();
+  }
+
+  void _navigateToDetail(
+    RateData currency,
+  ) {
+    Navigator.pushNamed(
+      context,
+      '/converter_details',
+      arguments: CurrencyArgument(
+        code: currency.code,
+        name: currency.name,
+        rate: currency.rate,
+        date: currency.date,
+        scale: currency.scale,
+        baseCurrencyCode: strings.base_cur_code,
+        baseCurrencyName: strings.base_currency_name,
       ),
     );
   }

@@ -54,6 +54,22 @@ class ConverterDetailsController {
     );
   }
 
+  void onBaseAmountChanged(
+    String value,
+  ) {
+    runInAction(() {
+      baseAmountInput.value = value;
+    });
+  }
+
+  void onCurrencyAmountChanged(
+    String value,
+  ) {
+    runInAction(() {
+      currencyAmountInput.value = value;
+    });
+  }
+
   double _parseAmount(
     String input,
   ) =>
@@ -72,21 +88,5 @@ class ConverterDetailsController {
     double amount,
   ) {
     return (amount * _currency.rate / _currency.scale).toStringAsFixed(2);
-  }
-
-  void onBaseAmountChanged(
-    String value,
-  ) {
-    runInAction(() {
-      baseAmountInput.value = value;
-    });
-  }
-
-  void onCurrencyAmountChanged(
-    String value,
-  ) {
-    runInAction(() {
-      currencyAmountInput.value = value;
-    });
   }
 }

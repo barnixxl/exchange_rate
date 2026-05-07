@@ -7,10 +7,15 @@ import '../../models/rate_data.dart';
 import 'converter_details_controller.dart';
 
 part 'converter_details_screen.base_converter_input.part.dart';
+
 part 'converter_details_screen.base_converter_result.part.dart';
+
 part 'converter_details_screen.header.part.dart';
+
 part 'converter_details_screen.info_row.part.dart';
+
 part 'converter_details_screen.reverse_converter_input.part.dart';
+
 part 'converter_details_screen.reverse_converter_result.part.dart';
 
 class ConverterDetailsScreen extends StatefulWidget {
@@ -34,10 +39,6 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
     _controller = ConverterDetailsController(
       _buildCurrencyModel(),
     );
-  }
-
-  RateData _buildCurrencyModel() {
-    return widget.currency.toRateData();
   }
 
   @override
@@ -126,5 +127,9 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
         ),
       ),
     );
+  }
+
+  RateData _buildCurrencyModel() {
+    return widget.currency.toRateData();
   }
 }
