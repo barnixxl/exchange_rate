@@ -20,27 +20,21 @@ Future<void> initializeLocale() async {
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeLocale();
-
   strings = lookupAppLocalizations(
     const Locale(
       'ru',
     ),
   );
-
   final getIt = GetIt.instance;
-
   final network = CurrencyRateNetwork();
   network.register(getIt);
   await network.initializeDependencies();
-
   final api = CurrencyApi();
   api.register(getIt);
   await api.initializeDependencies();
-
   final repository = CurrencyRepository();
   repository.register(getIt);
   await repository.initializeDependencies();
-
   runApp(
     const MyApp(),
   );

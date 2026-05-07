@@ -9,11 +9,8 @@ import '../../utils/date_formatter.dart';
 import 'home_controller.dart';
 
 part 'home_screen.error_state.part.dart';
-
 part 'home_screen.app_bar_state.part.dart';
-
 part 'home_screen.load_state.part.dart';
-
 part 'home_screen.success_state.part.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -61,7 +58,6 @@ class _HomeScreenState extends State<HomeScreen> {
     BuildContext context,
   ) {
     final homeController = _homeController;
-
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(

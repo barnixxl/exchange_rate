@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'ui/home/home_screen.dart';
 import 'ui/converter_details/converter_details_screen.dart';
-import '../../models/rate_data.dart';
+import 'models/rate_data.dart';
 
 class CurrencyArgument {
   final String code;

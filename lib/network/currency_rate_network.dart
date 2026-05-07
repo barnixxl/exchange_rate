@@ -28,7 +28,6 @@ class CurrencyRateNetwork {
         },
       ),
     );
-
     _dio.interceptors.add(
       LogInterceptor(
         request: true,
