@@ -20,10 +20,6 @@ class CurrencyApi {
     _network = _getIt<CurrencyRateNetwork>();
   }
 
-  static CurrencyApi getInstance() {
-    return _getIt<CurrencyApi>();
-  }
-
   Future<CurrencyResult<List<RateData>>> fetchRates() async {
     const url = '/rates?periodicity=0';
     try {
