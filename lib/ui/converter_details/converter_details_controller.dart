@@ -5,12 +5,17 @@ import '../../models/rate_data.dart';
 import '../../utils/date_formatter.dart';
 
 class ConverterDetailsController {
-  ConverterDetailsController(this._currency);
+  ConverterDetailsController(RateData currency) : _currency = currency;
 
   final RateData _currency;
 
-  final Observable<String> baseAmountInput = Observable('');
-  final Observable<String> currencyAmountInput = Observable('');
+  final Observable<String> baseAmountInput = Observable(
+    '',
+  );
+
+  final Observable<String> currencyAmountInput = Observable(
+    '',
+  );
 
   String get code => _currency.code;
 
