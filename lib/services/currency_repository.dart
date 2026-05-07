@@ -40,7 +40,9 @@ class CurrencyRepository extends BaseRepository {
       return result;
     }
     return CurrencyResult.success(
-      _filterAndSortRates(result.data),
+      _filterAndSortRates(
+        result.data,
+      ),
     );
   }
 
@@ -51,7 +53,9 @@ class CurrencyRepository extends BaseRepository {
       filtered.sort((a, b) {
         final indexA = _targetCurrencies.indexOf(a.code);
         final indexB = _targetCurrencies.indexOf(b.code);
-        return indexA.compareTo(indexB);
+        return indexA.compareTo(
+          indexB,
+        );
       });
       return filtered;
     }
