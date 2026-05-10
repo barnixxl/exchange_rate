@@ -31,9 +31,10 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
   @override
   void initState() {
     super.initState();
-    _controller = ConverterDetailsController(
-      _buildCurrencyModel(),
-    );
+    _controller = ConverterDetailsController()
+      ..setCurrency(
+        _buildCurrencyModel(),
+      );
   }
 
   @override

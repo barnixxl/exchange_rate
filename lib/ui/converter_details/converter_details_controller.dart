@@ -1,33 +1,29 @@
+import 'package:currency_converter/models/currency_result.dart';
 import 'package:mobx/mobx.dart';
-import 'package:currency_converter/main.dart';
 
 import '../../models/rate_data.dart';
 import '../../utils/date_formatter.dart';
+import '../../main.dart';
 
 class ConverterDetailsController {
-  ConverterDetailsController(RateData currency) : _currency = currency;
-
-  final RateData _currency;
-
-  final Observable<String> baseAmountInput = Observable(
-    '',
+  final Observable<CurrencyResult<RateData>> _currencyResult = Observable(
+    CurrencyResult.notInitialized(),
   );
 
-  final Observable<String> currencyAmountInput = Observable(
-    '',
-  );
+  final Observable<String> baseAmountInput = Observable('');
+  final Observable<String> currencyAmountInput = Observable('');
 
-  String get code => _currency.code;
+  String get code => _currencyResult.value.data?.code ?? '';
 
-  String get name => _currency.name;
+  String get name => _currencyResult.value.data?.name ?? '';
 
-  double get rate => _currency.rate;
+  double get rate => _currencyResult.value.data?.rate ?? 0.0;
 
-  int get scale => _currency.scale;
+  int get scale => _currencyResult.value.data?.scale ?? 1;
 
-  DateTime? get date => _currency.date;
+  DateTime? get date => _currencyResult.value.data?.date;
 
-  String? get formattedDate => date.toDayMonthYearTextDateFormat();
+  String? get formattedDate => date?.toDayMonthYearTextDateFormat();
 
   String get exchangeRateText => strings.common_scale_equals_rate_byn(
         scale,
@@ -75,23 +71,30 @@ class ConverterDetailsController {
     });
   }
 
+  void setCurrency(
+    RateData currency,
+  ) {
+    runInAction(() {
+      _currencyResult.value = CurrencyResult.success(currency);
+    });
+  }
+
   double _parseAmount(
     String input,
   ) =>
-      double.tryParse(
-        input,
-      ) ??
-      0.0;
+      double.tryParse(input) ?? 0.0;
 
   String _calculateForward(
     double amount,
   ) {
-    return (amount * _currency.scale / _currency.rate).toStringAsFixed(2);
+    final r = rate != 0 ? rate : 1;
+    return (amount * scale / r).toStringAsFixed(2);
   }
 
   String _calculateReverse(
     double amount,
   ) {
-    return (amount * _currency.rate / _currency.scale).toStringAsFixed(2);
+    final s = scale != 0 ? scale : 1;
+    return (amount * rate / s).toStringAsFixed(2);
   }
 }
