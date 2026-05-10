@@ -68,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 return Visibility(
                   visible: homeController.hasError,
                   child: _buildErrorWidget(
-                    error: homeController.currencyResult.value.error,
+                    error: homeController.error,
                     onRetryPressed: _loadData,
                   ),
                 );

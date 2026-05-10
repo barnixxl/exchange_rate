@@ -1,33 +1,36 @@
 import 'package:mobx/mobx.dart';
 
 import '../../models/currency_result.dart';
+import '../../models/currency_error.dart';
 import '../../models/rate_data.dart';
 import '../../services/currency_repository.dart';
 
 class HomeController {
   final CurrencyRepository _repository = CurrencyRepository.getInstance();
 
-  final Observable<CurrencyResult<List<RateData>>> currencyResult = Observable(
+  final Observable<CurrencyResult<List<RateData>>> _currencyResult = Observable(
     CurrencyResult.notInitialized(),
   );
 
-  bool get isLoading => currencyResult.value.isLoading;
+  bool get isLoading => _currencyResult.value.isLoading;
 
-  bool get hasError => currencyResult.value.isError;
+  bool get hasError => _currencyResult.value.isError;
 
-  bool get hasSuccess => currencyResult.value.isSuccess;
+  bool get hasSuccess => _currencyResult.value.isSuccess;
 
-  List<RateData> get currencies => currencyResult.value.data ?? [];
+  List<RateData> get currencies => _currencyResult.value.data ?? [];
 
   DateTime? get lastUpdateDate => currencies.firstOrNull?.date;
 
+  CurrencyError? get error => _currencyResult.value.error;
+
   Future<void> loadCurrencies() async {
     runInAction(() {
-      currencyResult.value = CurrencyResult.loading();
+      _currencyResult.value = CurrencyResult.loading();
     });
     final result = await _repository.fetchRates();
     runInAction(() {
-      currencyResult.value = result;
+      _currencyResult.value = result;
     });
   }
 }
