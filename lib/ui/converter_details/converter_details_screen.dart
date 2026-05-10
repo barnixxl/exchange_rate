@@ -32,7 +32,7 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
   void initState() {
     super.initState();
     _controller = ConverterDetailsController()
-      ..setCurrency(
+      ..loadCurrency(
         _buildCurrencyModel(),
       );
   }

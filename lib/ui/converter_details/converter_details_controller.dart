@@ -71,7 +71,7 @@ class ConverterDetailsController {
     });
   }
 
-  void setCurrency(
+  void loadCurrency(
     RateData currency,
   ) {
     runInAction(() {
