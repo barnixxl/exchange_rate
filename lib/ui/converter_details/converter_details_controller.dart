@@ -58,25 +58,31 @@ class ConverterDetailsController {
   void onBaseAmountChanged(
     String value,
   ) {
-    runInAction(() => _onBaseAmountChanged(
-          value,
-        ));
+    runInAction(() {
+      _onBaseAmountChanged(
+        value,
+      );
+    });
   }
 
   void onCurrencyAmountChanged(
     String value,
   ) {
-    runInAction(() => _onCurrencyAmountChanged(
-          value,
-        ));
+    runInAction(() {
+      _onCurrencyAmountChanged(
+        value,
+      );
+    });
   }
 
   void loadCurrency(
     RateData currency,
   ) {
-    runInAction(() => _loadCurrency(
-          currency,
-        ));
+    runInAction(() {
+      _loadCurrency(
+        currency,
+      );
+    });
   }
 
   void _onBaseAmountChanged(
