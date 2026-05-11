@@ -58,25 +58,43 @@ class ConverterDetailsController {
   void onBaseAmountChanged(
     String value,
   ) {
-    runInAction(() {
-      baseAmountInput.value = value;
-    });
+    runInAction(() => _onBaseAmountChanged(
+          value,
+        ));
   }
 
   void onCurrencyAmountChanged(
     String value,
   ) {
-    runInAction(() {
-      currencyAmountInput.value = value;
-    });
+    runInAction(() => _onCurrencyAmountChanged(
+          value,
+        ));
   }
 
   void loadCurrency(
     RateData currency,
   ) {
-    runInAction(() {
-      _currencyResult.value = CurrencyResult.success(currency);
-    });
+    runInAction(() => _loadCurrency(
+          currency,
+        ));
+  }
+
+  void _onBaseAmountChanged(
+    String value,
+  ) {
+    baseAmountInput.value = value;
+  }
+
+  void _onCurrencyAmountChanged(
+    String value,
+  ) {
+    currencyAmountInput.value = value;
+  }
+
+  void _loadCurrency(
+    RateData currency,
+  ) {
+    _currencyResult.value = CurrencyResult.success(currency);
   }
 
   double _parseAmount(
