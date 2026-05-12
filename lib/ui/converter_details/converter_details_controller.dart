@@ -22,7 +22,8 @@ class ConverterDetailsController {
 
   DateTime? get date => _currencyResult.value.data?.date;
 
-  String get formattedDate => _formatDate();
+  String get formattedDate =>
+      date?.toDayMonthYearTextDateFormat() ?? strings.common_absent_date;
 
   String get exchangeRateText => strings.common_scale_equals_rate_byn(
         scale,
@@ -56,13 +57,6 @@ class ConverterDetailsController {
     runInAction(() {
       _currencyResult.value = CurrencyResult.success(currency);
     });
-  }
-
-  String _formatDate() {
-    if (date != null) {
-      return date!.toDayMonthYearTextDateFormat() ?? '';
-    }
-    return strings.common_absent_date;
   }
 
   String _getUpdatedDateText() {
