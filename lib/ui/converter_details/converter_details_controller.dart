@@ -38,86 +38,53 @@ class ConverterDetailsController {
   bool get hasCurrencyAmount => currencyAmountInput.value.isNotEmpty;
 
   String get convertedAmount {
-    final amount = _parseAmount(
-      baseAmountInput.value,
-    );
-    return _calculateForward(
-      amount,
-    );
+    final amount = _parseAmount(baseAmountInput.value);
+    return _calculateForward(amount);
   }
 
   String get convertedAmountReverse {
-    final amount = _parseAmount(
-      currencyAmountInput.value,
-    );
-    return _calculateReverse(
-      amount,
-    );
+    final amount = _parseAmount(currencyAmountInput.value);
+    return _calculateReverse(amount);
   }
 
-  void onBaseAmountChanged(
-    String value,
-  ) {
+  void onBaseAmountChanged(String value) {
     runInAction(() {
-      _onBaseAmountChanged(
-        value,
-      );
+      _onBaseAmountChanged(value);
     });
   }
 
-  void onCurrencyAmountChanged(
-    String value,
-  ) {
+  void onCurrencyAmountChanged(String value) {
     runInAction(() {
-      _onCurrencyAmountChanged(
-        value,
-      );
+      _onCurrencyAmountChanged(value);
     });
   }
 
-  void loadCurrency(
-    RateData currency,
-  ) {
+  void loadCurrency(RateData currency) {
     runInAction(() {
-      _loadCurrency(
-        currency,
-      );
+      _loadCurrency(currency);
     });
   }
 
-  void _onBaseAmountChanged(
-    String value,
-  ) {
+  void _onBaseAmountChanged(String value) {
     baseAmountInput.value = value;
   }
 
-  void _onCurrencyAmountChanged(
-    String value,
-  ) {
+  void _onCurrencyAmountChanged(String value) {
     currencyAmountInput.value = value;
   }
 
-  void _loadCurrency(
-    RateData currency,
-  ) {
+  void _loadCurrency(RateData currency) {
     _currencyResult.value = CurrencyResult.success(currency);
   }
 
-  double _parseAmount(
-    String input,
-  ) =>
-      double.tryParse(input) ?? 0.0;
+  double _parseAmount(String input) => double.tryParse(input) ?? 0.0;
 
-  String _calculateForward(
-    double amount,
-  ) {
+  String _calculateForward(double amount) {
     final r = rate != 0 ? rate : 1;
     return (amount * scale / r).toStringAsFixed(2);
   }
 
-  String _calculateReverse(
-    double amount,
-  ) {
+  String _calculateReverse(double amount) {
     final s = scale != 0 ? scale : 1;
     return (amount * rate / s).toStringAsFixed(2);
   }
