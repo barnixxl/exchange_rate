@@ -31,14 +31,15 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
   @override
   void initState() {
     super.initState();
-    _controller.loadCurrency(widget.currency);
+    _controller.loadCurrency(
+        widget.currency,
+    );
   }
 
   @override
   Widget build(
     BuildContext context,
   ) {
-    final detailController = _controller;
     return GestureDetector(
       onTap: () => FocusScope.of(
         context,
@@ -46,7 +47,7 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            detailController.code,
+            _controller.code,
           ),
           backgroundColor: Colors.blue,
           foregroundColor: Colors.white,
@@ -57,11 +58,11 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildHeaderWidget(
-                code: detailController.code,
-                name: detailController.name,
-                rate: detailController.rate,
-                scale: detailController.scale,
-                date: detailController.date,
+                code: _controller.code,
+                name: _controller.name,
+                rate: _controller.rate,
+                scale: _controller.scale,
+                date: _controller.date,
                 baseCurrencyName: strings.base_currency_name,
               ),
               const SizedBox(
@@ -72,16 +73,16 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
                 children: [
                   _buildBaseConverterInputWidget(
                     baseCurrencyCode: strings.base_cur_code,
-                    onBaseAmountChanged: detailController.onBaseAmountChanged,
+                    onBaseAmountChanged: _controller.onBaseAmountChanged,
                   ),
                   Observer(
                     builder: (_) {
                       return Visibility(
-                        visible: detailController.hasBaseAmount,
+                        visible: _controller.hasBaseAmount,
                         child: _buildBaseConverterResultWidget(
-                          convertedResult: detailController.convertedAmount,
-                          resultCurrencyName: detailController.name,
-                          resultCurrencyCode: detailController.code,
+                          convertedResult: _controller.convertedAmount,
+                          resultCurrencyName: _controller.name,
+                          resultCurrencyCode: _controller.code,
                         ),
                       );
                     },
@@ -95,17 +96,17 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _buildReverseConverterInputWidget(
-                    sourceCurrencyCode: detailController.code,
+                    sourceCurrencyCode: _controller.code,
                     onCurrencyAmountChanged:
-                        detailController.onCurrencyAmountChanged,
+                        _controller.onCurrencyAmountChanged,
                   ),
                   Observer(
                     builder: (_) {
                       return Visibility(
-                        visible: detailController.hasCurrencyAmount,
+                        visible: _controller.hasCurrencyAmount,
                         child: _buildReverseConverterResultWidget(
                           convertedResult:
-                              detailController.convertedAmountReverse,
+                              _controller.convertedAmountReverse,
                           resultCurrencyName: strings.base_currency_name,
                         ),
                       );
