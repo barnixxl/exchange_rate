@@ -2,8 +2,6 @@ import 'package:currency_converter/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-import '../../app_router.dart';
-import '../../models/currency_result.dart';
 import '../../models/rate_data.dart';
 import '../../utils/date_formatter.dart';
 import 'converter_details_controller.dart';
@@ -16,7 +14,7 @@ part 'converter_details_screen.reverse_converter_input.part.dart';
 part 'converter_details_screen.reverse_converter_result.part.dart';
 
 class ConverterDetailsScreen extends StatefulWidget {
-  final CurrencyArgument currency;
+  final RateData currency;
 
   const ConverterDetailsScreen({
     super.key,
@@ -34,9 +32,7 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
   void initState() {
     super.initState();
     _controller = ConverterDetailsController()
-      ..loadCurrency(
-        CurrencyResult.success(_buildCurrencyModel()),
-      );
+      ..loadCurrency(widget.currency);
   }
 
   @override
@@ -67,7 +63,7 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
                 rate: detailController.rate,
                 scale: detailController.scale,
                 date: detailController.date,
-                baseCurrencyName: widget.currency.baseCurrencyName,
+                baseCurrencyName: strings.base_currency_name,
               ),
               const SizedBox(
                 height: 24,
@@ -76,7 +72,7 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _buildBaseConverterInputWidget(
-                    baseCurrencyCode: widget.currency.baseCurrencyCode,
+                    baseCurrencyCode: strings.base_cur_code,
                     onBaseAmountChanged: detailController.onBaseAmountChanged,
                   ),
                   Observer(
@@ -111,7 +107,7 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
                         child: _buildReverseConverterResultWidget(
                           convertedResult:
                               detailController.convertedAmountReverse,
-                          resultCurrencyName: widget.currency.baseCurrencyName,
+                          resultCurrencyName: strings.base_currency_name,
                         ),
                       );
                     },
@@ -126,9 +122,5 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
         ),
       ),
     );
-  }
-
-  RateData _buildCurrencyModel() {
-    return widget.currency.toRateData();
   }
 }

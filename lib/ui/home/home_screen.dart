@@ -2,7 +2,6 @@ import 'package:currency_converter/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-import '../../app_router.dart';
 import '../../models/currency_error.dart';
 import '../../models/rate_data.dart';
 import '../../utils/date_formatter.dart';
@@ -101,15 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Navigator.pushNamed(
       context,
       '/converter_details',
-      arguments: CurrencyArgument(
-        code: currency.code,
-        name: currency.name,
-        rate: currency.rate,
-        date: currency.date,
-        scale: currency.scale,
-        baseCurrencyCode: strings.base_cur_code,
-        baseCurrencyName: strings.base_currency_name,
-      ),
+      arguments: currency,
     );
   }
 }

@@ -1,12 +1,9 @@
 import 'package:mobx/mobx.dart';
 
-import '../../models/currency_result.dart';
 import '../../models/rate_data.dart';
 
 class ConverterDetailsController {
-  final Observable<CurrencyResult<RateData>> _currencyResult = Observable(
-    CurrencyResult.notInitialized(),
-  );
+  final Observable<RateData?> _rateData = Observable(null);
 
   final Observable<String> _baseAmountInput = Observable(
     '',
@@ -16,15 +13,15 @@ class ConverterDetailsController {
     '',
   );
 
-  String get code => _currencyResult.value.data?.code ?? '';
+  String get code => _rateData.value?.code ?? '';
 
-  String get name => _currencyResult.value.data?.name ?? '';
+  String get name => _rateData.value?.name ?? '';
 
-  DateTime? get date => _currencyResult.value.data?.date;
+  DateTime? get date => _rateData.value?.date;
 
-  double get rate => _currencyResult.value.data?.rate ?? 0.0;
+  double get rate => _rateData.value?.rate ?? 0.0;
 
-  int get scale => _currencyResult.value.data?.scale ?? 1;
+  int get scale => _rateData.value?.scale ?? 1;
 
   bool get hasBaseAmount => _baseAmountInput.value.isNotEmpty;
 
@@ -46,9 +43,9 @@ class ConverterDetailsController {
     });
   }
 
-  void loadCurrency(CurrencyResult<RateData> currencyResult) {
+  void loadCurrency(RateData rateData) {
     runInAction(() {
-      _currencyResult.value = currencyResult;
+      _rateData.value = rateData;
     });
   }
 
@@ -60,7 +57,7 @@ class ConverterDetailsController {
   }
 
   String _calculateConvertedAmountReverse() {
-    final amount = _parseAmount(_baseAmountInput.value);
+    final amount = _parseAmount(_currencyAmountInput.value);
     return _calculateReverse(amount);
   }
 
