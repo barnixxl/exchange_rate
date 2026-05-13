@@ -7,10 +7,15 @@ import '../../models/rate_data.dart';
 import 'converter_details_controller.dart';
 
 part 'converter_details_screen.base_converter_input.part.dart';
+
 part 'converter_details_screen.base_converter_result.part.dart';
+
 part 'converter_details_screen.header.part.dart';
+
 part 'converter_details_screen.info_row.part.dart';
+
 part 'converter_details_screen.reverse_converter_input.part.dart';
+
 part 'converter_details_screen.reverse_converter_result.part.dart';
 
 class ConverterDetailsScreen extends StatefulWidget {
@@ -62,9 +67,9 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
               _buildHeaderWidget(
                 code: detailController.code,
                 name: detailController.name,
-                exchangeRateText: detailController.exchangeRateText,
+                exchangeRateText: _getExchangeRateText(),
                 baseCurrencyName: widget.currency.baseCurrencyName,
-                updatedDateText: detailController.updatedDateText,
+                updatedDateText: _getUpdatedDateText(),
               ),
               const SizedBox(
                 height: 24,
@@ -127,5 +132,21 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
 
   RateData _buildCurrencyModel() {
     return widget.currency.toRateData();
+  }
+
+  String _getExchangeRateText() {
+    return strings.common_scale_equals_rate_byn(
+      _controller.scale,
+      _controller.code,
+      _controller.rate.toStringAsFixed(4),
+    );
+  }
+
+  String _getUpdatedDateText() {
+    final formatted = _controller.formattedDate;
+    if (formatted.isNotEmpty) {
+      return formatted;
+    }
+    return strings.common_absent_date;
   }
 }
