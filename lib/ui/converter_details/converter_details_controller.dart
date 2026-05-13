@@ -20,9 +20,9 @@ class ConverterDetailsController {
 
   String get name => _currencyResult.value.data?.name ?? '';
 
-  double get rate => _currencyResult.value.data?.rate ?? 0.0;
+  double get _rate => _currencyResult.value.data?.rate ?? 0.0;
 
-  int get scale => _currencyResult.value.data?.scale ?? 1;
+  int get _scale => _currencyResult.value.data?.scale ?? 1;
 
   DateTime? get date => _currencyResult.value.data?.date;
 
@@ -30,9 +30,9 @@ class ConverterDetailsController {
       date?.toDayMonthYearTextDateFormat() ?? strings.common_absent_date;
 
   String get exchangeRateText => strings.common_scale_equals_rate_byn(
-        scale,
+        _scale,
         code,
-        rate.toStringAsFixed(4),
+        _rate.toStringAsFixed(4),
       );
 
   String get updatedDateText => _getUpdatedDateText();
@@ -74,13 +74,13 @@ class ConverterDetailsController {
   double _parseAmount(String input) => double.tryParse(input) ?? 0.0;
 
   String _calculateForward(double amount) {
-    final rateValue = rate != 0 ? rate : 1;
-    return (amount * scale / rateValue).toStringAsFixed(2);
+    final rateValue = _rate != 0 ? _rate : 1;
+    return (amount * _scale / rateValue).toStringAsFixed(2);
   }
 
   String _calculateReverse(double amount) {
-    final scaleValue = scale != 0 ? scale : 1;
-    return (amount * rate / scaleValue).toStringAsFixed(2);
+    final scaleValue = _scale != 0 ? _scale : 1;
+    return (amount * _rate / scaleValue).toStringAsFixed(2);
   }
 
   String _calculateConvertedAmount() {
