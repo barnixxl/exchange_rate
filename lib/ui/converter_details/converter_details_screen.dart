@@ -74,12 +74,16 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
                   ),
                   Observer(
                     builder: (_) {
+                      final hasBaseAmount = _controller.hasBaseAmount;
+                      final convertedAmount = _controller.convertedAmount;
+                      final name = _controller.name;
+                      final code = _controller.code;
                       return Visibility(
-                        visible: _controller.hasBaseAmount,
+                        visible: hasBaseAmount,
                         child: _buildBaseConverterResultWidget(
-                          convertedResult: _controller.convertedAmount,
-                          resultCurrencyName: _controller.name,
-                          resultCurrencyCode: _controller.code,
+                          convertedResult: convertedAmount,
+                          resultCurrencyName: name,
+                          resultCurrencyCode: code,
                         ),
                       );
                     },
@@ -96,11 +100,12 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
                   ),
                   Observer(
                     builder: (_) {
+                      final hasCurrencyAmount = _controller.hasCurrencyAmount;
+                      final convertedAmountReverse = _controller.convertedAmountReverse;
                       return Visibility(
-                        visible: _controller.hasCurrencyAmount,
+                        visible: hasCurrencyAmount,
                         child: _buildReverseConverterResultWidget(
-                          convertedResult:
-                              _controller.convertedAmountReverse,
+                          convertedResult: convertedAmountReverse,
                           resultCurrencyName: strings.base_currency_name,
                         ),
                       );
