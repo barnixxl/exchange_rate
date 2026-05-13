@@ -13,7 +13,6 @@ Widget _buildHeaderWidget({
     code,
     rate.toStringAsFixed(4),
   );
-
   final formattedDate = date?.toDayMonthYearTextDateFormat() ?? '';
   final hasValidDate = formattedDate.isNotEmpty;
 
