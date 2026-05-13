@@ -65,9 +65,6 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
                 date: _controller.date,
                 baseCurrencyName: strings.base_currency_name,
               ),
-              const SizedBox(
-                height: 24,
-              ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -88,9 +85,6 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
                     },
                   ),
                 ],
-              ),
-              const SizedBox(
-                height: 24,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -113,9 +107,6 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
                     },
                   ),
                 ],
-              ),
-              const SizedBox(
-                height: 24,
               ),
             ],
           ),
