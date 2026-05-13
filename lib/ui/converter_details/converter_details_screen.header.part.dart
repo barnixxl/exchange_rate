@@ -15,7 +15,6 @@ Widget _buildHeaderWidget({
   );
   final formattedDate = date?.toDayMonthYearTextDateFormat() ?? '';
   final hasValidDate = formattedDate.isNotEmpty;
-
   return Card(
     elevation: 4,
     child: Padding(
