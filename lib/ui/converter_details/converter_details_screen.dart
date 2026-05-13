@@ -43,19 +43,6 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
     BuildContext context,
   ) {
     final detailController = _controller;
-    final exchangeRateText = strings.common_scale_equals_rate_byn(
-      detailController.scale,
-      detailController.code,
-      detailController.rate.toStringAsFixed(4),
-    );
-    final formattedDate = detailController.date?.toDayMonthYearTextDateFormat();
-    final String updatedDateText;
-    if (formattedDate != null && formattedDate.isNotEmpty) {
-      updatedDateText = formattedDate;
-    } else {
-      updatedDateText = strings.common_absent_date;
-    }
-
     return GestureDetector(
       onTap: () => FocusScope.of(
         context,
@@ -76,9 +63,10 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
               _buildHeaderWidget(
                 code: detailController.code,
                 name: detailController.name,
-                exchangeRateText: exchangeRateText,
+                rate: detailController.rate,
+                scale: detailController.scale,
+                date: detailController.date,
                 baseCurrencyName: widget.currency.baseCurrencyName,
-                updatedDateText: updatedDateText,
               ),
               const SizedBox(
                 height: 24,

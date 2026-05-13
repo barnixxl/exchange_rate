@@ -3,10 +3,20 @@ part of 'converter_details_screen.dart';
 Widget _buildHeaderWidget({
   required String code,
   required String name,
-  required String exchangeRateText,
+  required double rate,
+  required int scale,
+  required DateTime? date,
   required String baseCurrencyName,
-  required String updatedDateText,
 }) {
+  final exchangeRateText = strings.common_scale_equals_rate_byn(
+    scale,
+    code,
+    rate.toStringAsFixed(4),
+  );
+
+  final formattedDate = date?.toDayMonthYearTextDateFormat() ?? '';
+  final hasValidDate = formattedDate.isNotEmpty;
+
   return Card(
     elevation: 4,
     child: Padding(
@@ -50,7 +60,7 @@ Widget _buildHeaderWidget({
           ),
           _buildInfoRow(
             label: strings.update_date,
-            value: updatedDateText,
+            value: hasValidDate ? formattedDate : strings.common_absent_date,
           ),
         ],
       ),
