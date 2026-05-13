@@ -26,9 +26,7 @@ class ConverterDetailsScreen extends StatefulWidget {
 }
 
 class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
-  final ConverterDetailsController _controller;
-
-  _ConverterDetailsScreenState() : _controller = ConverterDetailsController(null);
+  final ConverterDetailsController _controller = ConverterDetailsController();
 
   @override
   void initState() {

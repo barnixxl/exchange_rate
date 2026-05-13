@@ -3,7 +3,7 @@ import 'package:mobx/mobx.dart';
 import '../../models/rate_data.dart';
 
 class ConverterDetailsController {
-  final Observable<RateData?> _rateData;
+  final Observable<RateData?> _rateData = Observable(null);
 
   final Observable<String> _baseAmountInput = Observable(
     '',
@@ -12,9 +12,6 @@ class ConverterDetailsController {
   final Observable<String> _currencyAmountInput = Observable(
     '',
   );
-
-  ConverterDetailsController(RateData? rateData)
-      : _rateData = Observable(rateData);
 
   String get code => _rateData.value?.code ?? '';
 
