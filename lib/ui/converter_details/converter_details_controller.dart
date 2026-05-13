@@ -7,10 +7,12 @@ class ConverterDetailsController {
   final Observable<CurrencyResult<RateData>> _currencyResult = Observable(
     CurrencyResult.notInitialized(),
   );
-  final Observable<String> baseAmountInput = Observable(
+
+  final Observable<String> _baseAmountInput = Observable(
     '',
   );
-  final Observable<String> currencyAmountInput = Observable(
+
+  final Observable<String> _currencyAmountInput = Observable(
     '',
   );
 
@@ -24,9 +26,9 @@ class ConverterDetailsController {
 
   int get scale => _currencyResult.value.data?.scale ?? 1;
 
-  bool get hasBaseAmount => baseAmountInput.value.isNotEmpty;
+  bool get hasBaseAmount => _baseAmountInput.value.isNotEmpty;
 
-  bool get hasCurrencyAmount => currencyAmountInput.value.isNotEmpty;
+  bool get hasCurrencyAmount => _currencyAmountInput.value.isNotEmpty;
 
   String get convertedAmount => _calculateConvertedAmount();
 
@@ -34,13 +36,13 @@ class ConverterDetailsController {
 
   void onBaseAmountChanged(String value) {
     runInAction(() {
-      baseAmountInput.value = value;
+      _baseAmountInput.value = value;
     });
   }
 
   void onCurrencyAmountChanged(String value) {
     runInAction(() {
-      currencyAmountInput.value = value;
+      _currencyAmountInput.value = value;
     });
   }
 
@@ -63,12 +65,12 @@ class ConverterDetailsController {
   }
 
   String _calculateConvertedAmount() {
-    final amount = _parseAmount(baseAmountInput.value);
+    final amount = _parseAmount(_baseAmountInput.value);
     return _calculateForward(amount);
   }
 
   String _calculateConvertedAmountReverse() {
-    final amount = _parseAmount(baseAmountInput.value);
+    final amount = _parseAmount(_baseAmountInput.value);
     return _calculateReverse(amount);
   }
 }
