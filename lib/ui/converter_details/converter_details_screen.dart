@@ -53,7 +53,6 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
       detailController.code,
       detailController.rate.toStringAsFixed(4),
     );
-
     final formattedDate = detailController.date?.toDayMonthYearTextDateFormat();
     final String updatedDateText;
     if (formattedDate != null && formattedDate.isNotEmpty) {
