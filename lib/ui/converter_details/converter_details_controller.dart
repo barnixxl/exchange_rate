@@ -1,29 +1,28 @@
 import 'package:mobx/mobx.dart';
 
-import '../../main.dart';
 import '../../models/currency_result.dart';
 import '../../models/rate_data.dart';
-import '../../utils/date_formatter.dart';
 
 class ConverterDetailsController {
   final Observable<CurrencyResult<RateData>> _currencyResult = Observable(
     CurrencyResult.notInitialized(),
   );
-  final Observable<String> baseAmountInput = Observable('');
-  final Observable<String> currencyAmountInput = Observable('');
+  final Observable<String> baseAmountInput = Observable(
+    '',
+  );
+  final Observable<String> currencyAmountInput = Observable(
+    '',
+  );
 
   String get code => _currencyResult.value.data?.code ?? '';
 
   String get name => _currencyResult.value.data?.name ?? '';
 
+  DateTime? get date => _currencyResult.value.data?.date;
+
   double get rate => _currencyResult.value.data?.rate ?? 0.0;
 
   int get scale => _currencyResult.value.data?.scale ?? 1;
-
-  DateTime? get date => _currencyResult.value.data?.date;
-
-  String get formattedDate =>
-      date?.toDayMonthYearTextDateFormat() ?? '';
 
   bool get hasBaseAmount => baseAmountInput.value.isNotEmpty;
 
