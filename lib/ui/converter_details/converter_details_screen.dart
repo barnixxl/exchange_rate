@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../../app_router.dart';
+import '../../models/currency_result.dart';
 import '../../models/rate_data.dart';
 import '../../utils/date_formatter.dart';
 import 'converter_details_controller.dart';
@@ -34,7 +35,7 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
     super.initState();
     _controller = ConverterDetailsController()
       ..loadCurrency(
-        _buildCurrencyModel(),
+        CurrencyResult.success(_buildCurrencyModel()),
       );
   }
 

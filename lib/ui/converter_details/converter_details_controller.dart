@@ -46,9 +46,9 @@ class ConverterDetailsController {
     });
   }
 
-  void loadCurrency(RateData currency) {
+  void loadCurrency(CurrencyResult<RateData> currencyResult) {
     runInAction(() {
-      _currencyResult.value = CurrencyResult.success(currency);
+      _currencyResult.value = currencyResult;
     });
   }
 
