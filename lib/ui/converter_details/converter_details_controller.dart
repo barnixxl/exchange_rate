@@ -54,16 +54,6 @@ class ConverterDetailsController {
 
   double _parseAmount(String input) => double.tryParse(input) ?? 0.0;
 
-  String _calculateForward(double amount) {
-    final rateValue = rate != 0 ? rate : 1;
-    return (amount * scale / rateValue).toStringAsFixed(2);
-  }
-
-  String _calculateReverse(double amount) {
-    final scaleValue = scale != 0 ? scale : 1;
-    return (amount * rate / scaleValue).toStringAsFixed(2);
-  }
-
   String _calculateConvertedAmount() {
     final amount = _parseAmount(_baseAmountInput.value);
     return _calculateForward(amount);
@@ -72,5 +62,15 @@ class ConverterDetailsController {
   String _calculateConvertedAmountReverse() {
     final amount = _parseAmount(_baseAmountInput.value);
     return _calculateReverse(amount);
+  }
+
+  String _calculateForward(double amount) {
+    final rateValue = rate != 0 ? rate : 1;
+    return (amount * scale / rateValue).toStringAsFixed(2);
+  }
+
+  String _calculateReverse(double amount) {
+    final scaleValue = scale != 0 ? scale : 1;
+    return (amount * rate / scaleValue).toStringAsFixed(2);
   }
 }
