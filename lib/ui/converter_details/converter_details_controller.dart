@@ -9,12 +9,8 @@ class ConverterDetailsController {
   final Observable<CurrencyResult<RateData>> _currencyResult = Observable(
     CurrencyResult.notInitialized(),
   );
-  final Observable<String> baseAmountInput = Observable(
-    '',
-  );
-  final Observable<String> currencyAmountInput = Observable(
-    '',
-  );
+  final Observable<String> baseAmountInput = Observable('');
+  final Observable<String> currencyAmountInput = Observable('');
 
   String get code => _currencyResult.value.data?.code ?? '';
 
