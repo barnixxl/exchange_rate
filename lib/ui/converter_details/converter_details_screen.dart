@@ -26,13 +26,14 @@ class ConverterDetailsScreen extends StatefulWidget {
 }
 
 class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
-  late final ConverterDetailsController _controller;
+  final ConverterDetailsController _controller;
+
+  _ConverterDetailsScreenState() : _controller = ConverterDetailsController(null);
 
   @override
   void initState() {
     super.initState();
-    _controller = ConverterDetailsController()
-      ..loadCurrency(widget.currency);
+    _controller.loadCurrency(widget.currency);
   }
 
   @override
