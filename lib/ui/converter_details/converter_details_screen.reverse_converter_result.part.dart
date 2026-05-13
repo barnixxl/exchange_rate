@@ -2,7 +2,6 @@ part of 'converter_details_screen.dart';
 
 Widget _buildReverseConverterResultWidget({
   required String convertedResult,
-  required String resultCurrencyName,
 }) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -14,7 +13,7 @@ Widget _buildReverseConverterResultWidget({
         child: Text(
           strings.converted_result_reverse(
             convertedResult,
-            resultCurrencyName,
+            strings.base_currency_name,
           ),
           style: const TextStyle(
             fontSize: 18,

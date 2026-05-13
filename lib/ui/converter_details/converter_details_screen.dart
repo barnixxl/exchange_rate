@@ -63,13 +63,11 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
                 rate: _controller.rate,
                 scale: _controller.scale,
                 date: _controller.date,
-                baseCurrencyName: strings.base_currency_name,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _buildBaseConverterInputWidget(
-                    baseCurrencyCode: strings.base_cur_code,
                     onBaseAmountChanged: _controller.onBaseAmountChanged,
                   ),
                   Observer(
@@ -106,7 +104,6 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
                         visible: hasCurrencyAmount,
                         child: _buildReverseConverterResultWidget(
                           convertedResult: convertedAmountReverse,
-                          resultCurrencyName: strings.base_currency_name,
                         ),
                       );
                     },

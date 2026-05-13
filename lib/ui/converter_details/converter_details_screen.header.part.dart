@@ -6,7 +6,6 @@ Widget _buildHeaderWidget({
   required double rate,
   required int scale,
   required DateTime? date,
-  required String baseCurrencyName,
 }) {
   final exchangeRateText = strings.common_scale_equals_rate_byn(
     scale,
@@ -54,7 +53,7 @@ Widget _buildHeaderWidget({
               ),
               _buildInfoRow(
                 label: strings.base_currency,
-                value: baseCurrencyName,
+                value: strings.base_currency_name,
               ),
               const SizedBox(
                 height: 16,

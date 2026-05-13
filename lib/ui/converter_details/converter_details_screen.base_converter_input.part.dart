@@ -1,7 +1,6 @@
 part of 'converter_details_screen.dart';
 
 Widget _buildBaseConverterInputWidget({
-  required String baseCurrencyCode,
   required void Function(
     String,
   ) onBaseAmountChanged,
@@ -12,7 +11,7 @@ Widget _buildBaseConverterInputWidget({
     ),
     decoration: InputDecoration(
       labelText: strings.amount_in(
-        baseCurrencyCode,
+        strings.base_cur_code,
       ),
       border: const OutlineInputBorder(),
     ),
