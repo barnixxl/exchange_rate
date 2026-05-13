@@ -3,7 +3,7 @@ import 'package:mobx/mobx.dart';
 import '../../models/currency_result.dart';
 import '../../models/currency_error.dart';
 import '../../models/rate_data.dart';
-import '../../services/currency_repository.dart';
+import '../../repository/currency_repository.dart';
 
 class HomeController {
   final CurrencyRepository _repository = CurrencyRepository.getInstance();
