@@ -5,7 +5,9 @@ Widget _buildSuccessWidget({
   required void Function(RateData) onCurrencyPressed,
 }) {
   return ListView.builder(
-    padding: const EdgeInsets.all(8),
+    padding: const EdgeInsets.all(
+      8,
+    ),
     itemCount: currencies.length,
     itemBuilder: (
       context,

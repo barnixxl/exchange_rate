@@ -34,7 +34,7 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
   void initState() {
     super.initState();
     _controller.loadCurrency(
-        widget.currency,
+      widget.currency,
     );
   }
 
@@ -58,7 +58,9 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
         foregroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(
+          16,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -100,13 +102,13 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
                 _buildReverseConverterInputWidget(
                   focusNode: _currencyInputFocusNode,
                   sourceCurrencyCode: _controller.code,
-                  onCurrencyAmountChanged:
-                      _controller.onCurrencyAmountChanged,
+                  onCurrencyAmountChanged: _controller.onCurrencyAmountChanged,
                 ),
                 Observer(
                   builder: (_) {
                     final hasCurrencyAmount = _controller.hasCurrencyAmount;
-                    final convertedAmountReverse = _controller.convertedAmountReverse;
+                    final convertedAmountReverse =
+                        _controller.convertedAmountReverse;
                     return Visibility(
                       visible: hasCurrencyAmount,
                       child: _buildReverseConverterResultWidget(

@@ -12,9 +12,13 @@ Widget _buildAppBarWidget({
     backgroundColor: Colors.blue,
     foregroundColor: Colors.white,
     bottom: PreferredSize(
-      preferredSize: const Size.fromHeight(40),
+      preferredSize: const Size.fromHeight(
+        40,
+      ),
       child: Container(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(
+          8,
+        ),
         color: Colors.blue.shade700,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
