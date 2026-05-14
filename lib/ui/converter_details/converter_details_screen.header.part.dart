@@ -27,12 +27,14 @@ Widget _buildHeaderWidget({
           ),
           child: Column(
             children: [
-              Text(
-                code,
-                style: const TextStyle(
-                  fontSize: 48,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.primary,
+              ClipOval(
+                child: Image.asset(
+                  AppImages.forCode(
+                    code,
+                  ),
+                  width: 80,
+                  height: 80,
+                  fit: BoxFit.cover,
                 ),
               ),
               const SizedBox(

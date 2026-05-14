@@ -1,6 +1,7 @@
 import 'package:currency_converter/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:currency_converter/resources/images/app_images.dart';
 
 import '../../models/rate_data.dart';
 import '../../resources/colors/app_colors.dart';
@@ -8,13 +9,9 @@ import '../../utils/date_formatter.dart';
 import 'converter_details_controller.dart';
 
 part 'converter_details_screen.base_converter_input.part.dart';
-
 part 'converter_details_screen.base_converter_result.part.dart';
-
 part 'converter_details_screen.header.part.dart';
-
 part 'converter_details_screen.reverse_converter_input.part.dart';
-
 part 'converter_details_screen.reverse_converter_result.part.dart';
 
 class ConverterDetailsScreen extends StatefulWidget {
