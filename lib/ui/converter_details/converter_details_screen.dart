@@ -56,6 +56,7 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
         ),
         backgroundColor: AppColors.primary,
         foregroundColor: AppColors.onPrimary,
+        automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(
