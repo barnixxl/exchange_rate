@@ -56,7 +56,9 @@ class CurrencyRateNetwork {
     }
   }
 
-  CurrencyError _mapDioError(DioException e) {
+  CurrencyError _mapDioError(
+    DioException e,
+  ) {
     switch (e.type) {
       case DioExceptionType.connectionTimeout:
       case DioExceptionType.sendTimeout:
@@ -66,7 +68,9 @@ class CurrencyRateNetwork {
         return CurrencyError.badResponse(0);
       case DioExceptionType.badResponse:
         final statusCode = e.response?.statusCode ?? 0;
-        return CurrencyError.badResponse(statusCode);
+        return CurrencyError.badResponse(
+          statusCode,
+        );
       case DioExceptionType.cancel:
         return CurrencyError.cancelled();
       case DioExceptionType.connectionError:

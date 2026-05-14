@@ -1,5 +1,6 @@
 import '../network/currency/resp/rate_data_from_network.dart';
 import '../utils/string_extensions.dart';
+import 'package:currency_converter/main.dart';
 
 class RateData {
   final String code;
@@ -19,7 +20,7 @@ class RateData {
   static RateData fromNetworkModel(RateDataFromNetwork model) {
     return RateData(
       code: model.curAbbreviation ?? '',
-      name: model.curName ?? 'Неизвестное название валюты',
+      name: model.curName ?? strings.common_unknown_currency_name,
       rate: model.curOfficialRate ?? 0.0,
       date: model.date?.toDayMonthYearDateParse(),
       scale: (model.curScale ?? 1).toInt(),

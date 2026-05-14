@@ -2,7 +2,9 @@ part of 'home_screen.dart';
 
 Widget _buildSuccessWidget({
   required List<RateData> currencies,
-  required void Function(RateData) onCurrencyPressed,
+  required void Function(
+    RateData,
+  ) onCurrencyPressed,
 }) {
   return ListView.builder(
     padding: const EdgeInsets.all(
@@ -37,7 +39,9 @@ Widget _buildSuccessWidget({
             strings.common_scale_equals_rate_byn(
               currency.scale,
               currency.code,
-              currency.rate.toStringAsFixed(4),
+              currency.rate.toStringAsFixed(
+                4,
+              ),
             ),
           ),
           trailing: const Icon(

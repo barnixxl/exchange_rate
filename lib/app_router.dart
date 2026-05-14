@@ -4,7 +4,9 @@ import 'ui/converter_details/converter_details_screen.dart';
 import 'models/rate_data.dart';
 
 class AppRouter {
-  static Route<dynamic> generateRoute(RouteSettings settings) {
+  static Route<dynamic> generateRoute(
+    RouteSettings settings,
+  ) {
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(
@@ -13,7 +15,9 @@ class AppRouter {
       case '/converter_details':
         final currency = settings.arguments as RateData;
         return MaterialPageRoute(
-          builder: (_) => ConverterDetailsScreen(currency: currency),
+          builder: (_) => ConverterDetailsScreen(
+            currency: currency,
+          ),
         );
       default:
         return MaterialPageRoute(

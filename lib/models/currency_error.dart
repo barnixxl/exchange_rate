@@ -25,7 +25,9 @@ class CurrencyError {
   factory CurrencyError.fromException(
     Object e,
   ) {
-    if (e is CurrencyError) return e;
+    if (e is CurrencyError) {
+      return e;
+    }
     return CurrencyError(
       errorCode: unknownCode,
       message: e.toString(),
