@@ -59,7 +59,9 @@ class CurrencyError {
   ) =>
       CurrencyError(
         errorCode: badResponseCode,
-        message: strings.error_bad_response(statusCode),
+        message: strings.error_bad_response(
+          statusCode,
+        ),
       );
 
   factory CurrencyError.cancelled() => CurrencyError(

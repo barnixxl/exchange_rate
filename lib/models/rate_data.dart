@@ -17,7 +17,9 @@ class RateData {
     required this.scale,
   });
 
-  static RateData fromNetworkModel(RateDataFromNetwork model) {
+  static RateData fromNetworkModel(
+    RateDataFromNetwork model,
+  ) {
     return RateData(
       code: model.curAbbreviation ?? '',
       name: model.curName ?? strings.common_unknown_currency_name,
