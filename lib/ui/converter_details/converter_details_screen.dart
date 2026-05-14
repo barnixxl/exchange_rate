@@ -8,9 +8,13 @@ import '../../utils/date_formatter.dart';
 import 'converter_details_controller.dart';
 
 part 'converter_details_screen.base_converter_input.part.dart';
+
 part 'converter_details_screen.base_converter_result.part.dart';
+
 part 'converter_details_screen.header.part.dart';
+
 part 'converter_details_screen.reverse_converter_input.part.dart';
+
 part 'converter_details_screen.reverse_converter_result.part.dart';
 
 class ConverterDetailsScreen extends StatefulWidget {
@@ -96,6 +100,9 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
                   },
                 ),
               ],
+            ),
+            const SizedBox(
+              height: 24,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
