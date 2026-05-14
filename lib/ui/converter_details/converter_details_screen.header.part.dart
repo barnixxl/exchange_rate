@@ -10,7 +10,9 @@ Widget _buildHeaderWidget({
   final exchangeRateText = strings.common_scale_equals_rate_byn(
     scale,
     code,
-    rate.toStringAsFixed(4),
+    rate.toStringAsFixed(
+        4,
+    ),
   );
   final formattedDate = date?.toDayMonthYearTextDateFormat() ?? '';
   final hasValidDate = formattedDate.isNotEmpty;
@@ -20,7 +22,9 @@ Widget _buildHeaderWidget({
       Card(
         elevation: 4,
         child: Padding(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.all(
+              24,
+          ),
           child: Column(
             children: [
               Text(
