@@ -24,11 +24,9 @@ Widget _buildSuccessWidget({
         child: ListTile(
           leading: CircleAvatar(
             backgroundColor: AppColors.primaryLight,
-            child: Text(
-              currency.code,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                color: AppColors.primary,
+            backgroundImage: AssetImage(
+              AppImages.forCode(
+                currency.code,
               ),
             ),
           ),
