@@ -27,6 +27,8 @@ class ConverterDetailsScreen extends StatefulWidget {
 
 class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
   final ConverterDetailsController _controller = ConverterDetailsController();
+  final FocusNode _baseInputFocusNode = FocusNode();
+  final FocusNode _currencyInputFocusNode = FocusNode();
 
   @override
   void initState() {
@@ -37,81 +39,85 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
   }
 
   @override
+  void dispose() {
+    _baseInputFocusNode.dispose();
+    _currencyInputFocusNode.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(
     BuildContext context,
   ) {
-    return GestureDetector(
-      onTap: () => FocusScope.of(
-        context,
-      ).unfocus(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            _controller.code,
-          ),
-          backgroundColor: Colors.blue,
-          foregroundColor: Colors.white,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          _controller.code,
         ),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildHeaderWidget(
-                code: _controller.code,
-                name: _controller.name,
-                rate: _controller.rate,
-                scale: _controller.scale,
-                date: _controller.date,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildBaseConverterInputWidget(
-                    onBaseAmountChanged: _controller.onBaseAmountChanged,
-                  ),
-                  Observer(
-                    builder: (_) {
-                      final hasBaseAmount = _controller.hasBaseAmount;
-                      final convertedAmount = _controller.convertedAmount;
-                      final name = _controller.name;
-                      final code = _controller.code;
-                      return Visibility(
-                        visible: hasBaseAmount,
-                        child: _buildBaseConverterResultWidget(
-                          convertedResult: convertedAmount,
-                          resultCurrencyName: name,
-                          resultCurrencyCode: code,
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildReverseConverterInputWidget(
-                    sourceCurrencyCode: _controller.code,
-                    onCurrencyAmountChanged:
-                        _controller.onCurrencyAmountChanged,
-                  ),
-                  Observer(
-                    builder: (_) {
-                      final hasCurrencyAmount = _controller.hasCurrencyAmount;
-                      final convertedAmountReverse = _controller.convertedAmountReverse;
-                      return Visibility(
-                        visible: hasCurrencyAmount,
-                        child: _buildReverseConverterResultWidget(
-                          convertedResult: convertedAmountReverse,
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ],
-          ),
+        backgroundColor: Colors.blue,
+        foregroundColor: Colors.white,
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildHeaderWidget(
+              code: _controller.code,
+              name: _controller.name,
+              rate: _controller.rate,
+              scale: _controller.scale,
+              date: _controller.date,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildBaseConverterInputWidget(
+                  focusNode: _baseInputFocusNode,
+                  onBaseAmountChanged: _controller.onBaseAmountChanged,
+                ),
+                Observer(
+                  builder: (_) {
+                    final hasBaseAmount = _controller.hasBaseAmount;
+                    final convertedAmount = _controller.convertedAmount;
+                    final name = _controller.name;
+                    final code = _controller.code;
+                    return Visibility(
+                      visible: hasBaseAmount,
+                      child: _buildBaseConverterResultWidget(
+                        convertedResult: convertedAmount,
+                        resultCurrencyName: name,
+                        resultCurrencyCode: code,
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildReverseConverterInputWidget(
+                  focusNode: _currencyInputFocusNode,
+                  sourceCurrencyCode: _controller.code,
+                  onCurrencyAmountChanged:
+                      _controller.onCurrencyAmountChanged,
+                ),
+                Observer(
+                  builder: (_) {
+                    final hasCurrencyAmount = _controller.hasCurrencyAmount;
+                    final convertedAmountReverse = _controller.convertedAmountReverse;
+                    return Visibility(
+                      visible: hasCurrencyAmount,
+                      child: _buildReverseConverterResultWidget(
+                        convertedResult: convertedAmountReverse,
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
