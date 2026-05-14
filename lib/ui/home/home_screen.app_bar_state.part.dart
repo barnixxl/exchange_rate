@@ -9,8 +9,8 @@ Widget _buildAppBarWidget({
     title: Text(
       strings.home_title,
     ),
-    backgroundColor: Colors.blue,
-    foregroundColor: Colors.white,
+    backgroundColor: AppColors.primary,
+    foregroundColor: AppColors.onPrimary,
     bottom: PreferredSize(
       preferredSize: const Size.fromHeight(
         40,
@@ -19,14 +19,14 @@ Widget _buildAppBarWidget({
         padding: const EdgeInsets.all(
           8,
         ),
-        color: Colors.blue.shade700,
+        color: AppColors.primaryDark,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Icon(
               Icons.update,
               size: 16,
-              color: Colors.white70,
+                color: AppColors.onPrimarySubtle,
             ),
             const SizedBox(
               width: 4,
@@ -37,7 +37,7 @@ Widget _buildAppBarWidget({
                     strings.common_absent_date,
               ),
               style: const TextStyle(
-                color: Colors.white70,
+              color: AppColors.onPrimarySubtle,
                 fontSize: 12,
               ),
             ),
@@ -52,7 +52,7 @@ Widget _buildAppBarWidget({
                 width: 20,
                 height: 20,
                 child: CircularProgressIndicator(
-                  color: Colors.white,
+                  color: AppColors.onPrimary,
                   strokeWidth: 2,
                 ),
               )

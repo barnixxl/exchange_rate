@@ -6,6 +6,7 @@ import 'app_router.dart';
 import 'network/currency/currency_api.dart';
 import 'network/currency_rate_network.dart';
 import 'repository/currency_repository.dart';
+import 'resources/colors/app_colors.dart';
 import 'resources/strings/app_localizations.dart';
 
 late final AppLocalizations strings;
@@ -54,7 +55,7 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary),
         useMaterial3: true,
         appBarTheme: const AppBarTheme(
           elevation: 0,

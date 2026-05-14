@@ -12,7 +12,7 @@ Widget _buildInfoRow({
           label,
           style: const TextStyle(
             fontSize: 16,
-            color: Colors.grey,
+            color: AppColors.textSecondary,
           ),
         ),
       ),

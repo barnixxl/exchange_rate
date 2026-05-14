@@ -21,12 +21,12 @@ Widget _buildSuccessWidget({
         ),
         child: ListTile(
           leading: CircleAvatar(
-            backgroundColor: Colors.blue.shade100,
+            backgroundColor: AppColors.primaryLight,
             child: Text(
               currency.code,
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
-                color: Colors.blue,
+                color: AppColors.primary,
               ),
             ),
           ),

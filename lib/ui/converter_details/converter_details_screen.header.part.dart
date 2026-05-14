@@ -32,7 +32,7 @@ Widget _buildHeaderWidget({
                 style: const TextStyle(
                   fontSize: 48,
                   fontWeight: FontWeight.bold,
-                  color: Colors.blue,
+                  color: AppColors.primary,
                 ),
               ),
               const SizedBox(
@@ -42,7 +42,7 @@ Widget _buildHeaderWidget({
                 name,
                 style: const TextStyle(
                   fontSize: 20,
-                  color: Colors.grey,
+                  color: AppColors.textSecondary,
                 ),
               ),
               const Divider(

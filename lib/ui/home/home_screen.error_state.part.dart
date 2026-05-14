@@ -15,7 +15,7 @@ Widget _buildErrorWidget({
           const Icon(
             Icons.error_outline,
             size: 64,
-            color: Colors.red,
+            color: AppColors.error,
           ),
           const SizedBox(
             height: 16,

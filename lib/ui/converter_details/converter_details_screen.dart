@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../../models/rate_data.dart';
+import '../../resources/colors/app_colors.dart';
 import '../../utils/date_formatter.dart';
 import 'converter_details_controller.dart';
 
@@ -54,8 +55,8 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
         title: Text(
           _controller.code,
         ),
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
+        backgroundColor: AppColors.primary,
+        foregroundColor: AppColors.onPrimary,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(
