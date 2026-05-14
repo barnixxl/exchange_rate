@@ -45,8 +45,6 @@ class _HomeScreenState extends State<HomeScreen> {
           builder: (_) {
             return _buildAppBarWidget(
               lastUpdateDate: homeController.lastUpdateDate,
-              isLoading: homeController.isLoading,
-              onRetryPressed: _loadData,
             );
           },
         ),
