@@ -11,7 +11,7 @@ Widget _buildHeaderWidget({
     scale,
     code,
     rate.toStringAsFixed(
-        4,
+      4,
     ),
   );
   final formattedDate = date?.toDayMonthYearTextDateFormat() ?? '';
@@ -23,7 +23,7 @@ Widget _buildHeaderWidget({
         elevation: 4,
         child: Padding(
           padding: const EdgeInsets.all(
-              24,
+            24,
           ),
           child: Column(
             children: [
@@ -64,7 +64,8 @@ Widget _buildHeaderWidget({
               ),
               _buildInfoRow(
                 label: strings.update_date,
-                value: hasValidDate ? formattedDate : strings.common_absent_date,
+                value:
+                    hasValidDate ? formattedDate : strings.common_absent_date,
               ),
             ],
           ),
@@ -72,6 +73,36 @@ Widget _buildHeaderWidget({
       ),
       const SizedBox(
         height: 24,
+      ),
+    ],
+  );
+}
+
+Widget _buildInfoRow({
+  required String label,
+  required String value,
+}) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      Flexible(
+        child: Text(
+          label,
+          style: const TextStyle(
+            fontSize: 16,
+            color: AppColors.textSecondary,
+          ),
+        ),
+      ),
+      Flexible(
+        child: Text(
+          value,
+          style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+          ),
+          textAlign: TextAlign.right,
+        ),
       ),
     ],
   );
