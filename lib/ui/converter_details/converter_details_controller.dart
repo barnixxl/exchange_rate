@@ -87,13 +87,17 @@ class ConverterDetailsController {
     double amount,
   ) {
     final rateValue = rate != 0 ? rate : 1;
-    return (amount * scale / rateValue).toStringAsFixed(2);
+    return (amount * scale / rateValue).toStringAsFixed(
+      2,
+    );
   }
 
   String _calculateReverse(
     double amount,
   ) {
     final scaleValue = scale != 0 ? scale : 1;
-    return (amount * rate / scaleValue).toStringAsFixed(2);
+    return (amount * rate / scaleValue).toStringAsFixed(
+      2,
+    );
   }
 }

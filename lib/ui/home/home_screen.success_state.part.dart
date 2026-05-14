@@ -40,7 +40,7 @@ Widget _buildSuccessWidget({
               currency.scale,
               currency.code,
               currency.rate.toStringAsFixed(
-                4,
+                2,
               ),
             ),
           ),

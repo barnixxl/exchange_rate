@@ -11,7 +11,7 @@ Widget _buildHeaderWidget({
     scale,
     code,
     rate.toStringAsFixed(
-      4,
+      2,
     ),
   );
   final formattedDate = date?.toDayMonthYearTextDateFormat() ?? '';
