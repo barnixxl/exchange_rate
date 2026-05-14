@@ -39,3 +39,10 @@ dev_dependencies:
 
 flutter:
   generate: true
+
+  assets:
+    - assets/images/usd.png
+    - assets/images/eur.png
+    - assets/images/cny.png
+    - assets/images/pln.png
+    - assets/images/uah.png
