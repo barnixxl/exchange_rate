@@ -68,17 +68,17 @@ class CurrencyRepository extends BaseRepository {
   ) {
     switch (code) {
       case 'USD':
-        return AppImages.usd;
+        return AppImages.usd.path;
       case 'EUR':
-        return AppImages.eur;
+        return AppImages.eur.path;
       case 'CNY':
-        return AppImages.cny;
+        return AppImages.cny.path;
       case 'PLN':
-        return AppImages.pln;
+        return AppImages.pln.path;
       case 'UAH':
-        return AppImages.uah;
+        return AppImages.uah.path;
       default:
-        return AppImages.usd;
+        return AppImages.usd.path;
     }
   }
 }
