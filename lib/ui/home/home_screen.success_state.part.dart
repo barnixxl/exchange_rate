@@ -1,6 +1,9 @@
 part of 'home_screen.dart';
 
 Widget _buildSuccessWidget({
+  required String Function(
+    String,
+  ) getImageForCode,
   required List<RateData> currencies,
   required void Function(
     RateData,
@@ -25,7 +28,7 @@ Widget _buildSuccessWidget({
           leading: CircleAvatar(
             backgroundColor: AppColors.primaryLight,
             backgroundImage: AssetImage(
-              AppImages.forCode(
+              getImageForCode(
                 currency.code,
               ),
             ),

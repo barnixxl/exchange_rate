@@ -1,7 +1,6 @@
 import 'package:currency_converter/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:currency_converter/resources/images/app_images.dart';
 
 import '../../models/rate_data.dart';
 import '../../resources/colors/app_colors.dart';
@@ -67,6 +66,7 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildHeaderWidget(
+              getImageForCode: _controller.imagesAssetsFor,
               code: _controller.code,
               name: _controller.name,
               rate: _controller.rate,

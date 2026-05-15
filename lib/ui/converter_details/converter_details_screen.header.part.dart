@@ -1,6 +1,9 @@
 part of 'converter_details_screen.dart';
 
 Widget _buildHeaderWidget({
+  required String Function(
+    String,
+  ) getImageForCode,
   required String code,
   required String name,
   required double rate,
@@ -29,7 +32,7 @@ Widget _buildHeaderWidget({
             children: [
               ClipOval(
                 child: Image.asset(
-                  AppImages.forCode(
+                  getImageForCode(
                     code,
                   ),
                   width: 80,

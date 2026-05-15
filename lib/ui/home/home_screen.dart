@@ -1,5 +1,4 @@
 import 'package:currency_converter/main.dart';
-import 'package:currency_converter/resources/images/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -78,6 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 return Visibility(
                   visible: homeController.hasSuccess,
                   child: _buildSuccessWidget(
+                    getImageForCode: homeController.imagesAssetsFor,
                     currencies: homeController.currencies,
                     onCurrencyPressed: _navigateToDetail,
                   ),
