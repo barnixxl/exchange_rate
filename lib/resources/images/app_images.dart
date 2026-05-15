@@ -1,18 +1,8 @@
 class AppImages {
-  static const String usd = 'assets/images/usd.png';
-  static const String eur = 'assets/images/eur.png';
-  static const String cny = 'assets/images/cny.png';
-  static const String pln = 'assets/images/pln.png';
-  static const String uah = 'assets/images/uah.png';
-
-  static String forCode(String code){
-    switch(code){
-      case 'USD': return usd;
-      case 'EUR': return eur;
-      case 'CNY': return cny;
-      case 'PLN': return pln;
-      case 'UAH': return uah;
-      default: return usd;
-    }
-  }
+  static const _baseImagePath = 'assets/images';
+  static const usd = '$_baseImagePath/usd.png';
+  static const eur = '$_baseImagePath/eur.png';
+  static const cny = '$_baseImagePath/cny.png';
+  static const pln = '$_baseImagePath/pln.png';
+  static const uah = '$_baseImagePath/uah.png';
 }

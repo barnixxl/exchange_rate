@@ -1,3 +1,4 @@
+import 'package:currency_converter/resources/images/app_images.dart';
 import 'package:get_it/get_it.dart';
 import '../models/rate_data.dart';
 import '../models/currency_result.dart';
@@ -60,5 +61,24 @@ class CurrencyRepository extends BaseRepository {
       return filtered;
     }
     return [];
+  }
+
+  static String currencyImageAssetFor(
+    String code,
+  ) {
+    switch (code) {
+      case 'USD':
+        return AppImages.usd;
+      case 'EUR':
+        return AppImages.eur;
+      case 'CNY':
+        return AppImages.cny;
+      case 'PLN':
+        return AppImages.pln;
+      case 'UAH':
+        return AppImages.uah;
+      default:
+        return AppImages.usd;
+    }
   }
 }
