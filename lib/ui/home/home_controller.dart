@@ -4,6 +4,7 @@ import '../../models/currency_result.dart';
 import '../../models/currency_error.dart';
 import '../../models/rate_data.dart';
 import '../../repository/currency_repository.dart';
+import '../../resources/images/app_images.dart';
 
 class HomeController {
   final CurrencyRepository _repository = CurrencyRepository.getInstance();
@@ -24,12 +25,21 @@ class HomeController {
 
   CurrencyError? get error => _currencyResult.value.error;
 
-  String imagesAssetsFor(
-    String code,
-  ) {
-    return CurrencyRepository.currencyImageAssetFor(
-      code,
-    );
+  String imagesAssetsFor(String code) {
+    switch (code) {
+      case 'USD':
+        return AppImages.usd.path;
+      case 'EUR':
+        return AppImages.eur.path;
+      case 'CNY':
+        return AppImages.cny.path;
+      case 'PLN':
+        return AppImages.pln.path;
+      case 'UAH':
+        return AppImages.uah.path;
+      default:
+        return AppImages.usd.path;
+    }
   }
 
   Future<void> loadCurrencies() async {

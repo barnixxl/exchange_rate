@@ -1,5 +1,6 @@
-import 'package:currency_converter/repository/currency_repository.dart';
 import 'package:mobx/mobx.dart';
+
+import '../../resources/images/app_images.dart';
 
 import '../../models/rate_data.dart';
 
@@ -34,12 +35,21 @@ class ConverterDetailsController {
 
   String get convertedAmountReverse => _calculateConvertedAmountReverse();
 
-  String imagesAssetsFor(
-    String code,
-  ) {
-    return CurrencyRepository.currencyImageAssetFor(
-      code,
-    );
+  String imagesAssetsFor(String code) {
+    switch (code) {
+      case 'USD':
+        return AppImages.usd.path;
+      case 'EUR':
+        return AppImages.eur.path;
+      case 'CNY':
+        return AppImages.cny.path;
+      case 'PLN':
+        return AppImages.pln.path;
+      case 'UAH':
+        return AppImages.uah.path;
+      default:
+        return AppImages.usd.path;
+    }
   }
 
   void onBaseAmountChanged(
