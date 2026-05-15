@@ -36,10 +36,11 @@ class ConverterDetailsController {
 
   String imagesAssetsFor(
     String code,
-  ) =>
-      CurrencyRepository.currencyImageAssetFor(
-        code,
-      );
+  ) {
+    return CurrencyRepository.currencyImageAssetFor(
+      code,
+    );
+  }
 
   void onBaseAmountChanged(
     String value,

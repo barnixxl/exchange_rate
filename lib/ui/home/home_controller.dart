@@ -26,10 +26,11 @@ class HomeController {
 
   String imagesAssetsFor(
     String code,
-  ) =>
-      CurrencyRepository.currencyImageAssetFor(
-        code,
-      );
+  ) {
+    return CurrencyRepository.currencyImageAssetFor(
+      code,
+    );
+  }
 
   Future<void> loadCurrencies() async {
     runInAction(() {
