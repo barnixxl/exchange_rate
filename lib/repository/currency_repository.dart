@@ -5,48 +5,6 @@ import '../network/currency/currency_api.dart';
 import '../repository/base_repository.dart';
 import '../resources/images/app_images.dart';
 
-enum CurrencyAssets {
-  usd,
-  eur,
-  cny,
-  pln,
-  uah;
-
-  String get imagePath {
-    switch (this) {
-      case CurrencyAssets.usd:
-        return AppImages.usd;
-      case CurrencyAssets.eur:
-        return AppImages.eur;
-      case CurrencyAssets.cny:
-        return AppImages.cny;
-      case CurrencyAssets.pln:
-        return AppImages.pln;
-      case CurrencyAssets.uah:
-        return AppImages.uah;
-    }
-  }
-
-  static CurrencyAssets fromCode(
-    String code,
-  ) {
-    switch (code) {
-      case 'USD':
-        return CurrencyAssets.usd;
-      case 'EUR':
-        return CurrencyAssets.eur;
-      case 'CNY':
-        return CurrencyAssets.cny;
-      case 'PLN':
-        return CurrencyAssets.pln;
-      case 'UAH':
-        return CurrencyAssets.uah;
-      default:
-        return CurrencyAssets.usd;
-    }
-  }
-}
-
 class CurrencyRepository extends BaseRepository {
   static final GetIt _getIt = GetIt.instance;
   static const _targetCurrencies = [
@@ -103,5 +61,47 @@ class CurrencyRepository extends BaseRepository {
       return filtered;
     }
     return [];
+  }
+}
+
+enum CurrencyAssets {
+  usd,
+  eur,
+  cny,
+  pln,
+  uah;
+
+  String get imagePath {
+    switch (this) {
+      case CurrencyAssets.usd:
+        return AppImages.usd;
+      case CurrencyAssets.eur:
+        return AppImages.eur;
+      case CurrencyAssets.cny:
+        return AppImages.cny;
+      case CurrencyAssets.pln:
+        return AppImages.pln;
+      case CurrencyAssets.uah:
+        return AppImages.uah;
+    }
+  }
+
+  static CurrencyAssets fromCode(
+    String code,
+  ) {
+    switch (code) {
+      case 'USD':
+        return CurrencyAssets.usd;
+      case 'EUR':
+        return CurrencyAssets.eur;
+      case 'CNY':
+        return CurrencyAssets.cny;
+      case 'PLN':
+        return CurrencyAssets.pln;
+      case 'UAH':
+        return CurrencyAssets.uah;
+      default:
+        return CurrencyAssets.usd;
+    }
   }
 }
