@@ -38,9 +38,9 @@ class ConverterDetailsController {
   String imagesAssetsFor(
     String code,
   ) {
-   return CurrencyRepository.imagesAssetsFor(
+    return CurrencyAssets.fromCode(
       code,
-    );
+    ).imagePath;
   }
 
   void onBaseAmountChanged(

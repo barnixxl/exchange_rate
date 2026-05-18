@@ -27,9 +27,9 @@ class HomeController {
   String imagesAssetsFor(
     String code,
   ) {
-    return CurrencyRepository.imagesAssetsFor(
+    return CurrencyAssets.fromCode(
       code,
-    );
+    ).imagePath;
   }
 
   Future<void> loadCurrencies() async {
