@@ -3,6 +3,9 @@ import '../models/rate_data.dart';
 import '../models/currency_result.dart';
 import '../network/currency/currency_api.dart';
 import '../repository/base_repository.dart';
+import '../resources/images/app_images.dart';
+
+enum CurrencyAssets { usd, eur, cny, pln, uah }
 
 class CurrencyRepository extends BaseRepository {
   static final GetIt _getIt = GetIt.instance;
@@ -28,6 +31,27 @@ class CurrencyRepository extends BaseRepository {
   @override
   Future<void> initializeDependencies() async {
     _api = _getIt<CurrencyApi>();
+  }
+
+  static String imagesAssetsFor(
+      String code,
+      ) {
+    final abbreviation = switch (code) {
+      'USD' => CurrencyAssets.usd,
+      'EUR' => CurrencyAssets.eur,
+      'CNY' => CurrencyAssets.cny,
+      'PLN' => CurrencyAssets.pln,
+      'UAH' => CurrencyAssets.uah,
+      _ => CurrencyAssets.usd,
+    };
+
+    return switch (abbreviation) {
+      CurrencyAssets.usd => AppImages.usd,
+      CurrencyAssets.eur => AppImages.eur,
+      CurrencyAssets.cny => AppImages.cny,
+      CurrencyAssets.pln => AppImages.pln,
+      CurrencyAssets.uah => AppImages.uah,
+    };
   }
 
   static CurrencyRepository getInstance() {
