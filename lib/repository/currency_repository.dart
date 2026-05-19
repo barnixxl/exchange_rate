@@ -8,14 +8,6 @@ import '../resources/images/app_images.dart';
 class CurrencyRepository extends BaseRepository {
   static final GetIt _getIt = GetIt.instance;
 
-  // static const _targetCurrencies = [
-  //   "USD",
-  //   "EUR",
-  //   "CNY",
-  //   "PLN",
-  //   "UAH",
-  // ];
-
   late final CurrencyApi _api;
 
   @override
