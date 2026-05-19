@@ -13,7 +13,9 @@ class CurrencyApi {
   void register(
     GetIt getIt,
   ) {
-    getIt.registerSingleton<CurrencyApi>(this);
+    getIt.registerSingleton<CurrencyApi>(
+      this,
+    );
   }
 
   Future<void> initializeDependencies() async {

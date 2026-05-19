@@ -28,13 +28,19 @@ Future<void> main() async {
   );
   final getIt = GetIt.instance;
   final network = CurrencyRateNetwork();
-  network.register(getIt);
+  network.register(
+    getIt,
+  );
   await network.initializeDependencies();
   final api = CurrencyApi();
-  api.register(getIt);
+  api.register(
+    getIt,
+  );
   await api.initializeDependencies();
   final repository = CurrencyRepository();
-  repository.register(getIt);
+  repository.register(
+    getIt,
+  );
   await repository.initializeDependencies();
   runApp(
     const MyApp(),

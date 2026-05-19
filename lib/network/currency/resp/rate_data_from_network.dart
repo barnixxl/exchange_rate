@@ -27,7 +27,9 @@ class RateDataFromNetwork {
   });
 
   factory RateDataFromNetwork.fromJson(Map<String, dynamic> json) =>
-      _$RateDataFromNetworkFromJson(json);
+      _$RateDataFromNetworkFromJson(
+        json,
+      );
 
   @override
   String toString() => 'RateDataFromNetwork('

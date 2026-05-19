@@ -36,12 +36,12 @@ class CurrencyError {
 
   factory CurrencyError.timeout() => CurrencyError(
         errorCode: timeoutCode,
-    errorMessage: strings.error_timeout,
+        errorMessage: strings.error_timeout,
       );
 
   factory CurrencyError.noInternet() => CurrencyError(
         errorCode: noInternetCode,
-    errorMessage: strings.error_no_internet,
+        errorMessage: strings.error_no_internet,
       );
 
   factory CurrencyError.serverError(
@@ -66,26 +66,26 @@ class CurrencyError {
 
   factory CurrencyError.cancelled() => CurrencyError(
         errorCode: cancelledCode,
-    errorMessage: strings.error_cancelled,
+        errorMessage: strings.error_cancelled,
       );
 
   factory CurrencyError.unknown() => CurrencyError(
         errorCode: unknownCode,
-    errorMessage: strings.error_unknown,
+        errorMessage: strings.error_unknown,
       );
 
   factory CurrencyError.parsing() => CurrencyError(
         errorCode: parsingCode,
-    errorMessage: strings.error_parsing,
+        errorMessage: strings.error_parsing,
       );
 
   factory CurrencyError.noData() => CurrencyError(
         errorCode: noDataCode,
-    errorMessage: strings.error_no_data,
+        errorMessage: strings.error_no_data,
       );
 
   factory CurrencyError.loadFailed() => CurrencyError(
         errorCode: loadFailedCode,
-    errorMessage: strings.error_load_failed,
+        errorMessage: strings.error_load_failed,
       );
 }
