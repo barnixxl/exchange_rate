@@ -7,13 +7,14 @@ import '../resources/images/app_images.dart';
 
 class CurrencyRepository extends BaseRepository {
   static final GetIt _getIt = GetIt.instance;
-  static const _targetCurrencies = [
-    "USD",
-    "EUR",
-    "CNY",
-    "PLN",
-    "UAH",
-  ];
+
+  // static const _targetCurrencies = [
+  //   "USD",
+  //   "EUR",
+  //   "CNY",
+  //   "PLN",
+  //   "UAH",
+  // ];
 
   late final CurrencyApi _api;
 
@@ -49,11 +50,18 @@ class CurrencyRepository extends BaseRepository {
 
   List<RateData> _filterAndSortRates(List<RateData>? rates) {
     if (rates != null) {
-      final filtered =
-          rates.where((r) => _targetCurrencies.contains(r.code)).toList();
-      filtered.sort((a, b) {
-        final indexA = _targetCurrencies.indexOf(a.code);
-        final indexB = _targetCurrencies.indexOf(b.code);
+      const currencies = CurrencyAssets.values;
+      final filtered = rates
+          .where((r) => currencies.any((c) => c.name.toUpperCase() == r.code))
+          .toList();
+      filtered.sort((
+        a,
+        b,
+      ) {
+        final indexA =
+            currencies.indexWhere((c) => c.name.toUpperCase() == a.code);
+        final indexB =
+            currencies.indexWhere((c) => c.name.toUpperCase() == b.code);
         return indexA.compareTo(
           indexB,
         );
