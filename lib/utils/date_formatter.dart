@@ -5,9 +5,10 @@ extension DateUtils on DateTime? {
       DateFormat('d MMMM y', 'ru');
 
   String? toDayMonthYearTextDateFormat() {
-    if (this != null) {
+    final self = this;
+    if (self != null) {
       return dayMonthYearTextDateFormat.format(
-        this!,
+        self,
       );
     }
     return null;
