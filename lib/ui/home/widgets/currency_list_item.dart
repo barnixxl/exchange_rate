@@ -47,12 +47,12 @@ class CurrencyListItem extends StatelessWidget {
       child: ListTile(
         textColor: AppColors.onPrimary,
         leading: Image.asset(
-                CurrencyAssets.fromCode(
-                  currency.code,
-                ).imagePath,
-                width: 40,
-                height: 40,
-              ),
+          CurrencyAssets.fromCode(
+            currency.code,
+          ).imagePath,
+          width: 40,
+          height: 40,
+        ),
         title: Text(
           currency.name,
         ),
