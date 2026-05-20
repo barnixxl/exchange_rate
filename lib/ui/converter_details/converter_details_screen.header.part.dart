@@ -42,15 +42,12 @@ Widget _buildHeaderWidget({
           ),
           child: Column(
             children: [
-              ClipOval(
-                child: Image.asset(
-                  CurrencyAssets.fromCode(
-                    code,
-                  ).imagePath,
-                  width: 80,
-                  height: 80,
-                  fit: BoxFit.cover,
-                ),
+              Image.asset(
+                CurrencyAssets.fromCode(
+                  code,
+                ).imagePath,
+                width: 80,
+                height: 80,
               ),
               const SizedBox(
                 height: 8,
