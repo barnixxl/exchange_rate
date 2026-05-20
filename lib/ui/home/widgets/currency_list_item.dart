@@ -1,0 +1,80 @@
+import 'package:currency_converter/main.dart';
+import 'package:flutter/material.dart';
+
+import '../../../models/rate_data.dart';
+import '../../../resources/colors/app_colors.dart';
+
+class CurrencyListItem extends StatelessWidget {
+  final RateData currency;
+  final String Function(
+    String,
+  ) getImageForCode;
+  final void Function(
+    RateData,
+  ) onTap;
+
+  const CurrencyListItem({
+    super.key,
+    required this.currency,
+    required this.getImageForCode,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(
+    BuildContext context,
+  ) {
+    return Container(
+      margin: const EdgeInsets.symmetric(
+        horizontal: 8,
+        vertical: 4,
+      ),
+      decoration: BoxDecoration(
+        color: AppColors.primaryLight,
+        borderRadius: BorderRadius.circular(
+          16,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.shadow.withValues(
+              alpha: 0.3,
+            ),
+            blurRadius: 4,
+            offset: const Offset(
+              0,
+              2,
+            ),
+          ),
+        ],
+      ),
+      child: ListTile(
+        textColor: AppColors.onPrimary,
+        leading: CircleAvatar(
+          backgroundColor: AppColors.primaryLight,
+          backgroundImage: AssetImage(
+            getImageForCode(
+              currency.code,
+            ),
+          ),
+        ),
+        title: Text(
+          currency.name,
+        ),
+        subtitle: Text(
+          strings.common_scale_equals_rate_byn(
+            currency.scale,
+            currency.code,
+            currency.rate.toStringAsFixed(
+              2,
+            ),
+          ),
+        ),
+        onTap: () {
+          onTap(
+            currency,
+          );
+        },
+      ),
+    );
+  }
+}
