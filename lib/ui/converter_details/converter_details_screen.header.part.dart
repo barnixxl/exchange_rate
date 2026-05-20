@@ -22,8 +22,23 @@ Widget _buildHeaderWidget({
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Card(
-        elevation: 4,
+      Container(
+        decoration: BoxDecoration(
+          color: AppColors.primaryLight,
+          borderRadius: BorderRadius.circular(
+            16,
+          ),
+          boxShadow: const [
+            BoxShadow(
+              color: AppColors.shadow,
+              blurRadius: 8,
+              offset: Offset(
+                0,
+                4,
+              ),
+            ),
+          ],
+        ),
         child: Padding(
           padding: const EdgeInsets.all(
             24,
@@ -47,11 +62,13 @@ Widget _buildHeaderWidget({
                 name,
                 style: const TextStyle(
                   fontSize: 20,
-                  color: AppColors.textSecondary,
+                  color: AppColors.onPrimary,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               const Divider(
                 height: 32,
+                color: AppColors.onPrimarySubtle,
               ),
               _buildInfoRow(
                 label: strings.exchange_rate,
@@ -95,7 +112,7 @@ Widget _buildInfoRow({
           label,
           style: const TextStyle(
             fontSize: 12,
-            color: AppColors.textSecondary,
+            color: AppColors.onPrimarySubtle,
           ),
         ),
       ),
@@ -105,6 +122,7 @@ Widget _buildInfoRow({
           style: const TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w500,
+            color: AppColors.onPrimary,
           ),
           textAlign: TextAlign.right,
         ),
