@@ -1,7 +1,5 @@
 import 'package:mobx/mobx.dart';
 
-import '../../repository/currency_repository.dart';
-
 import '../../models/rate_data.dart';
 
 class ConverterDetailsController {
@@ -34,14 +32,6 @@ class ConverterDetailsController {
   String get convertedAmount => _calculateConvertedAmount();
 
   String get convertedAmountReverse => _calculateConvertedAmountReverse();
-
-  String imagesAssetsFor(
-    String code,
-  ) {
-    return CurrencyAssets.fromCode(
-      code,
-    ).imagePath;
-  }
 
   void onBaseAmountChanged(
     String value,

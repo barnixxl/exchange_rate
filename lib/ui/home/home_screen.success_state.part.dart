@@ -1,9 +1,6 @@
 part of 'home_screen.dart';
 
 Widget _buildSuccessWidget({
-  required String Function(
-    String,
-  ) getImageForCode,
   required List<RateData> currencies,
   required void Function(
     RateData,
@@ -21,7 +18,6 @@ Widget _buildSuccessWidget({
       final currency = currencies[index];
       return CurrencyListItem(
         currency: currency,
-        getImageForCode: getImageForCode,
         onTap: onCurrencyPressed,
       );
     },

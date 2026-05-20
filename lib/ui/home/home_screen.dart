@@ -81,7 +81,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 return Visibility(
                   visible: homeController.hasSuccess,
                   child: _buildSuccessWidget(
-                    getImageForCode: homeController.imagesAssetsFor,
                     currencies: homeController.currencies,
                     onCurrencyPressed: _navigateToDetail,
                   ),

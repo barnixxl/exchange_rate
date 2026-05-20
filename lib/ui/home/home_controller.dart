@@ -24,14 +24,6 @@ class HomeController {
 
   CurrencyError? get error => _currencyResult.value.error;
 
-  String imagesAssetsFor(
-    String code,
-  ) {
-    return CurrencyAssets.fromCode(
-      code,
-    ).imagePath;
-  }
-
   Future<void> loadCurrencies() async {
     runInAction(() {
       _currencyResult.value = CurrencyResult.loading();

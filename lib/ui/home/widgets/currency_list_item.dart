@@ -2,13 +2,11 @@ import 'package:currency_converter/main.dart';
 import 'package:flutter/material.dart';
 
 import '../../../models/rate_data.dart';
+import '../../../repository/currency_repository.dart';
 import '../../../resources/colors/app_colors.dart';
 
 class CurrencyListItem extends StatelessWidget {
   final RateData currency;
-  final String Function(
-    String,
-  ) getImageForCode;
   final void Function(
     RateData,
   ) onTap;
@@ -16,7 +14,6 @@ class CurrencyListItem extends StatelessWidget {
   const CurrencyListItem({
     super.key,
     required this.currency,
-    required this.getImageForCode,
     required this.onTap,
   });
 
@@ -52,9 +49,9 @@ class CurrencyListItem extends StatelessWidget {
         leading: CircleAvatar(
           backgroundColor: AppColors.primaryLight,
           backgroundImage: AssetImage(
-            getImageForCode(
+            CurrencyAssets.fromCode(
               currency.code,
-            ),
+            ).imagePath,
           ),
         ),
         title: Text(
