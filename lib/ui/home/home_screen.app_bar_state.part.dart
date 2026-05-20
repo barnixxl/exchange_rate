@@ -27,7 +27,7 @@ Widget _buildAppBarWidget({
                     strings.common_absent_date,
               ),
               style: const TextStyle(
-                color: AppColors.onPrimarySubtle,
+                color: AppColors.onPrimary,
                 fontSize: 12,
               ),
             ),
