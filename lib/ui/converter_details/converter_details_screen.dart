@@ -76,10 +76,6 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildBaseConverterInputWidget(
-                  focusNode: _baseInputFocusNode,
-                  onBaseAmountChanged: _controller.onBaseAmountChanged,
-                ),
                 Observer(
                   builder: (_) {
                     final hasBaseAmount = _controller.hasBaseAmount;
@@ -96,6 +92,10 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
                     );
                   },
                 ),
+                _buildBaseConverterInputWidget(
+                  focusNode: _baseInputFocusNode,
+                  onBaseAmountChanged: _controller.onBaseAmountChanged,
+                ),
               ],
             ),
             const SizedBox(
@@ -104,11 +104,6 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildReverseConverterInputWidget(
-                  focusNode: _currencyInputFocusNode,
-                  sourceCurrencyCode: _controller.code,
-                  onCurrencyAmountChanged: _controller.onCurrencyAmountChanged,
-                ),
                 Observer(
                   builder: (_) {
                     final hasCurrencyAmount = _controller.hasCurrencyAmount;
@@ -121,6 +116,11 @@ class _ConverterDetailsScreenState extends State<ConverterDetailsScreen> {
                       ),
                     );
                   },
+                ),
+                _buildReverseConverterInputWidget(
+                  focusNode: _currencyInputFocusNode,
+                  sourceCurrencyCode: _controller.code,
+                  onCurrencyAmountChanged: _controller.onCurrencyAmountChanged,
                 ),
               ],
             ),
