@@ -10,11 +10,8 @@ import 'widgets/currency_list_item.dart';
 import 'home_controller.dart';
 
 part 'home_screen.error_state.part.dart';
-
 part 'home_screen.app_bar_state.part.dart';
-
 part 'home_screen.load_state.part.dart';
-
 part 'home_screen.success_state.part.dart';
 
 class HomeScreen extends StatefulWidget {

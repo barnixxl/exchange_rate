@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+
 import '../models/rate_data.dart';
 import '../models/currency_result.dart';
 import '../network/currency/currency_api.dart';

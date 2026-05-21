@@ -1,6 +1,7 @@
+import 'package:currency_converter/main.dart';
+
 import '../network/currency/resp/rate_data_from_network.dart';
 import '../utils/string_extensions.dart';
-import 'package:currency_converter/main.dart';
 
 class RateData {
   final String code;

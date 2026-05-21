@@ -1,8 +1,9 @@
 import 'package:currency_converter/models/rate_data.dart';
 import 'package:get_it/get_it.dart';
+
+import 'resp/rate_data_from_network.dart';
 import '../currency_rate_network.dart';
 import '../../models/currency_error.dart';
-import 'resp/rate_data_from_network.dart';
 import '../../models/currency_result.dart';
 
 class CurrencyApi {
