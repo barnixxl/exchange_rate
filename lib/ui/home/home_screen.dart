@@ -1,4 +1,3 @@
-import 'package:currency_converter/ui/converter_details/converter_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -7,6 +6,7 @@ import '../../models/currency_error.dart';
 import '../../models/rate_data.dart';
 import '../../resources/colors/app_colors.dart';
 import '../../utils/date_formatter.dart';
+import '../converter_details/converter_details_screen.dart';
 import 'home_controller.dart';
 import 'widgets/currency_list_item.dart';
 
