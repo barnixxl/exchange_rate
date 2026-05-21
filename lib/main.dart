@@ -1,8 +1,8 @@
+import 'package:currency_converter/ui/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
-import 'app_router.dart';
 import 'network/currency/currency_api.dart';
 import 'network/currency_rate_network.dart';
 import 'repository/currency_repository.dart';
@@ -71,8 +71,7 @@ class MyApp extends StatelessWidget {
           elevation: 0,
         ),
       ),
-      onGenerateRoute: AppRouter.generateRoute,
-      initialRoute: '/',
+      home: const HomeScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

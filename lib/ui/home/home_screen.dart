@@ -1,3 +1,4 @@
+import 'package:currency_converter/ui/converter_details/converter_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -97,10 +98,15 @@ class _HomeScreenState extends State<HomeScreen> {
   void _navigateToDetail(
     RateData currency,
   ) {
-    Navigator.pushNamed(
+    Navigator.push(
       context,
-      '/converter_details',
-      arguments: currency,
+      MaterialPageRoute(
+        builder: (_) {
+          return ConverterDetailsScreen(
+            currency: currency,
+          );
+        },
+      ),
     );
   }
 }
