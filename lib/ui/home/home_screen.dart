@@ -9,8 +9,8 @@ import '../../utils/date_formatter.dart';
 import 'home_controller.dart';
 import 'widgets/currency_list_item.dart';
 
-part 'home_screen.error_state.part.dart';
 part 'home_screen.app_bar_state.part.dart';
+part 'home_screen.error_state.part.dart';
 part 'home_screen.load_state.part.dart';
 part 'home_screen.success_state.part.dart';
 

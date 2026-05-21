@@ -1,7 +1,7 @@
 import 'package:get_it/get_it.dart';
 
-import '../models/rate_data.dart';
 import '../models/currency_result.dart';
+import '../models/rate_data.dart';
 import '../network/currency/currency_api.dart';
 import '../repository/base_repository.dart';
 import '../resources/images/app_images.dart';

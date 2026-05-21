@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'ui/home/home_screen.dart';
-import 'ui/converter_details/converter_details_screen.dart';
+
 import 'models/rate_data.dart';
+import 'ui/converter_details/converter_details_screen.dart';
+import 'ui/home/home_screen.dart';
 
 class AppRouter {
   static Route<dynamic> generateRoute(
