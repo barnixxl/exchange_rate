@@ -1,10 +1,10 @@
-import 'package:currency_converter/models/rate_data.dart';
 import 'package:get_it/get_it.dart';
 
-import 'resp/rate_data_from_network.dart';
-import '../currency_rate_network.dart';
 import '../../models/currency_error.dart';
 import '../../models/currency_result.dart';
+import '../../models/rate_data.dart';
+import '../currency_rate_network.dart';
+import 'resp/rate_data_from_network.dart';
 
 class CurrencyApi {
   static final GetIt _getIt = GetIt.instance;

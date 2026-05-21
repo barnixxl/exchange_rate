@@ -1,5 +1,4 @@
-import 'package:currency_converter/main.dart';
-
+import '../main.dart';
 import '../network/currency/resp/rate_data_from_network.dart';
 import '../utils/string_extensions.dart';
 

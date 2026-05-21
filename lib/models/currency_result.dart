@@ -1,4 +1,4 @@
-import 'package:currency_converter/models/currency_error.dart';
+import 'currency_error.dart';
 
 class CurrencyResult<T> {
   final T? data;

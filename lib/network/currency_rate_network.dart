@@ -1,7 +1,8 @@
-import 'package:currency_converter/models/currency_result.dart';
-import 'package:currency_converter/models/currency_error.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+
+import '../models/currency_error.dart';
+import '../models/currency_result.dart';
 
 class CurrencyRateNetwork {
   static const String _baseUrl = 'https://api.nbrb.by/exrates/';

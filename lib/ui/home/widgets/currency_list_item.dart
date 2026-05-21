@@ -1,6 +1,6 @@
-import 'package:currency_converter/main.dart';
 import 'package:flutter/material.dart';
 
+import '../../../main.dart';
 import '../../../models/rate_data.dart';
 import '../../../repository/currency_repository.dart';
 import '../../../resources/colors/app_colors.dart';
