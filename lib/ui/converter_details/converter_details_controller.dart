@@ -61,7 +61,10 @@ class ConverterDetailsController {
     String input,
   ) =>
       double.tryParse(
-        input.replaceAll(',', '.'),
+        input.replaceAll(
+          ',',
+          '.',
+        ),
       ) ??
       0.0;
 

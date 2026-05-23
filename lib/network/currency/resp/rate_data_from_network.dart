@@ -2,7 +2,10 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'rate_data_from_network.g.dart';
 
-@JsonSerializable(createToJson: false, explicitToJson: false)
+@JsonSerializable(
+  createToJson: false,
+  explicitToJson: false,
+)
 class RateDataFromNetwork {
   @JsonKey(name: 'Cur_ID')
   final int? curID;

@@ -9,7 +9,9 @@ Widget _buildReverseConverterInputWidget({
 }) {
   return TextField(
     focusNode: focusNode,
-    onTapOutside: (_) => focusNode.unfocus(),
+    onTapOutside: (_) {
+      return focusNode.unfocus();
+    },
     keyboardType: const TextInputType.numberWithOptions(
       decimal: true,
     ),

@@ -70,7 +70,9 @@ class CurrencyRateNetwork {
       case DioExceptionType.receiveTimeout:
         return CurrencyError.timeout();
       case DioExceptionType.badCertificate:
-        return CurrencyError.badResponse(0);
+        return CurrencyError.badResponse(
+          0,
+        );
       case DioExceptionType.badResponse:
         final statusCode = e.response?.statusCode ?? 0;
         return CurrencyError.badResponse(
